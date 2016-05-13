@@ -18,7 +18,8 @@ UITableViewDelegate,UITableViewDataSource
     
     TXListFrameModel           * _frameModel;
     
-    TXLinkExhibitionController * _videoExhibition;
+    TXExhibitionController     * _videoExhibition;
+    NSNotificationCenter       * notifiction;
     int pag;
     int number;
 }
@@ -29,7 +30,7 @@ UITableViewDelegate,UITableViewDataSource
 -(void)initVar
 {
     pag        = 2;
-    number     = 2;
+    number     = 3;
     
 }
 -(void)initData
@@ -68,8 +69,15 @@ UITableViewDelegate,UITableViewDataSource
 {
     if (tableView.tag==0)
     {
-        _videoExhibition=[[TXLinkExhibitionController alloc]init];
+        _videoExhibition=[[TXExhibitionController alloc]init];
         [self presentViewController:_videoExhibition animated:NO completion:nil];
+        _videoExhibition=[[TXExhibitionController alloc]init];
+        [self presentViewController:_videoExhibition animated:NO completion:nil];
+        _frameModel=_data.linkFrameModel[indexPath.row];
+        notifiction=[NSNotificationCenter defaultCenter];
+        [notifiction postNotificationName:@"gitModel" object:self userInfo:@{
+                                                                             @"model":_frameModel.model
+                                                                             }];
     }
     
 }
@@ -111,7 +119,7 @@ UITableViewDelegate,UITableViewDataSource
             //添加数据
             [_data addLinkDataPag:pag Number:number];
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                            {
                                [_linkTableView reloadData];
                                pag+=1;
@@ -126,7 +134,7 @@ UITableViewDelegate,UITableViewDataSource
 {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                    {
                        [self addVideoTableView];
                        

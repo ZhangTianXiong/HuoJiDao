@@ -8,6 +8,7 @@
 
 #import "TXExhibitionController.h"
 #import "AFNetworking.h"
+#import "UIImage+GIF.h"
 #import "TXTheDottedLineView.h"//功能条
 #import "TXExhibitionDetailsView.h"//展示条
 #import "TXDetailsTableVieewCell.h"
@@ -31,7 +32,7 @@ UITableViewDelegate,UITableViewDataSource
 
 @implementation TXExhibitionController
 
-#pragma mark------------------------ 屏幕旋转-------------------------
+#pragma mark------------------------屏幕旋转-------------------------
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
@@ -58,7 +59,7 @@ UITableViewDelegate,UITableViewDataSource
         [_player setFrame:CM(playerX, playerY,playerW , playerH)];
         //设置exhibitionDetailsView的Frame
         CGFloat exhibitionDetailsViewX=0;
-        CGFloat exhibitionDetailsViewY=CGRectGetMaxY(_player.frame);
+        CGFloat exhibitionDetailsViewY=_playerH;
         CGFloat exhibitionDetailsViewW=self.view.frame.size.width;
         CGFloat exhibitionDetailsViewH=_frameModel.H;
         _exhibitionDetailsView.frame=CGRectMake(exhibitionDetailsViewX,exhibitionDetailsViewY,exhibitionDetailsViewW ,exhibitionDetailsViewH);
@@ -133,6 +134,7 @@ UITableViewDelegate,UITableViewDataSource
     TXCommentFrameModel     * frameModel = _pinglunModel[indexPath.row];
     //创建cell
     TXDetailsTableVieewCell * cell       = [[TXDetailsTableVieewCell alloc]initWithTableView:tableView];
+    
     //设置单元格的数据
     cell.frameModel                      = frameModel;
     return cell;
@@ -149,7 +151,7 @@ UITableViewDelegate,UITableViewDataSource
     button.selected = !button.selected;
    if (button.selected)
     {
-       _player.isPauseByUser = NO;//播放状态标记
+        _player.isPauseByUser = NO;//播放状态标记
         _player.playState     = ZFPlayerStatePlaying;//播放中
         [_player.player play];//播放
         //大图标
@@ -185,21 +187,13 @@ UITableViewDelegate,UITableViewDataSource
         [self.view addSubview:_player];
         [self.view addSubview:_exhibitionNavigationView];
     }
-    else
-    {
-        //点击播放按钮后将videoExhibitionTableView添加在self.view上
-        [_exhibitionTableView.tableHeaderView addSubview:_player];
-        //将TableView置顶
-        [_exhibitionTableView setContentOffset:CGPointMake(0,0) animated:YES];
-    }
-
 }
 #pragma mark---------------添加exhibitionDetailsView----------
 -(void)addExhibitionDetailsView
 {
     //设置Frame
     CGFloat exhibitionDetailsViewX=0;
-    CGFloat exhibitionDetailsViewY=CGRectGetMaxY(_player.frame);
+    CGFloat exhibitionDetailsViewY=_playerH;
     CGFloat exhibitionDetailsViewW=self.view.frame.size.width;
     CGFloat exhibitionDetailsViewH=_frameModel.H;
     _exhibitionDetailsView.frame=CGRectMake(exhibitionDetailsViewX,exhibitionDetailsViewY ,exhibitionDetailsViewW,exhibitionDetailsViewH);
@@ -223,10 +217,13 @@ UITableViewDelegate,UITableViewDataSource
 -(void)navigationViewBack:(UIButton*)button
 {
     [self dismissViewControllerAnimated:NO completion:nil];
-    _player.isPauseByUser = YES;//播放状态标记
-    [_player.player pause];//暂停
-    _player.playState     = ZFPlayerStateStopped;//暂停中
-    [_pinglunModel removeAllObjects];//删除所有
+    if ([_model.type isEqualToString:@"video"])
+    {
+        _player.isPauseByUser = YES;//播放状态标记
+        [_player.player pause];//暂停
+        _player.playState     = ZFPlayerStateStopped;//暂停中
+        [_pinglunModel removeAllObjects];//删除所有
+    }
 }
 
 #pragma mark--------------viewDidLoad------------------------------
@@ -288,6 +285,7 @@ UITableViewDelegate,UITableViewDataSource
     [self addExhibitionTableView];
     //设置导航条
     [self setNavigationView];
+    
     //设置player的Frame
     CGFloat playerX=0;
     CGFloat playerY=0;
@@ -302,8 +300,43 @@ UITableViewDelegate,UITableViewDataSource
     [self.exhibitionTableView.tableHeaderView addSubview:_player];
     //调用添加详情View
     [self addExhibitionDetailsView];
+    
    
 }
+#pragma mark----------------创建picView-----------------------
+-(void)createPicView:(NSString *)strURL
+{
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //添加TableView
+        [self addExhibitionTableView];
+        //设置导航条
+        [self setNavigationView];
+        //设置picView的Frame
+        CGFloat picViewX=0;
+        CGFloat picViewY=0;
+        CGFloat picViewW=self.view.frame.size.width;
+        CGFloat picViewH=_playerH;
+        _picView=[[TXPicView alloc]initWithFrame:CM(picViewX, picViewY, picViewW, picViewH)];
+        
+        
+         //判断是否是pic 和 gif
+        if ([_model.type isEqualToString:@"pic"])
+        {
+        [_picView.picImageView sd_setImageWithURL:[NSURL URLWithString:strURL]];
+        }else if ([_model.type isEqualToString:@"gif"])
+        {
+            NSData * imageData=[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://img9.ph.126.net/ATRAnKXg_K2z_VS9ljqgVA==/1089871109841124969.gif"]];
+            _picView.picImageView.image=[UIImage sd_animatedGIFWithData:imageData];
+        }
+        
+        [self.exhibitionTableView.tableHeaderView addSubview:_picView];
+        [self addExhibitionDetailsView];
+    });
+    
+    
+}
+
 #pragma mark----------------请求video的数据--------------------
 -(void)requestData:(NSString*)strURL
 {
@@ -322,9 +355,6 @@ UITableViewDelegate,UITableViewDataSource
                                                      {
                                                          //调用创建视频播放前器
                                                          [self createMediaPlayer:responseObject[@"data"][@"url"]];
-                                                         
-                                                         NSLog(@"%@",responseObject[@"data"][@"url"]);
-                                                        
                                                      }
                                                      
                                                  }];
@@ -334,12 +364,12 @@ UITableViewDelegate,UITableViewDataSource
 #pragma mark----------------请求评论的数据--------------------
 -(void)requestPingLunData:(NSString*)blogid
 {
-    NSMutableArray * muarray =[NSMutableArray array];
     
+    NSMutableArray * muarray =[NSMutableArray array];
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
-    NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.quumii.com/app/api.php?method=getcomment&blogid=%@",blogid]];
+    NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.huojidao.com/CommentPage/8811"]];
     
     NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
     
@@ -350,13 +380,15 @@ UITableViewDelegate,UITableViewDataSource
                                                          NSLog(@"Error: %@", error);
                                                      } else
                                                      {
-                                                         for (NSDictionary * dic in responseObject)
+                                                         
+                                                         for (NSDictionary * dic in responseObject[@"data"])
                                                          {
                                                              TXCommentModel * model=[[TXCommentModel alloc]initWithDic:dic];
                                                              TXCommentFrameModel * frameModel=[[TXCommentFrameModel alloc]initWithModel:model];
                                                              [muarray addObject:frameModel];
                                                          }
                                                          _pinglunModel=muarray;
+                                                         
                                                      }
                                                      
                                                  }];
@@ -364,26 +396,27 @@ UITableViewDelegate,UITableViewDataSource
     
 }
 
-#pragma mark--------------------监听通知中心--------------------
+#pragma mark--------------------核心---监听通知中心--------------------
 -(void)gitModel:(NSNotification*)notification
 {
     _model=notification.userInfo[@"model"];
-   
-    NSLog(@"Vid:%@",_model.vid);
     //创建详情View数据模型
     _frameModel=[[TXExhibitionDetailsViewFrameModel alloc]initWithModel:_model];
     _exhibitionDetailsView=[[TXExhibitionDetailsView alloc]init];
     
+    //判断类型是否是Video
     if ([_model.type isEqualToString: @"video"])
     {
-        // 核心 请求数据
         [self requestData:_model.vid];
         [self requestPingLunData:_model.blogid];
     }
-    else if ([_model.type isEqualToString:@"pic"])
+    //判断类型是否是pic 和 gif
+    else if ([_model.type isEqualToString:@"pic"]||[_model.type isEqualToString:@"gif"])
     {
-        
+        [self createPicView:_model.img];
+        [self requestPingLunData:_model.blogid];
     }
+    
     
 }
 #pragma mark--------------------初始化变量----------------------
@@ -432,7 +465,12 @@ UITableViewDelegate,UITableViewDataSource
 #pragma mark--------------是否支持屏幕旋转--------------
 -(BOOL)shouldAutorotate
 {
-    return  YES;
+    //当只是vide的时候屏幕才能被旋转
+    if ([_model.type isEqualToString: @"video"])
+    {
+        return YES;
+    }
+    return  NO;
 }
 -(void)dealloc
 {

@@ -11,7 +11,7 @@
 #import "TXRequestData.h"
 #import "TXListFrameModel.h"
 #import "TXAllTableViewCell.h"
-#import "TXAllExhibitionController.h"
+#import "TXExhibitionController.h"
 
 @interface TXAllViewController : TXViewController
 //全部

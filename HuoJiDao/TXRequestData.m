@@ -424,7 +424,7 @@
 {
     if ([self respondsToSelector:@selector(addLinkDataPag:Number:)])
     {
-        
+        //可以把总跳数传递过来
         
         NSString                  * strURl         = [NSString stringWithFormat:@"http://api.huojidao.com/ChannelPage/1_4_%i_%i",pag,number];
         

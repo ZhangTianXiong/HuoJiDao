@@ -15,8 +15,6 @@
 		D596B0211CD195A200704CCA /* TXListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D596B0201CD195A200704CCA /* TXListModel.m */; };
 		D596B0241CD1A35E00704CCA /* TXListFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D596B0231CD1A35E00704CCA /* TXListFrameModel.m */; };
 		D596B02A1CD1E36400704CCA /* TXAllTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D596B0291CD1E36400704CCA /* TXAllTableViewCell.m */; };
-		D596B0341CD1E5FF00704CCA /* TXAllExhibitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = D596B0331CD1E5FF00704CCA /* TXAllExhibitionController.m */; };
-		D596B0371CD1ED7B00704CCA /* TXLinkExhibitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = D596B0361CD1ED7B00704CCA /* TXLinkExhibitionController.m */; };
 		D596B03B1CD1EE5F00704CCA /* TXLinkTableVieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D596B03A1CD1EE5F00704CCA /* TXLinkTableVieCell.m */; };
 		D5B028901CBF86A50085D7D9 /* LLAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B028871CBF86A50085D7D9 /* LLAnimationManager.m */; };
 		D5B028911CBF86A50085D7D9 /* LLCircleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B028891CBF86A50085D7D9 /* LLCircleLayer.m */; };
@@ -129,10 +127,6 @@
 		D596B0231CD1A35E00704CCA /* TXListFrameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXListFrameModel.m; sourceTree = "<group>"; };
 		D596B0281CD1E36400704CCA /* TXAllTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXAllTableViewCell.h; sourceTree = "<group>"; };
 		D596B0291CD1E36400704CCA /* TXAllTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXAllTableViewCell.m; sourceTree = "<group>"; };
-		D596B0321CD1E5FF00704CCA /* TXAllExhibitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXAllExhibitionController.h; sourceTree = "<group>"; };
-		D596B0331CD1E5FF00704CCA /* TXAllExhibitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXAllExhibitionController.m; sourceTree = "<group>"; };
-		D596B0351CD1ED7B00704CCA /* TXLinkExhibitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLinkExhibitionController.h; sourceTree = "<group>"; };
-		D596B0361CD1ED7B00704CCA /* TXLinkExhibitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLinkExhibitionController.m; sourceTree = "<group>"; };
 		D596B0391CD1EE5F00704CCA /* TXLinkTableVieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLinkTableVieCell.h; sourceTree = "<group>"; };
 		D596B03A1CD1EE5F00704CCA /* TXLinkTableVieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLinkTableVieCell.m; sourceTree = "<group>"; };
 		D5B028861CBF86A50085D7D9 /* LLAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAnimationManager.h; sourceTree = "<group>"; };
@@ -483,7 +477,7 @@
 				D5288A7B1CCB719A00D99B64 /* Home.h */,
 				D5E9FC911CBE1EA6000452D9 /* HomeController.h */,
 				D5E9FC921CBE1EA6000452D9 /* HomeController.m */,
-				D5D95B401CE4528100FA0938 /* 轮播图Controller */,
+				D5D95B401CE4528100FA0938 /* 轮播图链接Controller */,
 			);
 			name = "首页";
 			sourceTree = "<group>";
@@ -659,13 +653,13 @@
 			name = "分类公用详情Controller";
 			sourceTree = "<group>";
 		};
-		D5D95B401CE4528100FA0938 /* 轮播图Controller */ = {
+		D5D95B401CE4528100FA0938 /* 轮播图链接Controller */ = {
 			isa = PBXGroup;
 			children = (
 				D5D95B411CE452BC00FA0938 /* TXScrollFigureViewController.h */,
 				D5D95B421CE452BC00FA0938 /* TXScrollFigureViewController.m */,
 			);
-			name = "轮播图Controller";
+			name = "轮播图链接Controller";
 			sourceTree = "<group>";
 		};
 		D5E17F481CD048F400F1690A /* 图片 */ = {
@@ -751,8 +745,6 @@
 			children = (
 				D5288A6F1CCB718700D99B64 /* TXAllViewController.h */,
 				D5288A701CCB718700D99B64 /* TXAllViewController.m */,
-				D596B0321CD1E5FF00704CCA /* TXAllExhibitionController.h */,
-				D596B0331CD1E5FF00704CCA /* TXAllExhibitionController.m */,
 			);
 			name = "全部";
 			sourceTree = "<group>";
@@ -780,8 +772,6 @@
 			children = (
 				D5288A751CCB718700D99B64 /* TXLinkViewController.h */,
 				D5288A761CCB718700D99B64 /* TXLinkViewController.m */,
-				D596B0351CD1ED7B00704CCA /* TXLinkExhibitionController.h */,
-				D596B0361CD1ED7B00704CCA /* TXLinkExhibitionController.m */,
 			);
 			name = "链接文章";
 			sourceTree = "<group>";
@@ -1008,7 +998,7 @@
 				TargetAttributes = {
 					D5E9FC871CBE1EA6000452D9 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 39R685P985;
+						DevelopmentTeam = 6B72GXH32H;
 					};
 					D5E9FCA01CBE1EA6000452D9 = {
 						CreatedOnToolsVersion = 7.3;
@@ -1098,7 +1088,6 @@
 				D5E93BE61CCDE6E600B00DA0 /* TXPic_titleFrameModel.m in Sources */,
 				D5E5BED01CDDB5BD004A9BD8 /* TXExhibitionDetailsView.m in Sources */,
 				D596B0241CD1A35E00704CCA /* TXListFrameModel.m in Sources */,
-				D596B0371CD1ED7B00704CCA /* TXLinkExhibitionController.m in Sources */,
 				D5FA76D11CC4691B00A54535 /* UIImage+MultiFormat.m in Sources */,
 				D596B02A1CD1E36400704CCA /* TXAllTableViewCell.m in Sources */,
 				D5E93BDD1CCDC67600B00DA0 /* AFURLRequestSerialization.m in Sources */,
@@ -1133,7 +1122,6 @@
 				D5D4B5031CC229B100B06CE2 /* TXHomeModelo.m in Sources */,
 				D5CB43001CE07AEF00737BEB /* TXCommentModel.m in Sources */,
 				D5CA195C1CE30F5000E8FA5D /* TXChaneView.m in Sources */,
-				D596B0341CD1E5FF00704CCA /* TXAllExhibitionController.m in Sources */,
 				D5E9FCCB1CBE3EC8000452D9 /* TXView.m in Sources */,
 				D5BB160E1CC9CB0F007BC582 /* TXRecommendChaneView.m in Sources */,
 				D5CA195F1CE30F6600E8FA5D /* TXDisplaybarView.m in Sources */,
@@ -1301,7 +1289,7 @@
 				INFOPLIST_FILE = HuoJiDao/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = YCJ.HoJiDao.com;
+				PRODUCT_BUNDLE_IDENTIFIER = ZX.HoJiDao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1317,7 +1305,7 @@
 				INFOPLIST_FILE = HuoJiDao/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = YCJ.HoJiDao.com;
+				PRODUCT_BUNDLE_IDENTIFIER = ZX.HoJiDao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

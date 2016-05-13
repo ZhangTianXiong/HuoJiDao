@@ -19,3 +19,4 @@
 #import "TXHomeModelo.h"
 #import "TXListModel.h"
 #import "TXListFrameModel.h"
+#import "TXExhibitionController.h"

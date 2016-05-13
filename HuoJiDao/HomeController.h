@@ -32,6 +32,5 @@ typedef enum
 @property(nonatomic,assign)ENUM_TableView_Tag_Type * TableVIewTagType;
 
 
-
 @end
 

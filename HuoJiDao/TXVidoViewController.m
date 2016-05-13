@@ -15,7 +15,7 @@ UITableViewDelegate,UITableViewDataSource
 {
     TXRequestData               *  _data;
     TXListFrameModel            * _frameModel;
-    TXExhibitionController * _videoExhibition;
+    TXExhibitionController      * _videoExhibition;
     NSNotificationCenter        * notifiction;
     int pag;//页数
     int number;//条数
@@ -75,6 +75,7 @@ UITableViewDelegate,UITableViewDataSource
         _videoExhibition=[[TXExhibitionController alloc]init];
         [self presentViewController:_videoExhibition animated:NO completion:nil];
         _frameModel=_data.videoFrameModel[indexPath.row];
+        
         notifiction=[NSNotificationCenter defaultCenter];
         [notifiction postNotificationName:@"gitModel" object:self userInfo:@{
                                                                               @"model":_frameModel.model
@@ -122,7 +123,7 @@ UITableViewDelegate,UITableViewDataSource
             //添加数据
             [_data addVideoDataPag:pag Number:number];
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                            {
                                [_videoTableView reloadData];
                                pag+=1;
@@ -137,7 +138,7 @@ UITableViewDelegate,UITableViewDataSource
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                    {
           [self addVideoTableView];
                        

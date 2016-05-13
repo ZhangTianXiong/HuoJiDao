@@ -32,7 +32,8 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     TXVidoViewController       * _vidoViewController;//视频Controller
     TXPictureViewController    * _pictureViewController;//图片Controller
     TXLinkViewController       * _linkViewController;//链接(文章)Controller
-    
+    TXExhibitionController     * _exhibitionController;//详情Controller
+    NSNotificationCenter       * _notifiction;//通知中心
     TXNavigationView           * _navigtionView;//导航栏View
     TXCategoryView             * _categoryView;//分类View
     TXScrollFigureView         * _scrollFigureView;
@@ -141,7 +142,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
 -(void)addNewestTableView
 {
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //初始化addNewestTableView
         CGFloat newestTableViewX                   = 0;
         CGFloat newestTableViewY                   = _homeView.frame.origin.x;
@@ -543,6 +544,40 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
 
     return nil;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView.tag==homeTableViewTag)
+    {
+        //创建模型
+        TXHomeModelo          * homeModel      = _data.homeModel[indexPath.section];
+        TXListModel           * listModel      = homeModel.content[indexPath.row];
+        
+        _exhibitionController=[[TXExhibitionController alloc]init];
+        [self presentViewController:_exhibitionController animated:NO completion:nil];
+        
+        _notifiction=[NSNotificationCenter defaultCenter];
+        [_notifiction postNotificationName:@"gitModel" object:self userInfo:@{
+                                                                              @"model":listModel
+                                                                              }];
+        
+    }
+    if (tableView.tag==newestTableViewTag)
+    {
+        //初始化数据源
+        //创建数据源
+        TXListFrameModel              * frameModel    = _data.recommendFrameModel[indexPath.row];
+        
+        _exhibitionController=[[TXExhibitionController alloc]init];
+        [self presentViewController:_exhibitionController animated:NO completion:nil];
+        
+        _notifiction=[NSNotificationCenter defaultCenter];
+        [_notifiction postNotificationName:@"gitModel" object:self userInfo:@{
+                                                                              @"model":frameModel.model
+                                                                              }];
+
+    }
+
+}
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     CGFloat scrollViewY         = scrollView.contentOffset.y;
@@ -554,9 +589,9 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
         if (!self.newestTableView.tableFooterView.hidden)
         {
             //添加数据
-            [_data addAllDataPag:pag Number:number];
+            [_data addrecommendDataWithPag:pag Number:number];
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                            {
                             [_newestTableView reloadData];
                             pag+=1;

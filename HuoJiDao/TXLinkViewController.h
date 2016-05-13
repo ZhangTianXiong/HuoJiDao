@@ -10,7 +10,7 @@
 #import "TXRequestData.h"
 #import "TXListFrameModel.h"
 #import "TXLinkTableVieCell.h"
-#import "TXLinkExhibitionController.h"
+#import "TXExhibitionController.h"
 
 @interface TXLinkViewController : TXViewController
 //文章

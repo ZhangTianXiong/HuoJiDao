@@ -7,7 +7,6 @@
 //
 
 #import "TXViewController.h"
-
 #import "TXRequestData.h"
 #import "TXListFrameModel.h"
 #import "TXAllTableViewCell.h"

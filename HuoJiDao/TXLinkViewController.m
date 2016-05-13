@@ -14,14 +14,12 @@ UITableViewDelegate,UITableViewDataSource
 >
 
 {
-    TXRequestData              *  _data;
-    
-    TXListFrameModel           * _frameModel;
-    
-    TXExhibitionController     * _videoExhibition;
-    NSNotificationCenter       * notifiction;
-    int pag;
-    int number;
+    TXRequestData              *  _data;//数据源
+    TXListFrameModel           * _frameModel;//数据模型
+    TXExhibitionController     * _linkExhibition;//详情Controller
+    NSNotificationCenter       * _notifiction;
+    int                          _pag;
+    int                          _number;
 }
 @end
 
@@ -29,8 +27,8 @@ UITableViewDelegate,UITableViewDataSource
 @implementation TXLinkViewController
 -(void)initVar
 {
-    pag        = 2;
-    number     = 3;
+    _pag        = 2;
+    _number     = 3;
     
 }
 -(void)initData
@@ -38,8 +36,6 @@ UITableViewDelegate,UITableViewDataSource
      _data  =[[TXRequestData alloc]init];
     [_data requestLinkData];
 }
-
-
 -(void)addVideoTableView
 {
     CGFloat linkTableViewX       = 0;
@@ -47,9 +43,9 @@ UITableViewDelegate,UITableViewDataSource
     CGFloat linkTableViewW       = self.view.frame.size.width;
     CGFloat linkTableViewH       = self.view.frame.size.height-linkTableViewY;
     
-    _linkTableView           = [[UITableView alloc]initWithFrame:CM(linkTableViewX, linkTableViewY, linkTableViewW, linkTableViewH) style:UITableViewStylePlain];
+    _linkTableView               = [[UITableView alloc]initWithFrame:CM(linkTableViewX, linkTableViewY, linkTableViewW, linkTableViewH) style:UITableViewStylePlain];
     
-    _linkTableView.tag       = 0;
+    _linkTableView.tag                            = 0;
     _linkTableView.showsVerticalScrollIndicator   = NO;
     _linkTableView.showsHorizontalScrollIndicator = NO;
     _linkTableView.delegate                       = self;
@@ -69,15 +65,15 @@ UITableViewDelegate,UITableViewDataSource
 {
     if (tableView.tag==0)
     {
-        _videoExhibition=[[TXExhibitionController alloc]init];
-        [self presentViewController:_videoExhibition animated:NO completion:nil];
-        _videoExhibition=[[TXExhibitionController alloc]init];
-        [self presentViewController:_videoExhibition animated:NO completion:nil];
+        _linkExhibition=[[TXExhibitionController alloc]init];
+        [self presentViewController:_linkExhibition animated:NO completion:nil];
+        _linkExhibition=[[TXExhibitionController alloc]init];
+        [self presentViewController:_linkExhibition animated:NO completion:nil];
         _frameModel=_data.linkFrameModel[indexPath.row];
-        notifiction=[NSNotificationCenter defaultCenter];
-        [notifiction postNotificationName:@"gitModel" object:self userInfo:@{
+        _notifiction=[NSNotificationCenter defaultCenter];
+        [_notifiction postNotificationName:@"gitModel" object:self userInfo:@{
                                                                              @"model":_frameModel.model
-                                                                             }];
+                                                                            }];
     }
     
 }
@@ -117,12 +113,12 @@ UITableViewDelegate,UITableViewDataSource
         if (!self.linkTableView.tableFooterView.hidden)
         {
             //添加数据
-            [_data addLinkDataPag:pag Number:number];
+            [_data addLinkDataPag:_pag Number:_number];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                            {
                                [_linkTableView reloadData];
-                               pag+=1;
+                               _pag+=1;
                                
                            });
             
@@ -139,6 +135,12 @@ UITableViewDelegate,UITableViewDataSource
                        [self addVideoTableView];
                        
                    });
+    
+}
+-(void)dealloc
+{
+    NSLog(@"dealloc 被调用");
+    [_notifiction removeObserver:self name:@"gitModel" object:nil];
     
 }
 - (void)didReceiveMemoryWarning {

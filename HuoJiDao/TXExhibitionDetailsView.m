@@ -67,7 +67,7 @@
     
     //设置数据
     _titleLabel.text=_frameModel.model.subject;
-    _briefIntroductionLabel.text=[NSString stringWithFormat:@"简介:《刺客信条》是由育碧蒙特利尔工作室研发的一款动作类游戏。"];
+    _briefIntroductionLabel.text=_frameModel.model.description_api;
     _num.text=@"7万";
     _functionBarView.model=_frameModel.model;
 }

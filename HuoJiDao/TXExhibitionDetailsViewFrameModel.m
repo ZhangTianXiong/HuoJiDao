@@ -53,20 +53,20 @@
     _numFrame=CM(numFrameX, numFrameY, numFrameW, numFrameH);
     
     UIFont * briefIntroductionFout=[UIFont systemFontOfSize:13];
-    CGSize briefIntroductionFoutSize=[@"简介:《刺客信条》是由育碧蒙特利尔工作室研发的一款动作类游戏。" calculateTextSize:CGSizeMake(365, MAXFLOAT) andFoun:briefIntroductionFout];
+    CGSize briefIntroductionFoutSize=[_model.description_api calculateTextSize:CGSizeMake(365, MAXFLOAT) andFoun:briefIntroductionFout];
     CGFloat briefIntroductionLabelFrameX=margin;//介绍
     CGFloat briefIntroductionLabelFrameY=CGRectGetMaxY(_numFrame)+margin;
     CGFloat briefIntroductionLabelFrameW=briefIntroductionFoutSize.width;
     CGFloat briefIntroductionLabelFrameH=briefIntroductionFoutSize.height;
     _briefIntroductionLabelFrame=CM(briefIntroductionLabelFrameX, briefIntroductionLabelFrameY, briefIntroductionLabelFrameW, briefIntroductionLabelFrameH);
-    CGFloat butFrameX=35;//更多
-    CGFloat butFrameY=CGRectGetMaxY(_briefIntroductionLabelFrame)-margin-5;
+    CGFloat butFrameX=margin;//更多
+    CGFloat butFrameY=CGRectGetMaxY(_briefIntroductionLabelFrame);
     CGFloat butFrameW=50;
     CGFloat butFrameH=15;
     _butFrame=CM(butFrameX, butFrameY, butFrameW, butFrameH);
 
     CGFloat functionBarViewFrameX=margin;
-    CGFloat functionBarViewFrameY=CGRectGetMaxY(_briefIntroductionLabelFrame)+margin;
+    CGFloat functionBarViewFrameY=CGRectGetMaxY(_butFrame)+margin;
     CGFloat functionBarViewFrameW=355;
     CGFloat functionBarViewFrameH=40;
     _functionBarViewFrame=CGRectMake(functionBarViewFrameX, functionBarViewFrameY, functionBarViewFrameW, functionBarViewFrameH);

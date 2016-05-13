@@ -16,9 +16,9 @@ UITableViewDelegate,UITableViewDataSource
     TXRequestData               *  _data;
     TXListFrameModel            * _frameModel;
     TXExhibitionController      * _videoExhibition;
-    NSNotificationCenter        * notifiction;
-    int pag;//页数
-    int number;//条数
+    NSNotificationCenter        * _notifiction;
+    int                           _pag;//页数
+    int                           _number;//条数
 }
 
 @end
@@ -26,8 +26,8 @@ UITableViewDelegate,UITableViewDataSource
 @implementation TXVidoViewController
 -(void)initVar
 {
-    pag  = 2;
-    number    = 20;
+    _pag       = 2;
+    _number    = 20;
     
 }
 -(void)initData
@@ -42,18 +42,13 @@ UITableViewDelegate,UITableViewDataSource
     CGFloat videoTableViewY       = 64;
     CGFloat videoTableViewW       = self.view.frame.size.width;
     CGFloat videoTableViewH       = self.view.frame.size.height-videoTableViewY;
-    
-   
-    _videoTableView      = [[UITableView alloc]initWithFrame:CM(videoTableViewX, videoTableViewY, videoTableViewW, videoTableViewH) style:UITableViewStylePlain];
-    
-    _videoTableView.tag  = 0;
+    _videoTableView               = [[UITableView alloc]initWithFrame:CM(videoTableViewX, videoTableViewY, videoTableViewW, videoTableViewH) style:UITableViewStylePlain];
+    _videoTableView.tag                            = 0;
     _videoTableView.showsVerticalScrollIndicator   = NO;
     _videoTableView.showsHorizontalScrollIndicator = NO;
     _videoTableView.delegate                       = self;
     _videoTableView.dataSource                     = self;
-    
     self.videoTableView.tableFooterView            = [[[NSBundle mainBundle] loadNibNamed:@"videoJiaZai" owner:nil options:nil]lastObject];
-    
     [self.view addSubview:_videoTableView];
     
 }
@@ -71,13 +66,11 @@ UITableViewDelegate,UITableViewDataSource
 {
     if (tableView.tag==0)
     {
-        
         _videoExhibition=[[TXExhibitionController alloc]init];
         [self presentViewController:_videoExhibition animated:NO completion:nil];
         _frameModel=_data.videoFrameModel[indexPath.row];
-        
-        notifiction=[NSNotificationCenter defaultCenter];
-        [notifiction postNotificationName:@"gitModel" object:self userInfo:@{
+        _notifiction=[NSNotificationCenter defaultCenter];
+        [_notifiction postNotificationName:@"gitModel" object:self userInfo:@{
                                                                               @"model":_frameModel.model
                                                                               }];
         
@@ -121,12 +114,12 @@ UITableViewDelegate,UITableViewDataSource
         if (!self.videoTableView.tableFooterView.hidden)
         {
             //添加数据
-            [_data addVideoDataPag:pag Number:number];
+            [_data addVideoDataPag:_pag Number:_number];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                            {
                                [_videoTableView reloadData];
-                               pag+=1;
+                               _pag+=1;
                                
                            });
             
@@ -154,8 +147,9 @@ UITableViewDelegate,UITableViewDataSource
 
 -(void)dealloc
 {
-    [notifiction removeObserver:self];
     NSLog(@"dealloc 被调用");
+    [_notifiction removeObserver:self name:@"gitModel" object:nil];
+    
 }
 
 @end

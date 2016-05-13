@@ -11,6 +11,7 @@
 #import "UIImage+GIF.h"
 #import "TXTheDottedLineView.h"//功能条
 #import "TXExhibitionDetailsView.h"//展示条
+#import "TXCommentHeadView.h"//CommentHeadView评论组头部View
 #import "TXDetailsTableVieewCell.h"
 #import "TXCommentFrameModel.h"
 
@@ -22,29 +23,28 @@ UITableViewDelegate,UITableViewDataSource
     NSNotificationCenter                   * _notifiction;//通知中心
     UIView                                 * _myTableHeaderView;//_myTableHeaderView
     TXExhibitionDetailsView                * _exhibitionDetailsView;//添加在_myTableHeaderView上的详情View
+    TXCommentHeadView                      * _commentHeadView;//CommentHeadView评论组头部View
     TXExhibitionDetailsViewFrameModel      * _frameModel;//详情View的FrameModel
     CGFloat                                  navigationViewH;//导航栏的高
     CGFloat                                  _playerH;//视频播放器的高
+    CGFloat                                  _sectionHeader;
     NSMutableArray                         * _pinglunModel;//评论数据
     
 }
 @end
 
 @implementation TXExhibitionController
-
 #pragma mark------------------------屏幕旋转-------------------------
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
     {
         NSLog(@"现在是竖屏");
-        
         //设置导航栏
         //显示导航栏
         _exhibitionNavigationView.hidden=NO;
         //隐藏topImageView
         _player.maskView.topImageView.hidden=YES;
-        
         //设置exhibitionNavigationView的Frame
         CGFloat exhibitionNavigationViewX=0;
         CGFloat exhibitionNavigationViewY=0;
@@ -139,11 +139,28 @@ UITableViewDelegate,UITableViewDataSource
     cell.frameModel                      = frameModel;
     return cell;
 }
+#pragma mark---------UITableViewDataSource 监听HeadersView----------
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
      TXCommentFrameModel * frameModel=_pinglunModel[indexPath.row];
     return frameModel.rowH;
 }
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    _commentHeadView=[[TXCommentHeadView alloc]initWithFrame:CM(0, 0, 0, _sectionHeader)];
+    _commentHeadView.num=(int)_pinglunModel.count;
+  
+    
+    return _commentHeadView;
+}
+
+#pragma mark---------UITableViewDataSource 监听Headers的高----------
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return _sectionHeader;
+}
+
 #pragma mark---------------大播放按钮点击事件-------------------------
 -(void)bigStartAction:(UIButton *)button
 {
@@ -226,19 +243,20 @@ UITableViewDelegate,UITableViewDataSource
     }
 }
 
+/************************************************************************************************************
+ **  注意：                                                                                                 **
+ **  1.-(void)interfaceOrientation 该方法是强制将屏幕竖屏。(ARC情况下使用)。                                     **
+ **  2.[UIApplication sharedApplication] 该方法是获取当前屏幕方向。                                            **
+ **  3.-(void)willAnimateRotationToInterfaceOrientation: duration: 该方法是旋转方向 改变视图。                 **
+ **  4.-(BOOL)shouldAutorotate 该方法用于判断用户是否可以旋转屏幕。                                              **
+ **  5.-(UIInterfaceOrientationMask)supportedInterfaceOrientations 该方法 用于ViewController支持那些旋转方向。  **
+ ************************************************************************************************************/
+
 #pragma mark--------------viewDidLoad------------------------------
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    /************************************************************************************************************
-     **  注意：                                                                                                 **
-     **  1.-(void)interfaceOrientation 该方法是强制将屏幕竖屏。(ARC情况下使用)。                                     **
-     **  2.[UIApplication sharedApplication] 该方法是获取当前屏幕方向。                                            **
-     **  3.-(void)willAnimateRotationToInterfaceOrientation: duration: 该方法是旋转方向 改变视图。                 **
-     **  4.-(BOOL)shouldAutorotate 该方法用于判断用户是否可以旋转屏幕。                                              **
-     **  5.-(UIInterfaceOrientationMask)supportedInterfaceOrientations 该方法 用于ViewController支持那些旋转方向。  **
-     ************************************************************************************************************/
-    //强制竖屏
+        //强制竖屏
     [self interfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
     self.view.backgroundColor=[UIColor whiteColor];
 }
@@ -258,7 +276,7 @@ UITableViewDelegate,UITableViewDataSource
     
 }
 
-#pragma mark---------------添加VideoExhibitionTableView-------------
+#pragma mark---------------添加ExhibitionTableView-------------
 -(void)addExhibitionTableView
 {
     //设置位置
@@ -268,7 +286,7 @@ UITableViewDelegate,UITableViewDataSource
     CGFloat exhibitionTableViewY=0;
     CGFloat exhibitionTableViewW=viewW;
     CGFloat exhibitionTableViewH=viewH;
-    _exhibitionTableView=[[UITableView alloc]initWithFrame:CM(exhibitionTableViewX, exhibitionTableViewY, exhibitionTableViewW, exhibitionTableViewH) style:UITableViewStylePlain];
+    _exhibitionTableView=[[UITableView alloc]initWithFrame:CM(exhibitionTableViewX, exhibitionTableViewY, exhibitionTableViewW, exhibitionTableViewH) style:UITableViewStyleGrouped];
     _exhibitionTableView.separatorStyle = NO;//隐藏分割线
     _exhibitionTableView.delegate=self;
     _exhibitionTableView.dataSource=self;
@@ -285,7 +303,6 @@ UITableViewDelegate,UITableViewDataSource
     [self addExhibitionTableView];
     //设置导航条
     [self setNavigationView];
-    
     //设置player的Frame
     CGFloat playerX=0;
     CGFloat playerY=0;
@@ -300,14 +317,11 @@ UITableViewDelegate,UITableViewDataSource
     [self.exhibitionTableView.tableHeaderView addSubview:_player];
     //调用添加详情View
     [self addExhibitionDetailsView];
-    
-   
 }
 #pragma mark----------------创建picView-----------------------
--(void)createPicView:(NSString *)strURL
+-(void)createPicViewWithStrURL:(NSString *)strURL
 {
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //添加TableView
         [self addExhibitionTableView];
         //设置导航条
@@ -318,15 +332,13 @@ UITableViewDelegate,UITableViewDataSource
         CGFloat picViewW=self.view.frame.size.width;
         CGFloat picViewH=_playerH;
         _picView=[[TXPicView alloc]initWithFrame:CM(picViewX, picViewY, picViewW, picViewH)];
-        
-        
          //判断是否是pic 和 gif
         if ([_model.type isEqualToString:@"pic"])
         {
         [_picView.picImageView sd_setImageWithURL:[NSURL URLWithString:strURL]];
         }else if ([_model.type isEqualToString:@"gif"])
         {
-            NSData * imageData=[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://img9.ph.126.net/ATRAnKXg_K2z_VS9ljqgVA==/1089871109841124969.gif"]];
+            NSData * imageData=[NSData dataWithContentsOfURL:[NSURL URLWithString:_model.link]];
             _picView.picImageView.image=[UIImage sd_animatedGIFWithData:imageData];
         }
         
@@ -336,9 +348,8 @@ UITableViewDelegate,UITableViewDataSource
     
     
 }
-
 #pragma mark----------------请求video的数据--------------------
--(void)requestData:(NSString*)strURL
+-(void)requestDataWithStrURL:(NSString*)strURL
 {
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
@@ -362,13 +373,12 @@ UITableViewDelegate,UITableViewDataSource
     
 }
 #pragma mark----------------请求评论的数据--------------------
--(void)requestPingLunData:(NSString*)blogid
+-(void)requestPingLunDataWithBlogid:(NSString*)blogid
 {
     
     NSMutableArray * muarray =[NSMutableArray array];
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
     NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.huojidao.com/CommentPage/8811"]];
     
     NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
@@ -403,18 +413,17 @@ UITableViewDelegate,UITableViewDataSource
     //创建详情View数据模型
     _frameModel=[[TXExhibitionDetailsViewFrameModel alloc]initWithModel:_model];
     _exhibitionDetailsView=[[TXExhibitionDetailsView alloc]init];
-    
     //判断类型是否是Video
     if ([_model.type isEqualToString: @"video"])
     {
-        [self requestData:_model.vid];
-        [self requestPingLunData:_model.blogid];
+        [self requestDataWithStrURL:_model.vid];
+        [self requestPingLunDataWithBlogid:_model.blogid];
     }
     //判断类型是否是pic 和 gif
     else if ([_model.type isEqualToString:@"pic"]||[_model.type isEqualToString:@"gif"])
     {
-        [self createPicView:_model.img];
-        [self requestPingLunData:_model.blogid];
+        [self createPicViewWithStrURL:_model.img];
+        [self requestPingLunDataWithBlogid:_model.blogid];
     }
     
     
@@ -425,13 +434,15 @@ UITableViewDelegate,UITableViewDataSource
 {
     navigationViewH = 64;
     _playerH        = 200;
+    _sectionHeader  = 20;
+    
 }
 
 #pragma mark--------------------初始化数据----------------------
 /********************************************************
  **  创建通知中心接收消息                                 **
- **  1.@"video_Vid" 获取视频数据                        **
- **  2.@"small_startAction" 获取小按钮数据              **
+ **  1.@"gitModel" 获取数据                             **
+ **  2.@"small_startAction" 获取小按钮数据               **
  **                                                    **
  *******************************************************/
 -(void)initData
@@ -475,6 +486,8 @@ UITableViewDelegate,UITableViewDataSource
 -(void)dealloc
 {
     NSLog(@"dealloc 被调用");
+    [_notifiction removeObserver:self name:@"gitModel" object:nil];
+    
 }
 
 @end

@@ -43,6 +43,7 @@
         _unlikeView=unlikeView;
         
         UILabel * message=[[UILabel alloc]init];//消息
+        message.numberOfLines=0;
         message.font=[UIFont systemFontOfSize:12];
         _message=message;
         

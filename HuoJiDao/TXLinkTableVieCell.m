@@ -57,7 +57,7 @@
     _picture.frame                = _framemodel.pictureFrame;
     _picture.layer.masksToBounds = YES; //是否显示圆角以外的部分
     _picture.layer.cornerRadius   = 5;
-    [_picture sd_setImageWithURL:[NSURL URLWithString:_framemodel.model.img] placeholderImage:[UIImage imageNamed:@"turkey-1"]];
+    [_picture sd_setImageWithURL:[NSURL URLWithString:_framemodel.model.img] placeholderImage:[UIImage imageNamed:@"网络异常显示图"]];
     
     
     //设置标题

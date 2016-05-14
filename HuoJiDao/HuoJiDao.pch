@@ -13,11 +13,10 @@
 #define VIEW_WIDTH ([UIScreen  mainScreen].bounds.size.width)
 #define VIEW_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 
-
+#define DELAY_DATE 0.9
 
 //RGB相关
 //基类 TXNavigationController
-
 #define Color(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 #define  Navigation_Color  [UIColor colorWithRed:90/255.0f green:179/255.0f blue:240/255.0f alpha:1]
 #define TitleLab_Color [UIColor whiteColor]//标题颜色

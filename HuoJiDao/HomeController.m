@@ -35,6 +35,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     TXExhibitionController     * _exhibitionController;//详情Controller
     NSNotificationCenter       * _notifiction;//通知中心
     TXNavigationView           * _navigtionView;//导航栏View
+    UIView                     * _homeTableViewHeaderview;//首页TableViewHeaderview
     TXCategoryView             * _categoryView;//分类View
     TXScrollFigureView         * _scrollFigureView;//轮播图View
     CGFloat                      _viewW;//View的宽
@@ -123,7 +124,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
 #pragma mark=================添加addNewestTableView===============
 -(void)addNewestTableView
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.85 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //初始化addNewestTableView
         CGFloat newestTableViewX                   = 0;
         CGFloat newestTableViewY                   = _homeView.frame.origin.x;
@@ -162,14 +163,21 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     [self.homeTableView addSubview:_scrollFigureView];
   
 }
-
+#pragma mark========添加刷新View========================
+-(void)addRefreshView
+{
+    UIView * refreshView=[[[NSBundle mainBundle] loadNibNamed:@"ShuaXin" owner:nil options:nil]lastObject];
+    
+    refreshView.frame=CGRectMake(0, -40, self.view.frame.size.width,  40);
+    [self.homeTableView.tableHeaderView addSubview:refreshView];
+}
 
 #pragma mark========设置HomeTableView的HeaderView=======
 -(void)setHomeTableViewWithHeaderView
 {
-    UIView            * view        = [[UIView alloc]initWithFrame:CM(0, 0, 0, _HomeTableViewHeaderHeight)];
-    view.backgroundColor            = Color(239, 239, 244, 1);
-    _homeTableView.tableHeaderView  = view;
+    _homeTableViewHeaderview        = [[UIView alloc]initWithFrame:CM(0, 0, 0, _HomeTableViewHeaderHeight)];
+    _homeTableViewHeaderview.backgroundColor            = Color(239, 239, 244, 1);
+    _homeTableView.tableHeaderView  = _homeTableViewHeaderview;
 
 }
 #pragma mark=========添加addHomeTableView===============
@@ -243,7 +251,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
 {
     //添加NavigtionView
     [self addNavigtionView];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(DELAY_DATE * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
     {
         //添加底层View
         [self addBottomView];
@@ -254,6 +262,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
         [self addScrollFigureView];
         //添加CategoryView
         [self addCategoryView];
+        [self addRefreshView];
         //添加NewestTableView
         [self addNewestTableView];
         //添加菜单
@@ -309,7 +318,6 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
         }
         
     }
-    
 }
 #pragma mark---------TXNaVigtionViewDelegate 监听搜索按钮-----------
 -(void)navigationView:(TXNavigationView * )navigtionView SearchButton:(UIButton *)but
@@ -366,8 +374,6 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
         //处理数据
         view.model=model;
         view.backgroundColor=[UIColor whiteColor];
-//        //添加到homeView
-//        [self.homeView addSubview:view];
         return view;
     }
     
@@ -456,6 +462,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
 
     return nil;
 }
+
 #pragma mark-----------------------TableView点击事件-----------------
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -488,30 +495,69 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     }
 
 }
-#pragma mark-------------------加载数据-----------------------
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+#pragma mark---------------下拉加载原理---------------------
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
-    CGFloat scrollViewY         = scrollView.contentOffset.y;
-    CGFloat footerY             = self.newestTableView.tableFooterView.frame.origin.y;
-    CGFloat y                   = footerY-scrollViewY-10;
-    //判断加载  以及添加数据 刷新数据
-    if (y<y+15)
-    {
-        if (!self.newestTableView.tableFooterView.hidden)
-        {
-            //添加数据
-            [_data addrecommendDataWithPag:_pag Number:_number];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                           {
-                            [_newestTableView reloadData];
-                            _pag+=1;
 
-                           });
+    
+    NSLog(@"scrollViewX:%f  scrollViewY:%f",scrollView.contentOffset.x ,scrollView.contentOffset.y);
+    
+    if (scrollView.contentOffset.y <-60)
+    {
+        [UIView animateWithDuration:0.4 animations:^{
+         self.homeTableView.contentInset = UIEdgeInsetsMake(40.0f, 0.0f, 0.0f, 0.0f);
+        } completion:^(BOOL finished){
             
-        }
+            [_data requestHomeModelData];
+            /**
+             *  发起网络请求,请求刷新数据
+             */
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [self.homeTableView reloadData];
+                _scrollFigureView.scrollFigureModel  = _data.scrollFigureModel;//轮播图网址
+                [UIView animateWithDuration:0.4 animations:^{
+                    
+                    self.homeTableView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+                    
+                }];
+            });
+        }];
         
     }
 }
-
+#pragma mark-------------------上拉加载原理----------------
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    
+    NSLog(@"%f",scrollView.contentOffset.y);
+    NSLog(@"%f",scrollView.frame.size.height);
+    NSLog(@"%f",scrollView.contentSize.height);
+    /**
+     *  关键-->
+     *  scrollView一开始并不存在偏移量,但是会设定contentSize的大小,所以contentSize.height永远都会比contentOffset.y高一个手机屏幕的
+     *  高度;上拉加载的效果就是每次滑动到底部时,再往上拉的时候请求更多,那个时候产生的偏移量,就能让contentOffset.y + 手机屏幕尺寸高大于这
+     *  个滚动视图的contentSize.height
+     */
+    if (scrollView.contentOffset.y + scrollView.frame.size.height >= scrollView.contentSize.height) {
+        NSLog(@"%d %s",__LINE__,__FUNCTION__);
+        [UIView commitAnimations];
+        
+        [UIView animateWithDuration:1.0 animations:^{
+            //  frame发生的偏移量,距离底部往上提高60(可自行设定)
+            self.newestTableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0);
+        } completion:^(BOOL finished) {
+            //添加数据
+            [_data addrecommendDataWithPag:_pag Number:_number];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(DELAY_DATE * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+                           {
+                               [_newestTableView reloadData];
+                               _pag+=1;
+                               
+                           });
+        }];
+        
+    }
+}
 
 @end

@@ -324,9 +324,7 @@
         [dataTask resume];
       
     }
-    
-    
-    
+   
 }
 #pragma mark---------------------添加视频页面数据-----------------
 -(void)addVideoDataPag:(int)pag Number:(int)number

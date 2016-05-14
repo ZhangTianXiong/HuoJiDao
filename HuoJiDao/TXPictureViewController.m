@@ -86,7 +86,7 @@ UITableViewDelegate,UITableViewDataSource
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
     //延迟加载TableView
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)( 0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)( 0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                    {
                       [self addPicTableView];
                    });

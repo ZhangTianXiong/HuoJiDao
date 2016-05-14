@@ -529,7 +529,7 @@
     [self.playerItme removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"small_startAction" object:nil];
     
-    NSLog(@"%s",__func__);
+    NSLog(@"dealloc：%s",__func__);
     
 }
 

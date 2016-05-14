@@ -63,8 +63,8 @@
     CGFloat unlikeViewFrameH=likeViewFrameH;
     _unlikeViewFrame=CGRectMake(unlikeViewFrameX, unlikeViewFrameY, unlikeViewFrameW, unlikeViewFrameH);
     
-    UIFont * messageFont=[UIFont systemFontOfSize:13];
-    CGSize  messageSize=[_model.message calculateTextSize:CGSizeMake(355, MAXFLOAT) andFoun:messageFont];
+    UIFont * messageFont=[UIFont systemFontOfSize:12];
+    CGSize  messageSize=[_model.message calculateTextSize:CGSizeMake(375-65-15, MAXFLOAT) andFoun:messageFont];
     
     CGFloat messageFrameX=userNameFrameX;
     CGFloat messageFrameY=CGRectGetMaxY(_datelineFrame)+margin;
@@ -74,8 +74,6 @@
     
     //行高
     _rowH=CGRectGetMaxY(_messageFrame)+margin;
-    
-    NSLog(@"行高：%f",_rowH);
     
     
     

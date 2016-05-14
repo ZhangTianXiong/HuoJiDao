@@ -238,9 +238,40 @@ UITableViewDelegate,UITableViewDataSource
     {
         _player.isPauseByUser = YES;//播放状态标记
         [_player.player pause];//暂停
-        _player.playState     = ZFPlayerStateStopped;//暂停中
+        _player.playState     = ZFPlayerStatePause;//暂停中
         [_pinglunModel removeAllObjects];//删除所有
     }
+    
+    
+    
+    dispatch_async(
+                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+                   , ^{
+                       
+                       
+                       NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES) objectAtIndex:0];
+                       
+                       NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachPath];
+                       NSLog(@"files :%lu",(unsigned long)[files count]);
+                       for (NSString *p in files)
+                       {
+                           NSError *error;
+                           NSString *path = [cachPath stringByAppendingPathComponent:p];
+                           if ([[NSFileManager defaultManager] fileExistsAtPath:path])
+                           {
+                               [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+                           }
+                       }
+
+                       
+                       
+                       
+                   });
+                   
+                      
+    
+    
+    
 }
 
 /************************************************************************************************************
@@ -321,7 +352,7 @@ UITableViewDelegate,UITableViewDataSource
 #pragma mark----------------创建picView-----------------------
 -(void)createPicViewWithStrURL:(NSString *)strURL
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //添加TableView
         [self addExhibitionTableView];
         //设置导航条
@@ -379,10 +410,8 @@ UITableViewDelegate,UITableViewDataSource
     NSMutableArray * muarray =[NSMutableArray array];
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.huojidao.com/CommentPage/8811"]];
-    
+    NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.huojidao.com/CommentPage/33375"]];
     NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
-    
     NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
                                                  {
                                                      if (error)
@@ -390,16 +419,14 @@ UITableViewDelegate,UITableViewDataSource
                                                          NSLog(@"Error: %@", error);
                                                      } else
                                                      {
-                                                         
-                                                         for (NSDictionary * dic in responseObject[@"data"])
-                                                         {
-                                                             TXCommentModel * model=[[TXCommentModel alloc]initWithDic:dic];
-                                                             TXCommentFrameModel * frameModel=[[TXCommentFrameModel alloc]initWithModel:model];
-                                                             [muarray addObject:frameModel];
+                                                       for (NSDictionary * dic in responseObject[@"data"])
+                                                             {
+                                                                 TXCommentModel * model=[[TXCommentModel alloc]initWithDic:dic];
+                                                                 TXCommentFrameModel * frameModel=[[TXCommentFrameModel alloc]initWithModel:model];
+                                                                 [muarray addObject:frameModel];
+                                                             }
+                                                             _pinglunModel=muarray;
                                                          }
-                                                         _pinglunModel=muarray;
-                                                         
-                                                     }
                                                      
                                                  }];
     [dataTask resume];
@@ -410,6 +437,8 @@ UITableViewDelegate,UITableViewDataSource
 -(void)gitModel:(NSNotification*)notification
 {
     _model=notification.userInfo[@"model"];
+    
+    NSLog(@"blogid:%@",_model.blogid);
     //创建详情View数据模型
     _frameModel=[[TXExhibitionDetailsViewFrameModel alloc]initWithModel:_model];
     _exhibitionDetailsView=[[TXExhibitionDetailsView alloc]init];
@@ -489,5 +518,25 @@ UITableViewDelegate,UITableViewDataSource
     [_notifiction removeObserver:self name:@"gitModel" object:nil];
     
 }
+
+
+
+
+
+-(void)clearCacheSuccess
+{
+    NSLog(@"清理成功");
+}
+
+
+
+
+
+
+
+
+
+
+
 
 @end

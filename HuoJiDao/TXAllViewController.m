@@ -110,7 +110,7 @@ UITableViewDelegate,UITableViewDataSource
             //添加数据
             [_data addAllDataPag:_pag Number:_number];
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(DELAY_DATE * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                            {
                                [_allTableView reloadData];
                                _pag+=1;
@@ -124,7 +124,7 @@ UITableViewDelegate,UITableViewDataSource
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(DELAY_DATE * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                    {
                    [self addVideoTableView];
                    });

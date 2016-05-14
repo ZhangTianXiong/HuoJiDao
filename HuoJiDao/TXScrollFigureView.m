@@ -64,8 +64,11 @@ UIScrollViewDelegate
 -(void)setScrollFigureModel:(NSArray *)scrollFigureModel
 {
     
+    [self removeTimer];
+    
+    
     //重新赋值
-    _scrollFigureModel                                  = scrollFigureModel;
+    _scrollFigureModel                         = scrollFigureModel;
     
     CGFloat viewW                              = self.frame.size.width;
     CGFloat viewH                              = self.frame.size.height;

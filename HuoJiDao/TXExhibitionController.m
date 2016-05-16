@@ -8,13 +8,19 @@
 
 #import "TXExhibitionController.h"
 #import "AFNetworking.h"
-#import "UIImage+GIF.h"
+#import "UIImage+GIF.h"//SDWebImage的GIF
 #import "TXTheDottedLineView.h"//功能条
 #import "TXExhibitionDetailsView.h"//展示条
 #import "TXCommentHeadView.h"//CommentHeadView评论组头部View
-#import "TXDetailsTableVieewCell.h"
+#import "TXDetailsTableVieewCell.h"//DetailsTableVieewCell详情cell
 #import "TXCommentFrameModel.h"
 
+typedef NS_ENUM(NSInteger, Direction)
+{
+   Vertical_screen,//竖屏
+   Cross_screen,//横屏
+    
+};
 @interface TXExhibitionController ()
 <
 UITableViewDelegate,UITableViewDataSource
@@ -25,140 +31,133 @@ UITableViewDelegate,UITableViewDataSource
     TXExhibitionDetailsView                * _exhibitionDetailsView;//添加在_myTableHeaderView上的详情View
     TXCommentHeadView                      * _commentHeadView;//CommentHeadView评论组头部View
     TXExhibitionDetailsViewFrameModel      * _frameModel;//详情View的FrameModel
-    CGFloat                                  navigationViewH;//导航栏的高
+    CGFloat                                  _navigationViewH;//导航栏的高
     CGFloat                                  _playerH;//视频播放器的高
-    CGFloat                                  _sectionHeader;
+    CGFloat                                  _sectionHeader;//组头部的高
     NSMutableArray                         * _pinglunModel;//评论数据
+    Direction                              * direction;//横竖屏的枚举
+    BOOL                                     _isDirection;//横竖屏
     
+   
 }
 @end
-
 @implementation TXExhibitionController
-#pragma mark------------------------屏幕旋转-------------------------
--(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+
+#pragma mark--------------------初始化数据----------------------
+/********************************************************
+ **  创建通知中心接收消息                                 **
+ **  1.@"gitModel" 获取数据                             **
+ **  2.@"small_startAction" 获取小按钮数据               **
+ **                                                    **
+ *******************************************************/
+-(void)initData
 {
-    if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
-    {
-        NSLog(@"现在是竖屏");
-        //设置导航栏
-        //显示导航栏
-        _exhibitionNavigationView.hidden=NO;
-        //隐藏topImageView
-        _player.maskView.topImageView.hidden=YES;
-        //设置exhibitionNavigationView的Frame
-        CGFloat exhibitionNavigationViewX=0;
-        CGFloat exhibitionNavigationViewY=0;
-        CGFloat exhibitionNavigationViewW=VIEW_WIDTH;
-        CGFloat exhibitionNavigationViewH=navigationViewH;
-        [_exhibitionNavigationView setFrame:CGRectMake(exhibitionNavigationViewX, exhibitionNavigationViewY, exhibitionNavigationViewW,exhibitionNavigationViewH )];
-        //播放器的Frame
-        CGFloat playerX=0;
-        CGFloat playerY=0;
-        CGFloat playerW=VIEW_WIDTH;
-        CGFloat playerH=_playerH;
-        [_player setFrame:CM(playerX, playerY,playerW , playerH)];
-        //设置exhibitionDetailsView的Frame
-        CGFloat exhibitionDetailsViewX=0;
-        CGFloat exhibitionDetailsViewY=_playerH;
-        CGFloat exhibitionDetailsViewW=self.view.frame.size.width;
-        CGFloat exhibitionDetailsViewH=_frameModel.H;
-        _exhibitionDetailsView.frame=CGRectMake(exhibitionDetailsViewX,exhibitionDetailsViewY,exhibitionDetailsViewW ,exhibitionDetailsViewH);
-        //设置exhibitionTableView的Frame
-        CGFloat exhibitionTableViewX=0;
-        CGFloat exhibitionTableViewY=0;
-        CGFloat exhibitionTableViewW=VIEW_WIDTH;
-        CGFloat exhibitionTableViewH=VIEW_HEIGHT;
-        [_exhibitionTableView setFrame:CM(exhibitionTableViewX,exhibitionTableViewY,exhibitionTableViewW, exhibitionTableViewH)];
-        //设置tableHeaderView的Frame
-        CGFloat myTableHeaderViewX=0;
-        CGFloat myTableHeaderViewY=0;
-        CGFloat myTableHeaderViewW=VIEW_WIDTH;
-        CGFloat myTableHeaderViewH=_playerH+_frameModel.H;
-        [_myTableHeaderView setFrame:CM(myTableHeaderViewX, myTableHeaderViewY,myTableHeaderViewW , myTableHeaderViewH)];
-        //设置fullScreenBtn图标
-        [_player.maskView.fullScreenBtn setImage:[UIImage imageNamed:@"最大化_icon"] forState:UIControlStateNormal];
-    }
-    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation))
-    {
-        NSLog(@"现在是横屏");
-        //设置导航栏
-        //显示导航栏
-        _exhibitionNavigationView.hidden=YES;
-        //隐藏topImageView
-        _player.maskView.topImageView.hidden=NO;
-        //设置exhibitionNavigationViewX的Frame
-        CGFloat exhibitionNavigationViewX=0;
-        CGFloat exhibitionNavigationViewY=0;
-        CGFloat exhibitionNavigationViewW=VIEW_WIDTH;
-        CGFloat exhibitionNavigationViewH=navigationViewH;
-        //设置exhibitionNavigationView的Frame
-        [_exhibitionNavigationView setFrame:CGRectMake(exhibitionNavigationViewX, exhibitionNavigationViewY, exhibitionNavigationViewW, exhibitionNavigationViewH)];
-        //设置player的Frame
-        CGFloat playerX=0;
-        CGFloat playerY=0;
-        CGFloat playerW=VIEW_WIDTH;
-        CGFloat playerH=VIEW_HEIGHT;
-        [_player setFrame:CM(playerX, playerY,playerW , playerH)];
-        _exhibitionDetailsView.frame=CGRectMake(0, CGRectGetMaxY(_player.frame), self.view.frame.size.width,_frameModel.H);
-        //设置exhibitionDetailsView的Frame
-        CGFloat exhibitionDetailsViewX=0;
-        CGFloat exhibitionDetailsViewY=CGRectGetMaxY(_player.frame);
-        CGFloat exhibitionDetailsViewW=self.view.frame.size.width;
-        CGFloat exhibitionDetailsViewH=_frameModel.H;
-        _exhibitionDetailsView.frame=CGRectMake(exhibitionDetailsViewX,exhibitionDetailsViewY,exhibitionDetailsViewW ,exhibitionDetailsViewH);
-        //设置exhibitionTableView的Frame
-        CGFloat exhibitionTableViewX=0;
-        CGFloat exhibitionTableViewY=0;
-        CGFloat exhibitionTableViewW=VIEW_WIDTH;
-        CGFloat exhibitionTableViewH=VIEW_HEIGHT;
-        [_exhibitionTableView setFrame:CM(exhibitionTableViewX, exhibitionTableViewY, exhibitionTableViewW, exhibitionTableViewH)];
-        //设置tableHeaderView的Frame
-        CGFloat myTableHeaderViewX=0;
-        CGFloat myTableHeaderViewY=0;
-        CGFloat myTableHeaderViewW=VIEW_WIDTH;
-        CGFloat myTableHeaderViewH=VIEW_HEIGHT;
-        [_myTableHeaderView setFrame:CM(myTableHeaderViewX, myTableHeaderViewY,myTableHeaderViewW , myTableHeaderViewH)];
-        //设置fullScreenBtn的图标
-        [_player.maskView.fullScreenBtn setImage:[UIImage imageNamed:@"最小化_icon"] forState:UIControlStateNormal];
-    }
+    //创建通知中心
+    _notifiction=[NSNotificationCenter defaultCenter];
+    [_notifiction addObserver:self selector:@selector(gitModel:) name:@"gitModel" object:nil];
+    [_notifiction addObserver:self selector:@selector(smallStartAction:) name:@"small_startAction" object:nil];
+    
 }
-#pragma mark-----------------监听TableView的Row------------------
+
+#pragma mark--------------------通知中心--------------------
+-(void)gitModel:(NSNotification*)notification
+{
+    _model=notification.userInfo[@"model"];
+    //创建详情View数据模型
+    _frameModel=[[TXExhibitionDetailsViewFrameModel alloc]initWithModel:_model];
+    _exhibitionDetailsView=[[TXExhibitionDetailsView alloc]init];
+    //判断类型是否是Video
+    if ([_model.type isEqualToString: @"video"])
+    {
+        [self requestDataWithStrURL:_model.vid];
+        [self requestPingLunDataWithBlogid:_model.blogid];
+    }
+    //判断类型是否是pic 和 gif
+    else if ([_model.type isEqualToString:@"pic"]||[_model.type isEqualToString:@"gif"])
+    {
+        [self createPicViewWithStrURL:_model.img];
+        [self requestPingLunDataWithBlogid:_model.blogid];
+    }
+    
+    
+}
+#pragma mark-------------------初始化变量----------------------
+-(void)initVar
+{
+    _navigationViewH = 64;//导航栏的高
+    _playerH        = 200;//播放器的高
+    _sectionHeader  = 20;//组头部View的高
+    _isDirection     = Vertical_screen;//竖屏
+}
+
+#pragma mark===================viewDidLoad===================
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.view.backgroundColor=[UIColor whiteColor];
+    [self interfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation]];//强制竖屏
+    
+}
+#pragma mark==================监听TableView的Row================
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return _pinglunModel.count;
 }
-#pragma mark-----------------监听TableView的Cell------------------
+#pragma mark==================监听TableView的Cell===============
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //创建数据模型
     TXCommentFrameModel     * frameModel = _pinglunModel[indexPath.row];
     //创建cell
     TXDetailsTableVieewCell * cell       = [[TXDetailsTableVieewCell alloc]initWithTableView:tableView];
-    
     //设置单元格的数据
     cell.frameModel                      = frameModel;
     return cell;
 }
-#pragma mark---------UITableViewDataSource 监听HeadersView----------
+#pragma mark=================监听HeadersView的高===============
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
      TXCommentFrameModel * frameModel=_pinglunModel[indexPath.row];
     return frameModel.rowH;
 }
+#pragma mark=================监听HeaderInSectionView===============
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    
     _commentHeadView=[[TXCommentHeadView alloc]initWithFrame:CM(0, 0, 0, _sectionHeader)];
     _commentHeadView.num=(int)_pinglunModel.count;
-  
-    
     return _commentHeadView;
 }
-
-#pragma mark---------UITableViewDataSource 监听Headers的高----------
+#pragma mark=================监听HeaderInSectionView的高===============
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return _sectionHeader;
+}
+//播放
+-(void)myPlay
+{
+    _player.isPauseByUser = NO;//播放状态标记
+    _player.playState     = ZFPlayerStatePlaying;//播放中
+    [_player.player play];//播放
+}
+//暂停
+-(void)myPause
+{
+    _player.isPauseByUser = YES;//播放状态标记
+    _player.playState     = ZFPlayerStatePause;//暂停中
+    [_player.player pause];//暂停
+}
+//按钮暂停状态的图标
+-(void)buttonIconPause
+{
+    [_player.maskView.bigstartBut setImage:[UIImage imageNamed:@"big_暂停_icon"] forState:UIControlStateNormal];
+    [_player.maskView.startBut setImage:[UIImage imageNamed:@"small_暂停_icon"] forState:UIControlStateNormal];
+}
+//按钮播放状态的图标
+-(void)buttonIconPlay
+{
+    [_player.maskView.bigstartBut setImage:[UIImage imageNamed:@"big_播放_icon"] forState:UIControlStateNormal];
+    [_player.maskView.startBut setImage:[UIImage imageNamed:@"small_播放_icon"] forState:UIControlStateNormal];
+
 }
 
 #pragma mark---------------大播放按钮点击事件-------------------------
@@ -168,29 +167,27 @@ UITableViewDelegate,UITableViewDataSource
     button.selected = !button.selected;
    if (button.selected)
     {
-        _player.isPauseByUser = NO;//播放状态标记
-        _player.playState     = ZFPlayerStatePlaying;//播放中
-        [_player.player play];//播放
-        //大图标
-        [button setImage:[UIImage imageNamed:@"big_暂停_icon"] forState:UIControlStateNormal];
-        //小图标
-        [_player.maskView.startBut setImage:[UIImage imageNamed:@"small_暂停_icon"] forState:UIControlStateNormal];
+        [self myPlay];
+        [self buttonIconPause];
         //点击播放按钮后将player添加在self.view上
         [self.view addSubview:_player];
         [self.view addSubview:_exhibitionNavigationView];
+        
     }
     else
     {
-        _player.isPauseByUser = YES;//播放状态标记
-        _player.playState     = ZFPlayerStatePause;//暂停中
-         [_player.player pause];//暂停
-        //播放中
-        [button setImage:[UIImage imageNamed:@"big_播放_icon"] forState:UIControlStateNormal];
-        [_player.maskView.startBut setImage:[UIImage imageNamed:@"small_播放_icon"] forState:UIControlStateNormal];
-        //点击播放按钮后将videoExhibitionTableView添加在self.view上
-        [_exhibitionTableView.tableHeaderView addSubview:_player];
-        //将TableView置顶
-        [_exhibitionTableView setContentOffset:CGPointMake(0,0) animated:YES];
+        [self myPause];//暂停
+        [self buttonIconPlay];//按钮播放状态的图标
+        if (_isDirection==Vertical_screen)
+        {
+            //点击播放按钮后将videoExhibitionTableView添加在self.view上
+            [_exhibitionTableView.tableHeaderView addSubview:_player];
+            //将TableView置顶
+            [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH+_sectionHeader+72) animated:YES];
+            
+        }
+        
+        
     }
 
 }
@@ -203,6 +200,43 @@ UITableViewDelegate,UITableViewDataSource
         //点击播放按钮后将player添加在self.view上
         [self.view addSubview:_player];
         [self.view addSubview:_exhibitionNavigationView];
+    }else
+    {
+    
+        if (_isDirection==Vertical_screen)
+        {
+            //点击播放按钮后将videoExhibitionTableView添加在self.view上
+            [_exhibitionTableView.tableHeaderView addSubview:_player];
+        }
+        if (_isDirection==Vertical_screen)
+        {   //将TableView置顶
+            [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH+_sectionHeader+72) animated:YES];
+        }
+
+    }
+    
+    
+}
+#pragma mark -----------------导航栏 播放按钮------------
+-(void)startAction:(UIButton*)button
+{
+   
+    //改变播放按钮状态
+    _player.maskView.startBut.selected=!button.selected;
+    _player.maskView.bigstartBut.selected=!button.selected;
+    
+    if ( _player.maskView.bigstartBut.selected)
+    {
+       [_exhibitionTableView setContentOffset:CGPointMake(0,0) animated:YES];
+        [self myPlay];
+        [self buttonIconPause];
+        //点击播放按钮后将player添加在self.view上
+        [self.view addSubview:_player];
+        [self.view addSubview:_exhibitionNavigationView];
+        _exhibitionNavigationView.backgroundColor=Color(90,179, 240, 0);
+        _exhibitionNavigationView.but.alpha=0;
+       
+       
     }
 }
 #pragma mark---------------添加exhibitionDetailsView----------
@@ -231,6 +265,7 @@ UITableViewDelegate,UITableViewDataSource
     _exhibitionTableView.tableHeaderView  =_myTableHeaderView;
 }
 #pragma mark--------------navigationView返回按钮--------------------
+/*********************************注意返回时请清除缓存。*********************************/
 -(void)navigationViewBack:(UIButton*)button
 {
     [self dismissViewControllerAnimated:NO completion:nil];
@@ -241,55 +276,6 @@ UITableViewDelegate,UITableViewDataSource
         _player.playState     = ZFPlayerStatePause;//暂停中
         [_pinglunModel removeAllObjects];//删除所有
     }
-    
-    
-    
-    dispatch_async(
-                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-                   , ^{
-                       
-                       
-                       NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask, YES) objectAtIndex:0];
-                       
-                       NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachPath];
-                       NSLog(@"files :%lu",(unsigned long)[files count]);
-                       for (NSString *p in files)
-                       {
-                           NSError *error;
-                           NSString *path = [cachPath stringByAppendingPathComponent:p];
-                           if ([[NSFileManager defaultManager] fileExistsAtPath:path])
-                           {
-                               [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
-                           }
-                       }
-
-                       
-                       
-                       
-                   });
-                   
-                      
-    
-    
-    
-}
-
-/************************************************************************************************************
- **  注意：                                                                                                 **
- **  1.-(void)interfaceOrientation 该方法是强制将屏幕竖屏。(ARC情况下使用)。                                     **
- **  2.[UIApplication sharedApplication] 该方法是获取当前屏幕方向。                                            **
- **  3.-(void)willAnimateRotationToInterfaceOrientation: duration: 该方法是旋转方向 改变视图。                 **
- **  4.-(BOOL)shouldAutorotate 该方法用于判断用户是否可以旋转屏幕。                                              **
- **  5.-(UIInterfaceOrientationMask)supportedInterfaceOrientations 该方法 用于ViewController支持那些旋转方向。  **
- ************************************************************************************************************/
-
-#pragma mark--------------viewDidLoad------------------------------
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-        //强制竖屏
-    [self interfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
-    self.view.backgroundColor=[UIColor whiteColor];
 }
 
 #pragma mark--------------添加导航栏---------------------------------
@@ -299,12 +285,13 @@ UITableViewDelegate,UITableViewDataSource
     CGFloat exhibitionNavigationViewX=0;
     CGFloat exhibitionNavigationViewY=0;
     CGFloat exhibitionNavigationViewW=self.view.frame.size.width;
-    CGFloat exhibitionNavigationViewH=navigationViewH;
+    CGFloat exhibitionNavigationViewH=_navigationViewH;
     _exhibitionNavigationView=[[TXExhibitionNavigationView alloc]initWithFrame:CM(exhibitionNavigationViewX, exhibitionNavigationViewY,exhibitionNavigationViewW,exhibitionNavigationViewH)];
     _exhibitionNavigationView.backgroundColor=[UIColor colorWithWhite:1 alpha:0];
     [_exhibitionNavigationView.backBut addTarget:self action:@selector(navigationViewBack:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_exhibitionNavigationView];
-    
+    _exhibitionNavigationView.but.alpha=0;
+    [_exhibitionNavigationView.but addTarget:self action:@selector(startAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark---------------添加ExhibitionTableView-------------
@@ -330,40 +317,36 @@ UITableViewDelegate,UITableViewDataSource
 #pragma mark---------------创建MediaPlayer--------------------------
 -(void)createMediaPlayer:(NSString*)strURL
 {
-    //添加TableView
-    [self addExhibitionTableView];
-    //设置导航条
-    [self setNavigationView];
+    [self addExhibitionTableView];//添加TableView
+    [self setNavigationView];//设置导航条
     //设置player的Frame
     CGFloat playerX=0;
     CGFloat playerY=0;
     CGFloat playerW=self.view.frame.size.width;
     CGFloat playerH=_playerH;
     _player=[[TXMediaPlayer alloc]initWithFrame:CGRectMake(playerX, playerY,playerW ,playerH)];
-    //添加URL
-    _player.videoURL=[NSURL URLWithString: strURL];
-    //添加大播放按钮
-    [_player.maskView.bigstartBut addTarget:self action:@selector(bigStartAction:) forControlEvents:UIControlEventTouchUpInside];
-    //将player添加在tableHeaderView上
-    [self.exhibitionTableView.tableHeaderView addSubview:_player];
-    //调用添加详情View
-    [self addExhibitionDetailsView];
+    _player.videoURL=[NSURL URLWithString: strURL];//添加URL
+    [_player.maskView.bigstartBut addTarget:self action:@selector(bigStartAction:) forControlEvents:UIControlEventTouchUpInside];//添加大播放按钮
+    [self.exhibitionTableView.tableHeaderView addSubview:_player];//将player添加在tableHeaderView上
+    [self addExhibitionDetailsView];//调用添加详情View
 }
 #pragma mark----------------创建picView-----------------------
 -(void)createPicViewWithStrURL:(NSString *)strURL
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        //添加TableView
-        [self addExhibitionTableView];
-        //设置导航条
-        [self setNavigationView];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+    {
+        
+        [self addExhibitionTableView];//添加TableView
+        [self setNavigationView];//设置导航条
+        
         //设置picView的Frame
         CGFloat picViewX=0;
         CGFloat picViewY=0;
         CGFloat picViewW=self.view.frame.size.width;
         CGFloat picViewH=_playerH;
         _picView=[[TXPicView alloc]initWithFrame:CM(picViewX, picViewY, picViewW, picViewH)];
-         //判断是否是pic 和 gif
+        
+         //判断是否是pic和gif
         if ([_model.type isEqualToString:@"pic"])
         {
         [_picView.picImageView sd_setImageWithURL:[NSURL URLWithString:strURL]];
@@ -372,7 +355,6 @@ UITableViewDelegate,UITableViewDataSource
             NSData * imageData=[NSData dataWithContentsOfURL:[NSURL URLWithString:_model.link]];
             _picView.picImageView.image=[UIImage sd_animatedGIFWithData:imageData];
         }
-        
         [self.exhibitionTableView.tableHeaderView addSubview:_picView];
         [self addExhibitionDetailsView];
     });
@@ -433,55 +415,15 @@ UITableViewDelegate,UITableViewDataSource
     
 }
 
-#pragma mark--------------------核心---监听通知中心--------------------
--(void)gitModel:(NSNotification*)notification
-{
-    _model=notification.userInfo[@"model"];
-    
-    NSLog(@"blogid:%@",_model.blogid);
-    //创建详情View数据模型
-    _frameModel=[[TXExhibitionDetailsViewFrameModel alloc]initWithModel:_model];
-    _exhibitionDetailsView=[[TXExhibitionDetailsView alloc]init];
-    //判断类型是否是Video
-    if ([_model.type isEqualToString: @"video"])
-    {
-        [self requestDataWithStrURL:_model.vid];
-        [self requestPingLunDataWithBlogid:_model.blogid];
-    }
-    //判断类型是否是pic 和 gif
-    else if ([_model.type isEqualToString:@"pic"]||[_model.type isEqualToString:@"gif"])
-    {
-        [self createPicViewWithStrURL:_model.img];
-        [self requestPingLunDataWithBlogid:_model.blogid];
-    }
-    
-    
-}
-#pragma mark--------------------初始化变量----------------------
-//父类的方法(初始化变量)
--(void)initVar
-{
-    navigationViewH = 64;
-    _playerH        = 200;
-    _sectionHeader  = 20;
-    
-}
 
-#pragma mark--------------------初始化数据----------------------
-/********************************************************
- **  创建通知中心接收消息                                 **
- **  1.@"gitModel" 获取数据                             **
- **  2.@"small_startAction" 获取小按钮数据               **
- **                                                    **
- *******************************************************/
--(void)initData
-{
-    //创建通知中心
-    _notifiction=[NSNotificationCenter defaultCenter];
-    [_notifiction addObserver:self selector:@selector(gitModel:) name:@"gitModel" object:nil];
-    [_notifiction addObserver:self selector:@selector(smallStartAction:) name:@"small_startAction" object:nil];
-    
-}
+/************************************************************************************************************
+ **  注意：                                                                                                 **
+ **  1.-(void)interfaceOrientation 该方法是强制将屏幕竖屏。(ARC情况下使用)。                                     **
+ **  2.[UIApplication sharedApplication] 该方法是获取当前屏幕方向。                                            **
+ **  3.-(void)willAnimateRotationToInterfaceOrientation: duration: 该方法是旋转方向 改变视图。                 **
+ **  4.-(BOOL)shouldAutorotate 该方法用于判断用户是否可以旋转屏幕。                                              **
+ **  5.-(UIInterfaceOrientationMask)supportedInterfaceOrientations 该方法 用于ViewController支持那些旋转方向。  **
+ ************************************************************************************************************/
 #pragma mark--------------强制转换屏幕方向------------------------
 - (void)interfaceOrientation:(UIInterfaceOrientation)orientation
 {
@@ -505,37 +447,100 @@ UITableViewDelegate,UITableViewDataSource
 #pragma mark--------------是否支持屏幕旋转--------------
 -(BOOL)shouldAutorotate
 {
-    //当只是vide的时候屏幕才能被旋转
+    //当只是vide的时候屏幕才有可能被旋转
     if ([_model.type isEqualToString: @"video"])
     {
         return YES;
     }
     return  NO;
 }
+#pragma mark------------------------屏幕旋转-------------------------
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
+    {
+        NSLog(@"现在是竖屏");
+        _isDirection=Vertical_screen;//竖屏
+        _exhibitionNavigationView.hidden=NO;//显示导航栏
+        _player.maskView.topImageView.hidden=YES;//隐藏topImageView
+        //设置exhibitionNavigationView的Frame
+        CGFloat exhibitionNavigationViewX=0;
+        CGFloat exhibitionNavigationViewY=0;
+        CGFloat exhibitionNavigationViewW=self.view.frame.size.width;
+        CGFloat exhibitionNavigationViewH=_navigationViewH;
+        [_exhibitionNavigationView setFrame:CGRectMake(exhibitionNavigationViewX, exhibitionNavigationViewY, exhibitionNavigationViewW,exhibitionNavigationViewH )];
+        //播放器的Frame
+        CGFloat playerX=0;
+        CGFloat playerY=0;
+        CGFloat playerW=self.view.frame.size.width;
+        CGFloat playerH=_playerH;
+        [_player setFrame:CM(playerX, playerY,playerW , playerH)];
+        //exhibitionTableView的Frame
+        CGFloat exhibitionTableViewX=0;
+        CGFloat exhibitionTableViewY=0;
+        CGFloat exhibitionTableViewW=self.view.frame.size.width;
+        CGFloat exhibitionTableViewH=self.view.frame.size.height;
+        [_exhibitionTableView setFrame:CM(exhibitionTableViewX,exhibitionTableViewY,exhibitionTableViewW, exhibitionTableViewH)];
+        [self.view addSubview:_exhibitionTableView];
+        if (_player.isPauseByUser==YES)
+        {
+            [_exhibitionTableView.tableHeaderView addSubview:_player];
+        }
+        else if (_player.isPauseByUser==NO)
+        {
+            _exhibitionNavigationView.but.alpha=0;
+            _exhibitionNavigationView.backgroundColor=Color(90,179, 240, 0);
+            [self.view addSubview:_player];
+        }
+        //添加导航栏
+        [self.view addSubview:_exhibitionNavigationView];
+        //设置fullScreenBtn图标
+        [_player.maskView.fullScreenBtn setImage:[UIImage imageNamed:@"最大化_icon"] forState:UIControlStateNormal];
+        
+        if (_player.isPauseByUser==YES)
+        {
+            //将TableView置顶
+            [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH+_sectionHeader+72) animated:YES];
+        }
+        
+    }
+    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation))
+    {
+        NSLog(@"现在是横屏");
+        _isDirection=Cross_screen;//竖屏
+        _exhibitionNavigationView.hidden=YES;//隐藏导航栏
+        _player.maskView.topImageView.hidden=NO;//显示topImageView
+        //设置player的Frame
+        CGFloat playerX=0;
+        CGFloat playerY=0;
+        CGFloat playerW=VIEW_WIDTH;
+        CGFloat playerH=VIEW_HEIGHT;
+        [_player setFrame:CM(playerX, playerY,playerW , playerH)];
+        [self.view addSubview:_player];
+        //移除exhibitionTableView
+        [_exhibitionTableView removeFromSuperview];
+        //设置fullScreenBtn的图标;
+        [_player.maskView.fullScreenBtn setImage:[UIImage imageNamed:@"最小化_icon"] forState:UIControlStateNormal];
+        
+    }
+}
+#pragma mark--------------scrollView 滑动事件 -------------------
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat  a=scrollView.contentOffset.y/(_playerH-_navigationViewH);
+    if (_player.isPauseByUser==YES)
+    {
+        _exhibitionNavigationView.backgroundColor=Color(90,179, 240, a);
+        _exhibitionNavigationView.but.alpha=a;
+    }
+}
+
 -(void)dealloc
 {
     NSLog(@"dealloc 被调用");
     [_notifiction removeObserver:self name:@"gitModel" object:nil];
     
 }
-
-
-
-
-
--(void)clearCacheSuccess
-{
-    NSLog(@"清理成功");
-}
-
-
-
-
-
-
-
-
-
 
 
 

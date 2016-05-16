@@ -164,15 +164,17 @@
 #pragma mark---------------------------播放、暂停-------------------------------
 - (void)startAction:(UIButton *)button
 {
+    
     self.maskView.bigstartBut.selected=!button.selected;
     button.selected = !button.selected;
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"small_startAction" object:self userInfo:@{@"button":button}];
     
     if (button.selected)
     {
+        [_player play];//播放
         self.isPauseByUser = NO;//播放状态
         self.playState     = ZFPlayerStatePlaying;//播放中
-        [_player play];//播放
+        
         
         //大图标
         [self.maskView.bigstartBut  setImage:[UIImage imageNamed:@"big_暂停_icon"] forState:UIControlStateNormal];
@@ -182,10 +184,10 @@
     }
     else
     {
-        
+        [_player pause];//暂停
         self.isPauseByUser = YES;//播放状态
         self.playState     = ZFPlayerStatePause;//暂停中
-        [_player pause];//暂停
+        
         //大图标
         [self.maskView.bigstartBut  setImage:[UIImage imageNamed:@"big_播放_icon"] forState:UIControlStateNormal];
         //小图标
@@ -193,7 +195,7 @@
         
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"small_startAction" object:self userInfo:@{@"button":button}];
+    
 }
 
 #pragma mark--------------------------设置播放进度和时间------------------------

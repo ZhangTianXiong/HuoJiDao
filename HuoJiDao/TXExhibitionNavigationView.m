@@ -39,14 +39,14 @@
     _backBut.frame      = CM(backButX, backButY, backButW_H, backButW_H);
     
     //but按钮
-    CGFloat butW=80;
+    CGFloat butW=100;
     CGFloat butH=backButW_H;
     CGFloat butX=(viewW-butW)/2;
     CGFloat butY=backButY;
     _but.frame=CM(butX, butY, butW, butH);
     
     CGFloat iconX=0;
-    CGFloat iconW_H=20;
+    CGFloat iconW_H=15;
     CGFloat iconY=(butH-iconW_H)/2;
     icon.frame=CM(iconX, iconY, iconW_H, iconW_H);
     
@@ -68,7 +68,10 @@
         
         UIButton * but=[UIButton buttonWithType:UIButtonTypeCustom];
         icon=[[UIImageView alloc]init];
+        icon.image=[UIImage imageNamed:@"small_播放_icon"];
         label=[[UILabel alloc]init];
+        label.textColor=[UIColor whiteColor];
+        label.text=@"点击播放";
         _but=but;
         
         [self addSubview:backBut];

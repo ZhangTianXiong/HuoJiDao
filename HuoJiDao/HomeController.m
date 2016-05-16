@@ -19,8 +19,6 @@
 //添加TXHomeHeaderInSectionView
 #import "TXHomeHeaderInSectionView.h"
 
-//实验区
-
 @interface HomeController ()
 <
 TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDataSource
@@ -301,24 +299,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
        _scrollView.contentOffset=CGPointMake(self.newestView.frame.origin.x,self.newestView.frame.origin.y );
     }
 }
-#pragma mark------------UIScrollViewDelegate 监听滑动-----------
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
 
-    CGPoint point = scrollView.contentOffset;
-    //设置选项卡的状态
-    if (scrollView.tag==0)
-    {
-        if (point.x<10)
-        {
-             _navigtionView.tab.selectedSegmentIndex=0;
-        }else if(point.x==_newestView.frame.origin.x)
-        {
-             _navigtionView.tab.selectedSegmentIndex=1;
-        }
-        
-    }
-}
 #pragma mark---------TXNaVigtionViewDelegate 监听搜索按钮-----------
 -(void)navigationView:(TXNavigationView * )navigtionView SearchButton:(UIButton *)but
 {
@@ -494,6 +475,25 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
                                                                               }];
     }
 
+}
+#pragma mark------------UIScrollViewDelegate 监听滑动-----------
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+    CGPoint point = scrollView.contentOffset;
+    //设置选项卡的状态
+    if (scrollView.tag==0)
+    {
+        if (point.x<10)
+        {
+            _navigtionView.tab.selectedSegmentIndex=0;
+        }else if(point.x==_newestView.frame.origin.x)
+        {
+            _navigtionView.tab.selectedSegmentIndex=1;
+        }
+        
+    }
+    
 }
 #pragma mark---------------下拉加载原理---------------------
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView

@@ -29,28 +29,25 @@ typedef NS_ENUM(NSInteger,Button_tag)
     [self initVar];
     [self setNavigationView];
     [self initView];
-    
-    
-        
-  
+
 }
-#pragma mark------初始化数据-------------
+#pragma mark++++++++++初始化数据++++++++++
 -(void)initData
 {
     
     
 }
-#pragma mark------初始化变量-------------
+#pragma mark++++++++++初始化变量++++++++++
 -(void)initVar
 {
     
 }
-#pragma mark------初始化视图-------------
+#pragma mark===============初始化视图===============
 -(void)initView{
     
     
 }
-#pragma mark------Button点击事件-----------
+#pragma mark-------------Button点击事件-------------
 -(void)navigationButton:(UIButton *)sender
 {
     switch (sender.tag)
@@ -67,7 +64,7 @@ typedef NS_ENUM(NSInteger,Button_tag)
             break;
     }
 }
-#pragma mark -----------设置导航栏-------------
+#pragma mark-------------设置导航栏-------------
 -(void)setNavigationView
 {
     //创建导航View
@@ -99,7 +96,7 @@ typedef NS_ENUM(NSInteger,Button_tag)
     [self.view addSubview:_searchBut];
     [self setNavigationViewFrame];
 }
-#pragma mark ------设置导航栏位置--------------
+#pragma mark=================设置导航栏位置=================
 -(void)setNavigationViewFrame
 {
     _navigationView.frame        = NavigationView_Frame;
@@ -128,7 +125,7 @@ typedef NS_ENUM(NSInteger,Button_tag)
    
 }
 
-#pragma mark---------------------是否支持屏幕旋转------------------
+#pragma mark-------------是否支持屏幕旋转-------------
 
 - (BOOL)shouldAutorotate
 
@@ -143,16 +140,12 @@ typedef NS_ENUM(NSInteger,Button_tag)
     
 }
 
-
-#pragma mark------------------只支持这一个方向(正常的方向)------------
+#pragma mark-------------只支持这一个方向(正常的方向)-------------
 -(UIInterfaceOrientationMask)supportedInterfaceOrientations
 
 {
     return UIInterfaceOrientationMaskPortrait;//只支持这一个方向(正常的方向)
     
 }
--(void)dealloc
-{
-    
-}
+
 @end

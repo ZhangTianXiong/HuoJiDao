@@ -7,12 +7,18 @@
 //
 
 #import "TXViewController.h"
-#import "TXExhibitionNavigationView.h"
-#import "TXMediaPlayer.h"
+#import "AFNetworking.h"//AFNetworking
+#import "UIImage+GIF.h"//SDWebImage的GIF
+#import "TXExhibitionNavigationView.h"//导航栏
+#import "TXMediaPlayer.h"//视频播放
+#import "TXPicView.h"//图片展示View
+#import "TXExhibitionDetailsView.h"//展示条
+#import "TXTheDottedLineView.h"//功能条
+#import "TXDetailsTableVieewCell.h"//DetailsTableVieewCell详情cell
+#import "TXCommentFrameModel.h"//Cell的数据模型
+#import "TXCommentHeadView.h"//CommentHeadView评论组头部View
 #import "TXListModel.h"
-#import "TXPicView.h"
 @interface TXExhibitionController : TXViewController
-
 @property(nonatomic,strong)TXListModel                     * model;
 @property(nonatomic,strong)TXExhibitionNavigationView      * exhibitionNavigationView;
 @property(nonatomic,strong)UITableView                     * exhibitionTableView;

@@ -19,7 +19,7 @@ UIScrollViewDelegate
 }
 @end
 @implementation TXScrollFigureView
-#pragma mark---------------重写initWithFrame方法------------------
+#pragma mark================重写initWithFrame方法================
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self=[super initWithFrame:frame])
@@ -60,7 +60,7 @@ UIScrollViewDelegate
     
     
 }
-#pragma mark--------------重写setPictures用于创建轮播图 --------------
+#pragma mark++++++++++++++++重写setPictures用于创建轮播图+++++++++++++++
 -(void)setScrollFigureModel:(NSArray *)scrollFigureModel
 {
     

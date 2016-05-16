@@ -16,7 +16,7 @@
 }
 @end
 @implementation TXCategoryView
-#pragma mark-----------------------点击事件----------------
+#pragma mark----------------点击事件----------------
 -(void)CategoryViewButton:(UIButton*)sender
 {
     switch (sender.tag)
@@ -61,7 +61,7 @@
             break;
     }
 }
-#pragma mark-----------------------设置视图数据----------------
+#pragma mark++++++++++++++++++设置视图数据++++++++++++++++++
 -(void)setViewData
 {
    
@@ -116,7 +116,7 @@
     
     
 }
-#pragma mark-----------------------设置视图框架----------------
+#pragma mark=============设置视图框架=============
 -(void)setViewFrame
 {
     CGFloat viewW                    = self.frame.size.width;
@@ -172,7 +172,7 @@
     _linkLabel.frame                 = CM(linkLabelX, linkLabelY, linkLabelW, linkLabelH);
     [self setViewData];
 }
-#pragma mark-----------------------初始化视图----------------
+#pragma mark=============初始化视图=============
 -(void)initView
 {
     //实例化Button

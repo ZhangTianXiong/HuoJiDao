@@ -17,7 +17,7 @@
     _model=model;
     [self setViewData];
 }
-#pragma mark---------------重写设置视图数据-----------
+#pragma mark++++++++++++++重写设置视图数据++++++++++++++
 
 -(void)setViewData
 {
@@ -28,7 +28,7 @@
     _themeLabel.textColor   = [UIColor blackColor];
     
 }
-#pragma mark---------------设置视图框架-----------
+#pragma mark==============设置视图框架==============
 -(void)setViewFrame
 {
     CGFloat viewW           = self.frame.size.width;
@@ -54,7 +54,7 @@
     _but.frame              = CM(butX, butY, butW, butH);
     
 }
-#pragma mark---------------初始化视图-----------
+#pragma mark==============初始化视图==============
 -(void)initView
 {
     UIImageView * icon      = [[UIImageView alloc]init];
@@ -82,7 +82,7 @@
     
 }
 
-#pragma mark---------------重写initWithFrame方法-----------
+#pragma mark==============重写initWithFrame方法==============
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self=[super initWithFrame:frame])

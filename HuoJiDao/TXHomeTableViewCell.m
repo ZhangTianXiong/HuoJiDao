@@ -15,7 +15,7 @@
 @implementation TXHomeTableViewCell
 
 
-#pragma mark  ------ 创建子cell子控件
+#pragma mark================创建子cell子控件================
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier])
@@ -66,7 +66,7 @@
 }
 
 
-#pragma mark-----------设置View的Frame-----------------
+#pragma mark================设置View的Frame================
 -(void)setViewFrae
 { 
     //icon
@@ -102,7 +102,7 @@
     
     
 }
-#pragma mark -----------设置cell数据-------------------
+#pragma mark+++++++++++++++++设置cell数据+++++++++++++++++
 -(void)setModel:(TXListModel *)model
 {
     _model= model;

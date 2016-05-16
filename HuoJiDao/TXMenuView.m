@@ -13,7 +13,7 @@
 }
 @end
 @implementation TXMenuView
-#pragma mark -------获取父类Controller---------
+#pragma mark-------获取父类Controller---------
 -(UIViewController*)getController
 {
     id controller      = [self nextResponder];
@@ -34,7 +34,7 @@
     }
     return self;
 }
-#pragma mark -------开始动画以及关闭动画
+#pragma mark -------开始动画以及关闭动画--------
 -(void)startAnimation
 {
     if (self.ll_isOpen)
@@ -44,7 +44,7 @@
         [self ll_openSlideMenu];
     }
 }
-#pragma mark --------设置View宽度 背景图 以及动画效果
+#pragma mark --------设置View宽度 背景图 以及动画效果---------
 -(void)setWithViewWidth:(CGFloat)width
         BackgroundImage:(UIImage*)Image
           SpringDamping:(CGFloat)springDamping
@@ -62,7 +62,7 @@
     !springVelocity ? (self.ll_springVelocity=15)  : (self.ll_springVelocity=springVelocity);
     !springFramesNum? (self.ll_springFramesNum=60) : (self.ll_springFramesNum);
 }
-#pragma mark ------初始化View布局
+#pragma mark ------初始化View布局---------
 -(void)initView
 {
     _imageView       = [[UIImageView alloc]init];
@@ -77,17 +77,17 @@
 
     
 }
-#pragma mark -------头像点击事件
+#pragma mark -------头像点击事件---------
 -(void)handLetap:(UITapGestureRecognizer*)sender
 {
     NSLog(@"Menu 头像");
 }
-#pragma mark -------BUtton 点击事件
+#pragma mark -------BUtton 点击事件--------
 -(void)MenuButton:(UIButton *)sender
 {
     NSLog(@"Menu 登录 登出");
 }
-#pragma mark ------初始化View数据
+#pragma mark +++++++++++++初始化View数据+++++++++++++
 -(void)setViewtData
 {
     
@@ -120,7 +120,7 @@
     _tableView.dataSource=self;
     
 }
-#pragma mark -----初始化View 位置
+#pragma mark============初始化View 位置==============
 -(void)setViewFrame
 {
     

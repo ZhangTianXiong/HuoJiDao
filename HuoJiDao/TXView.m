@@ -28,18 +28,18 @@
  **  2.设置视图位置---setViewFrame                **
  **  3.设置视图数据---setViewData                 **
  **************************************************/
-#pragma mark------------设置视图数据-------------
+#pragma mark++++++++++++++设置视图数据++++++++++++++
 -(void)setViewData
 {
     
 }
-#pragma mark------------设置视图Frame-------------
+#pragma mark==============设置视图Frame==============
 -(void)setViewFrame
 {
     
 }
 
-#pragma mark------------初始化视图-------------
+#pragma mark==============初始化视图==============
 -(void)initView
 {
     

@@ -10,7 +10,7 @@
 
 @implementation TXAllTableViewCell
 
-#pragma mark--------重写initWithStyle:reuseIdentifier:方法 创建子控件-----------
+#pragma mark===============重写initWithStyle:reuseIdentifier:方法 创建子控件==============
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier])
@@ -49,7 +49,7 @@
     }
     return self;
 }
-#pragma mark---------------重写setFramemodel方法设置视图数据-----------
+#pragma mark++++++++++++++重写setFramemodel方法设置视图数据+++++++++++++++
 -(void)setFramemodel:(TXListFrameModel *)framemodel
 {
     _framemodel                   = framemodel;

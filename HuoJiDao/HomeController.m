@@ -60,7 +60,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
  **   2.addMenu 添加菜单功能                                                      **
  **   3.addCategory 添加跳转控制器                                                **
  *********************************************************************************/
-#pragma mark=================初始化变量initData===============
+#pragma mark+++++++++++++++++初始化变量initData+++++++++++++++++
 -(void)initData
 {
     //初始化数据源
@@ -69,7 +69,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     [_data requestRecommendData];
     
 }
-#pragma mark=================初始化变量initVar===============
+#pragma mark+++++++++++++++++初始化变量initVar+++++++++++++++++
 -(void)initVar
 {
     _pag    = 2;
@@ -81,122 +81,37 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     _categoryViewHeight        = 64;//设置分类View的高
     _categoryViewTop           = 145;//设置分类距离Scroll的间距
 }
-#pragma mark================在HomeController上面添加MenuView======
--(void)addMenu
+#pragma mark==================设置NavigationView==================
+-(void)setNavigationView
 {
-    // 初始化
-    _menu  = [[TXMenuView alloc] init];
-    [self.view addSubview:_menu];
-    CGFloat menuW=self.view.frame.size.width/1.4;
-    [_menu setWithViewWidth:menuW BackgroundImage:[UIImage imageNamed:@"星空"] SpringDamping:0 SpringVelocity:0 SpringFramesNum:0];
-}
-#pragma mark================在HomeController上面添加CategoryController====
--(void)addCategory
-{
-    _allViewController       = [[TXAllViewController alloc]init];
-    _vidoViewController      = [[TXVidoViewController alloc]init];
-    _pictureViewController   = [[TXPictureViewController alloc]init];
-    _linkViewController      = [[TXLinkViewController alloc]init];
-    _allViewController.modalTransitionStyle     =  UIModalTransitionStyleCrossDissolve;
-    _vidoViewController.modalTransitionStyle    =  UIModalTransitionStyleCrossDissolve;
-    _pictureViewController.modalTransitionStyle =  UIModalTransitionStyleCrossDissolve;
-    _linkViewController.modalTransitionStyle    =  UIModalTransitionStyleCrossDissolve;
-    _tit=@[@"全部",@"视频",@"图片",@"文章"];
-}
-#pragma mark==================ViewDidLoad===================
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-/*************************************************************************
- **                                                                     **
- **    下面的代码主要用于创建UI控件 将控件添加在View下层。                      **
- **     1.addHomeTableView 添加首页的TableView                            **
- **     2.addNewestTableView 添加最新推荐TableView                         **
- **     3.addBottomView 添加底层View 控件                                 **
- **     4.addCategoryView 添加分类view                                    **
- **     5.注意：addNavigtionView 上面的方法都在这里调用                       **
- **                                                                      **
- **                                                                      **
- *************************************************************************/
-#pragma mark=================添加addNewestTableView===============
--(void)addNewestTableView
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.85 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        //初始化addNewestTableView
-        CGFloat newestTableViewX                   = 0;
-        CGFloat newestTableViewY                   = _homeView.frame.origin.x;
-        CGFloat newestTableViewW                   = self.homeView.frame.size.width;
-        CGFloat newestTableViewH                   = self.newestView.frame.size.height;
-        _newestTableView=[[UITableView alloc]initWithFrame:CM(newestTableViewX,newestTableViewY,newestTableViewW,newestTableViewH) style:UITableViewStylePlain];
-        _newestTableView.tag=1;
-        _newestTableView.showsHorizontalScrollIndicator = NO;
-        _newestTableView.showsVerticalScrollIndicator   = NO;
-        _newestTableView.delegate                       = self;
-        _newestTableView.dataSource                     = self;
-        self.newestTableView.tableFooterView=[[[NSBundle mainBundle] loadNibNamed:@"videoJiaZai" owner:nil options:nil]lastObject];
-        [self.newestView addSubview:_newestTableView];
-
-    });
+    
+    [self addNavigtionView];//添加NavigtionView
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(DELAY_DATE * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+                   {
+                       
+                       [self addBottomView];//添加底层View
+                       [self addHomeTableView];//添加HomeTableView
+                       [self setHomeTableViewWithHeaderView];//设置HomeTableView的HeaderView
+                       [self addScrollFigureView];//添加图片轮播图
+                       [self addCategoryView];//添加CategoryView
+                       [self addRefreshView];//添加刷新机制
+                       [self addNewestTableView];//添加NewestTableView
+                       [self addMenu];//添加菜单
+                       [self addCategory];//增加分类
+                       
+                   });
+    
     
 }
-#pragma mark========HomeTableView的HeaderView上添加分类CategoryView======
--(void)addCategoryView
+#pragma mark==================添加NavigtionView==================
+-(void)addNavigtionView
 {
-    _categoryView                                   = [[TXCategoryView alloc]initWithFrame:CM(0, _categoryViewTop, self.view.frame.size.width, _categoryViewHeight)];
-    _categoryView.backgroundColor                   = [UIColor whiteColor];
-    _categoryView.delegate                          = self;
-    [self.homeTableView addSubview:_categoryView];
-}
-#pragma mark======HomeTableView的HeaderView上-添加轮播图ScrollFigureView====
--(void)addScrollFigureView
-{
-    CGFloat scrollFigureViewX   = 0;
-    CGFloat scrollFigureViewY   = 0;
-    CGFloat scrollFigureViewW   = _scrollView.frame.size.width;
-    CGFloat scrollFigureViewH   = _scrollFigureViewHeight;
-    _scrollFigureView           = [[TXScrollFigureView alloc]initWithFrame:CM(scrollFigureViewX, scrollFigureViewY, scrollFigureViewW, scrollFigureViewH)];
-    //添加数据
-    _scrollFigureView.scrollFigureModel  = _data.scrollFigureModel;//轮播图网址
-    [self.homeTableView addSubview:_scrollFigureView];
-  
-}
-#pragma mark========添加刷新View========================
--(void)addRefreshView
-{
-    UIView * refreshView=[[[NSBundle mainBundle] loadNibNamed:@"ShuaXin" owner:nil options:nil]lastObject];
-    
-    refreshView.frame=CGRectMake(0, -40, self.view.frame.size.width,  40);
-    [self.homeTableView.tableHeaderView addSubview:refreshView];
+    _navigtionView                             = [[TXNavigationView alloc]initWithFrame:NavigationView_Frame];
+    [self.view addSubview:_navigtionView];
+    _navigtionView.delegat                     = self;
 }
 
-#pragma mark========设置HomeTableView的HeaderView=======
--(void)setHomeTableViewWithHeaderView
-{
-    _homeTableViewHeaderview        = [[UIView alloc]initWithFrame:CM(0, 0, 0, _HomeTableViewHeaderHeight)];
-    _homeTableViewHeaderview.backgroundColor            = Color(239, 239, 244, 1);
-    _homeTableView.tableHeaderView  = _homeTableViewHeaderview;
-
-}
-#pragma mark=========添加addHomeTableView===============
--(void)addHomeTableView
-{
-    //初始化TableView
-    CGFloat homeTableViewX    =0;
-    CGFloat homeTableViewY    =0;
-    CGFloat homeTableViewW    = self.homeView.frame.size.width;
-    CGFloat homeTableViewH    = self.homeView.frame.size.height;
-     _homeTableView=[[UITableView alloc]initWithFrame:CM(homeTableViewX, homeTableViewY, homeTableViewW, homeTableViewH) style:UITableViewStyleGrouped];
-    _homeTableView.tag        = 0;
-    _homeTableView.showsHorizontalScrollIndicator = NO;
-    _homeTableView.showsVerticalScrollIndicator   = NO;
-    _homeTableView.delegate   = self;
-    _homeTableView.dataSource = self;
-    [self.homeView addSubview:_homeTableView];
-}
-
-
-#pragma mark=============添加底层View============
+#pragma mark==================添加底层View============
 -(void)addBottomView
 {
     //创建ScrollerView
@@ -237,42 +152,118 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     
     
 }
-#pragma mark===========添加navigtionView=============
--(void)addNavigtionView
+/*************************************************************************
+ **                                                                     **
+ **    下面的代码主要用于创建UI控件 将控件添加在View下层。                      **
+ **     1.addHomeTableView 添加首页的TableView                            **
+ **     2.addNewestTableView 添加最新推荐TableView                         **
+ **     3.addBottomView 添加底层View 控件                                 **
+ **     4.addCategoryView 添加分类view                                    **
+ **     5.注意：addNavigtionView 上面的方法都在这里调用                       **
+ **                                                                      **
+ **                                                                      **
+ *************************************************************************/
+#pragma mark==================添加addHomeTableView===============
+-(void)addHomeTableView
 {
-    _navigtionView                             = [[TXNavigationView alloc]initWithFrame:NavigationView_Frame];
-    [self.view addSubview:_navigtionView];
-    _navigtionView.delegat                     = self;
+    //初始化TableView
+    CGFloat homeTableViewX    =0;
+    CGFloat homeTableViewY    =0;
+    CGFloat homeTableViewW    = self.homeView.frame.size.width;
+    CGFloat homeTableViewH    = self.homeView.frame.size.height;
+    _homeTableView=[[UITableView alloc]initWithFrame:CM(homeTableViewX, homeTableViewY, homeTableViewW, homeTableViewH) style:UITableViewStyleGrouped];
+    _homeTableView.tag        = 0;
+    _homeTableView.showsHorizontalScrollIndicator = NO;
+    _homeTableView.showsVerticalScrollIndicator   = NO;
+    _homeTableView.delegate   = self;
+    _homeTableView.dataSource = self;
+    [self.homeView addSubview:_homeTableView];
 }
-#pragma mark===========设置NavigationView============
--(void)setNavigationView
+#pragma mark==================设置HomeTableView的HeaderView=======
+-(void)setHomeTableViewWithHeaderView
 {
-    //添加NavigtionView
-    [self addNavigtionView];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(DELAY_DATE * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-    {
-        //添加底层View
-        [self addBottomView];
-        //添加HomeTableView
-        [self addHomeTableView];
-        //设置HomeTableView的HeaderView
-        [self setHomeTableViewWithHeaderView];
-        [self addScrollFigureView];
-        //添加CategoryView
-        [self addCategoryView];
-        [self addRefreshView];
-        //添加NewestTableView
-        [self addNewestTableView];
-        //添加菜单
-        [self addMenu];
-        //增加分类
-        [self addCategory];
-
+    _homeTableViewHeaderview        = [[UIView alloc]initWithFrame:CM(0, 0, 0, _HomeTableViewHeaderHeight)];
+    _homeTableViewHeaderview.backgroundColor            = Color(239, 239, 244, 1);
+    _homeTableView.tableHeaderView  = _homeTableViewHeaderview;
+    
+}
+#pragma mark==================HomeTableView的HeaderView上-添加轮播图ScrollFigureView====
+-(void)addScrollFigureView
+{
+    CGFloat scrollFigureViewX   = 0;
+    CGFloat scrollFigureViewY   = 0;
+    CGFloat scrollFigureViewW   = _scrollView.frame.size.width;
+    CGFloat scrollFigureViewH   = _scrollFigureViewHeight;
+    _scrollFigureView           = [[TXScrollFigureView alloc]initWithFrame:CM(scrollFigureViewX, scrollFigureViewY, scrollFigureViewW, scrollFigureViewH)];
+    //添加数据
+    _scrollFigureView.scrollFigureModel  = _data.scrollFigureModel;//轮播图网址
+    [self.homeTableView addSubview:_scrollFigureView];
+    
+}
+#pragma mark==================HomeTableView的HeaderView上添加分类CategoryView======
+-(void)addCategoryView
+{
+    _categoryView                                   = [[TXCategoryView alloc]initWithFrame:CM(0, _categoryViewTop, self.view.frame.size.width, _categoryViewHeight)];
+    _categoryView.backgroundColor                   = [UIColor whiteColor];
+    _categoryView.delegate                          = self;
+    [self.homeTableView addSubview:_categoryView];
+}
+#pragma mark==================添加刷新View========================
+-(void)addRefreshView
+{
+    UIView * refreshView=[[[NSBundle mainBundle] loadNibNamed:@"ShuaXin" owner:nil options:nil]lastObject];
+    refreshView.frame=CGRectMake(0, -40, self.view.frame.size.width,  40);
+    [self.homeTableView.tableHeaderView addSubview:refreshView];
+}
+#pragma mark==================添加addNewestTableView===============
+-(void)addNewestTableView
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.85 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //初始化addNewestTableView
+        CGFloat newestTableViewX                   = 0;
+        CGFloat newestTableViewY                   = _homeView.frame.origin.x;
+        CGFloat newestTableViewW                   = self.homeView.frame.size.width;
+        CGFloat newestTableViewH                   = self.newestView.frame.size.height;
+        _newestTableView=[[UITableView alloc]initWithFrame:CM(newestTableViewX,newestTableViewY,newestTableViewW,newestTableViewH) style:UITableViewStylePlain];
+        _newestTableView.tag=1;
+        _newestTableView.showsHorizontalScrollIndicator = NO;
+        _newestTableView.showsVerticalScrollIndicator   = NO;
+        _newestTableView.delegate                       = self;
+        _newestTableView.dataSource                     = self;
+        self.newestTableView.tableFooterView=[[[NSBundle mainBundle] loadNibNamed:@"videoJiaZai" owner:nil options:nil]lastObject];
+        [self.newestView addSubview:_newestTableView];
+        
     });
     
-    
+}
+#pragma mark==================添加MenuView==================
+-(void)addMenu
+{
+    // 初始化
+    _menu  = [[TXMenuView alloc] init];
+    [self.view addSubview:_menu];
+    CGFloat menuW=self.view.frame.size.width/1.4;
+    [_menu setWithViewWidth:menuW BackgroundImage:[UIImage imageNamed:@"星空"] SpringDamping:0 SpringVelocity:0 SpringFramesNum:0];
 }
 
+#pragma mark==================ViewDidLoad==================
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
+#pragma mark==================添加CategoryController==================
+-(void)addCategory
+{
+    _allViewController       = [[TXAllViewController alloc]init];
+    _vidoViewController      = [[TXVidoViewController alloc]init];
+    _pictureViewController   = [[TXPictureViewController alloc]init];
+    _linkViewController      = [[TXLinkViewController alloc]init];
+    _allViewController.modalTransitionStyle     =  UIModalTransitionStyleCrossDissolve;
+    _vidoViewController.modalTransitionStyle    =  UIModalTransitionStyleCrossDissolve;
+    _pictureViewController.modalTransitionStyle =  UIModalTransitionStyleCrossDissolve;
+    _linkViewController.modalTransitionStyle    =  UIModalTransitionStyleCrossDissolve;
+    _tit=@[@"全部",@"视频",@"图片",@"文章"];
+}
 /****************************************************************************
  **                                                                        **
  **   下面的代码主要用于实现交互功能                                            **
@@ -300,31 +291,31 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     }
 }
 
-#pragma mark---------TXNaVigtionViewDelegate 监听搜索按钮-----------
+#pragma mark-----------TXNaVigtionViewDelegate 监听搜索按钮-----------
 -(void)navigationView:(TXNavigationView * )navigtionView SearchButton:(UIButton *)but
 {
     TXSearchViewController * searchViewController=[[TXSearchViewController alloc]init];
     [self presentViewController:searchViewController animated:NO completion:nil];
 }
-#pragma mark---------TXCategoryViewDelegate 监听全部按钮按钮-----------
+#pragma mark-----------TXCategoryViewDelegate 监听全部按钮按钮-----------
 - (void)categoryView:(TXCategoryView    * )categoryView AllBut:(UIButton *)but
 {
     [self presentViewController:_allViewController animated:YES completion:nil];
    _allViewController.titleLabel.text=_tit[but.tag];
 }
-#pragma mark--------TXCategoryViewDelegate 监听监听视频按钮-----------
+#pragma mark-----------TXCategoryViewDelegate 监听监听视频按钮-----------
 - (void)categoryView:(TXCategoryView    * )categoryView VideoBut:(UIButton *)but
 {
     [self presentViewController:_vidoViewController animated:YES completion:nil];
    _vidoViewController.titleLabel.text=_tit[but.tag];
 }
-#pragma mark--------TXCategoryViewDelegate 监听图片按钮------------
+#pragma mark-----------TXCategoryViewDelegate 监听图片按钮-----------
 - (void)categoryView:(TXCategoryView    * )categoryView PictureBut:(UIButton *)but
 {
     [self presentViewController:_pictureViewController animated:YES completion:nil];
     _pictureViewController.titleLabel.text=_tit[but.tag];
 }
-#pragma mark--------TXCategoryViewDelegate 监听链接按钮-------------
+#pragma mark-----------TXCategoryViewDelegate 监听链接按钮-----------
 - (void)categoryView:(TXCategoryView    * )categoryView LinkBut:(UIButton *)but
 {
     [self presentViewController:_linkViewController animated:YES completion:nil];
@@ -342,7 +333,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
  *    homeTableViewTag 时首页         *
  *    newestTableViewTag 是最新推荐    *
  *************************************/
-#pragma mark---------UITableViewDataSource 监听HeaderView----------
+#pragma mark-----------UITableViewDataSource监听HeaderView----------
 -(UIView*)tableView:(UITableView * )tableView viewForHeaderInSection:(NSInteger)section
 {
     
@@ -357,11 +348,9 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
         view.backgroundColor=[UIColor whiteColor];
         return view;
     }
-    
-    
     return nil;
 }
-#pragma mark---------UITableViewDataSource 监听Headers的高----------
+#pragma mark-----------UITableViewDataSource监听Headers的高-----------
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     //判断是哪个TableView
@@ -372,18 +361,17 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     return 0;
 }
 
-#pragma mark--------UITableViewDataSource 监听Section---------
+#pragma mark-----------UITableViewDataSource监听Section---------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 
     if (tableView.tag==homeTableViewTag)
     {
-        
         return _data.homeModel.count;
     }
     return 1;
 }
-#pragma mark----------UITableViewDataSource 监听Row------------
+#pragma mark-----------UITableViewDataSource监听Row-----------
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView.tag==homeTableViewTag)
@@ -398,7 +386,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     }
     return 0;
 }
-#pragma mark---------UITableViewDataSource 监听的Row的高度----------
+#pragma mark-----------UITableViewDataSource监听Row的高度----------
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag==homeTableViewTag)
@@ -444,7 +432,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     return nil;
 }
 
-#pragma mark-----------------------TableView点击事件-----------------
+#pragma mark-----------TableView点击事件-----------
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag==homeTableViewTag)
@@ -476,7 +464,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     }
 
 }
-#pragma mark------------UIScrollViewDelegate 监听滑动-----------
+#pragma mark-----------UIScrollViewDelegate监听滑动-----------
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     
@@ -495,13 +483,12 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     }
     
 }
-#pragma mark---------------下拉加载原理---------------------
+#pragma mark+++++++++++++++++++下拉加载原理+++++++++++++++++++
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
 
     
     NSLog(@"scrollViewX:%f  scrollViewY:%f",scrollView.contentOffset.x ,scrollView.contentOffset.y);
-    
     if (scrollView.contentOffset.y <-60)
     {
         [UIView animateWithDuration:0.4 animations:^{
@@ -526,7 +513,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
         
     }
 }
-#pragma mark-------------------上拉加载原理----------------
+#pragma mark+++++++++++++++++++上拉加载原理+++++++++++++++++++
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     

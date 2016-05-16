@@ -9,5 +9,4 @@
 #import "TXViewController.h"
 #import <WebKit/WebKit.h>
 @interface TXScrollFigureViewController : TXViewController
-
 @end

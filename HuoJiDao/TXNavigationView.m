@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger,Button_tag)
 
 
 
-#pragma mark 监听 菜单按钮以及搜索按钮
+#pragma mark---------------监听菜单按钮以及搜索按钮---------------
 -(void)TXHomeNaVigtionViewButton:(UIButton*)sender
 {
     switch (sender.tag)
@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger,Button_tag)
     }
 }
 
-#pragma mark 监听选项卡
+#pragma mark---------------监听选项卡---------------
 -(void)TXHomeNaVigtionViewTab:(UISegmentedControl*)sender
 {
     if ([_delegat respondsToSelector:@selector(navigationView:Tab:)])
@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger,Button_tag)
         [_delegat navigationView:self Tab:_tab];
     }
 }
-#pragma mark---- 初始化View
+#pragma mark==============初始化View==============
 
 //设置数据
 -(void)setViewData
@@ -85,7 +85,7 @@ typedef NS_ENUM(NSInteger,Button_tag)
     [_searchBut addTarget:self action:@selector(TXHomeNaVigtionViewButton:) forControlEvents:UIControlEventTouchUpInside];
     
 }
-#pragma mark ---设置界面Frame
+#pragma mark==============设置界面Frame==============
 -(void)setViewFrame
 {
     //设置Frame

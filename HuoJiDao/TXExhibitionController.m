@@ -214,8 +214,6 @@ UITableViewDelegate,UITableViewDataSource
         }
 
     }
-    
-    
 }
 #pragma mark -----------------导航栏 播放按钮------------
 -(void)startAction:(UIButton*)button

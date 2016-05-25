@@ -24,11 +24,6 @@
 		D59D85CE1CEB03FD0034DF31 /* TXSignInNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D59D85CD1CEB03FD0034DF31 /* TXSignInNavigationView.m */; };
 		D59D85D11CEB0D5A0034DF31 /* TXSignInbackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D59D85D01CEB0D5A0034DF31 /* TXSignInbackgroundView.m */; };
 		D59D85D61CEB100A0034DF31 /* TXInputBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = D59D85D51CEB100A0034DF31 /* TXInputBoxView.m */; };
-		D5B028901CBF86A50085D7D9 /* LLAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B028871CBF86A50085D7D9 /* LLAnimationManager.m */; };
-		D5B028911CBF86A50085D7D9 /* LLCircleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B028891CBF86A50085D7D9 /* LLCircleLayer.m */; };
-		D5B028921CBF86A50085D7D9 /* LLDisplayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B0288B1CBF86A50085D7D9 /* LLDisplayLayer.m */; };
-		D5B028931CBF86A50085D7D9 /* LLSlideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B0288D1CBF86A50085D7D9 /* LLSlideMenu.m */; };
-		D5B028941CBF86A50085D7D9 /* UIView+SetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B0288F1CBF86A50085D7D9 /* UIView+SetRect.m */; };
 		D5BB16021CC9BB3C007BC582 /* NSString+TXCalculateSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BB16011CC9BB3C007BC582 /* NSString+TXCalculateSize.m */; };
 		D5BB160B1CC9C594007BC582 /* TXRecommendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BB160A1CC9C594007BC582 /* TXRecommendTableViewCell.m */; };
 		D5BB160E1CC9CB0F007BC582 /* TXRecommendChaneView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BB160D1CC9CB0F007BC582 /* TXRecommendChaneView.m */; };
@@ -166,16 +161,6 @@
 		D59D85D01CEB0D5A0034DF31 /* TXSignInbackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXSignInbackgroundView.m; sourceTree = "<group>"; };
 		D59D85D41CEB100A0034DF31 /* TXInputBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXInputBoxView.h; sourceTree = "<group>"; };
 		D59D85D51CEB100A0034DF31 /* TXInputBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXInputBoxView.m; sourceTree = "<group>"; };
-		D5B028861CBF86A50085D7D9 /* LLAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAnimationManager.h; sourceTree = "<group>"; };
-		D5B028871CBF86A50085D7D9 /* LLAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAnimationManager.m; sourceTree = "<group>"; };
-		D5B028881CBF86A50085D7D9 /* LLCircleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLCircleLayer.h; sourceTree = "<group>"; };
-		D5B028891CBF86A50085D7D9 /* LLCircleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLCircleLayer.m; sourceTree = "<group>"; };
-		D5B0288A1CBF86A50085D7D9 /* LLDisplayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLDisplayLayer.h; sourceTree = "<group>"; };
-		D5B0288B1CBF86A50085D7D9 /* LLDisplayLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLDisplayLayer.m; sourceTree = "<group>"; };
-		D5B0288C1CBF86A50085D7D9 /* LLSlideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSlideMenu.h; sourceTree = "<group>"; };
-		D5B0288D1CBF86A50085D7D9 /* LLSlideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLSlideMenu.m; sourceTree = "<group>"; };
-		D5B0288E1CBF86A50085D7D9 /* UIView+SetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SetRect.h"; sourceTree = "<group>"; };
-		D5B0288F1CBF86A50085D7D9 /* UIView+SetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SetRect.m"; sourceTree = "<group>"; };
 		D5BB16001CC9BB3C007BC582 /* NSString+TXCalculateSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TXCalculateSize.h"; sourceTree = "<group>"; };
 		D5BB16011CC9BB3C007BC582 /* NSString+TXCalculateSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TXCalculateSize.m"; sourceTree = "<group>"; };
 		D5BB16091CC9C594007BC582 /* TXRecommendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXRecommendTableViewCell.h; sourceTree = "<group>"; };
@@ -503,23 +488,6 @@
 				D59D85D01CEB0D5A0034DF31 /* TXSignInbackgroundView.m */,
 			);
 			name = "登录背景View";
-			sourceTree = "<group>";
-		};
-		D5B028851CBF86780085D7D9 /* 第三方侧拉栏 */ = {
-			isa = PBXGroup;
-			children = (
-				D5B028861CBF86A50085D7D9 /* LLAnimationManager.h */,
-				D5B028871CBF86A50085D7D9 /* LLAnimationManager.m */,
-				D5B028881CBF86A50085D7D9 /* LLCircleLayer.h */,
-				D5B028891CBF86A50085D7D9 /* LLCircleLayer.m */,
-				D5B0288A1CBF86A50085D7D9 /* LLDisplayLayer.h */,
-				D5B0288B1CBF86A50085D7D9 /* LLDisplayLayer.m */,
-				D5B0288C1CBF86A50085D7D9 /* LLSlideMenu.h */,
-				D5B0288D1CBF86A50085D7D9 /* LLSlideMenu.m */,
-				D5B0288E1CBF86A50085D7D9 /* UIView+SetRect.h */,
-				D5B0288F1CBF86A50085D7D9 /* UIView+SetRect.m */,
-			);
-			name = "第三方侧拉栏";
 			sourceTree = "<group>";
 		};
 		D5BB15F91CC9AD07007BC582 /* 首页model */ = {
@@ -1203,7 +1171,6 @@
 		D5FA76D81CC4BADC00A54535 /* 第三方库 */ = {
 			isa = PBXGroup;
 			children = (
-				D5B028851CBF86780085D7D9 /* 第三方侧拉栏 */,
 				D5E93BCC1CCDC65800B00DA0 /* AFNetworking */,
 				D5CD52FC1CC0CE370051CD04 /* 第三方SDWebImage */,
 				D5DC72741CF3FF8A00B95140 /* 第三方弹幕框架CFDanmaku */,
@@ -1362,14 +1329,12 @@
 				D5D95B431CE452BC00FA0938 /* TXScrollFigureViewController.m in Sources */,
 				D5288A771CCB718700D99B64 /* TXAllViewController.m in Sources */,
 				D5CA14F71CEFF0C6005D86DD /* TXPersonalCenterViewController.m in Sources */,
-				D5B028941CBF86A50085D7D9 /* UIView+SetRect.m in Sources */,
 				D5FA76CE1CC4691B00A54535 /* SDWebImagePrefetcher.m in Sources */,
 				D5E93BDC1CCDC67600B00DA0 /* AFSecurityPolicy.m in Sources */,
 				D5FA76D51CC4691B00A54535 /* UIView+WebCacheOperation.m in Sources */,
 				D5EF79221CC73E9F0081ABDD /* TXScrollFigureView.m in Sources */,
 				D596B0211CD195A200704CCA /* TXListModel.m in Sources */,
 				D51BAD3D1CEDA8420028E746 /* TXPersonalCenterModel.m in Sources */,
-				D5B028911CBF86A50085D7D9 /* LLCircleLayer.m in Sources */,
 				D5F3F9201CF299BF00F5E55E /* CFDanmaku.m in Sources */,
 				D5E93BE61CCDE6E600B00DA0 /* TXPic_titleFrameModel.m in Sources */,
 				D59D85D61CEB100A0034DF31 /* TXInputBoxView.m in Sources */,
@@ -1386,7 +1351,6 @@
 				D5288A791CCB718700D99B64 /* TXPictureViewController.m in Sources */,
 				D5BB16141CC9F8E8007BC582 /* TXRequestData.m in Sources */,
 				D5FA76D21CC4691B00A54535 /* UIImage+WebP.m in Sources */,
-				D5B028931CBF86A50085D7D9 /* LLSlideMenu.m in Sources */,
 				D59D85D11CEB0D5A0034DF31 /* TXSignInbackgroundView.m in Sources */,
 				D5E9FC931CBE1EA6000452D9 /* HomeController.m in Sources */,
 				D5E93BDE1CCDC67600B00DA0 /* AFURLResponseSerialization.m in Sources */,
@@ -1394,7 +1358,6 @@
 				D5FA76D41CC4691B00A54535 /* UIImageView+WebCache.m in Sources */,
 				D5DE5E771CEC3FAC001B2DEE /* TXRegisteredbackgroundView.m in Sources */,
 				D5CD530E1CC0DBF60051CD04 /* TXCategoryView.m in Sources */,
-				D5B028901CBF86A50085D7D9 /* LLAnimationManager.m in Sources */,
 				D5288A781CCB718700D99B64 /* TXVidoViewController.m in Sources */,
 				D5E9FC901CBE1EA6000452D9 /* AppDelegate.m in Sources */,
 				D5F3F9211CF299BF00F5E55E /* CFDanmakuInfo.m in Sources */,
@@ -1408,7 +1371,6 @@
 				D5E17F471CD0482700F1690A /* TXExhibitionController.m in Sources */,
 				D5DE5E7A1CEC4646001B2DEE /* TXRegisteredInputBoxView.m in Sources */,
 				D5DE5E6C1CEC3813001B2DEE /* TXRegisteredNavigationView.m in Sources */,
-				D5B028921CBF86A50085D7D9 /* LLDisplayLayer.m in Sources */,
 				D5FA76CD1CC4691B00A54535 /* SDWebImageManager.m in Sources */,
 				D5D28C4F1CCF4E3A000CED18 /* TXTheDottedLineView.m in Sources */,
 				D5BB16021CC9BB3C007BC582 /* NSString+TXCalculateSize.m in Sources */,

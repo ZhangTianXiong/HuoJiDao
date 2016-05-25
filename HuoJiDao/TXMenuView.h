@@ -7,7 +7,6 @@
 //
 
 #import "TXView.h"
-#import "LLSlideMenu.h"
 @interface TXMenuView :TXView
 @property(nonatomic,assign)BOOL         isAnimation;
 //UI布局

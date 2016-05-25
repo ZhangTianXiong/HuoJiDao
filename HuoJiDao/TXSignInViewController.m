@@ -113,13 +113,6 @@
 -(void)thirdPartyIoginViewWeiBoBut:(UIButton *)but
 {
     
-    HomeController * homeViewController=[[HomeController alloc]init];
-    
-    [self presentViewController:homeViewController animated:NO completion:^{
-        NSUserDefaults * userDefaults=[NSUserDefaults standardUserDefaults];
-        [userDefaults removeObjectForKey:@"用户信息"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"个人中心" object:self];
-    }];
     
     NSLog(@"第三方登录——微博按钮");
 }

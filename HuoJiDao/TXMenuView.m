@@ -13,6 +13,7 @@
 #import "TXMenuTableViewCell.h"
 #import "TXPersonalCenterModel.h"
 #import "TXPersonalCenterViewController.h"
+#import "TXSetUpViewController.h"//设置Controller
 @interface TXMenuView ()<UITableViewDelegate,UITableViewDataSource>
 {
     UITapGestureRecognizer * _tapGesture;
@@ -260,6 +261,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"菜单 Cell被点击啦");
+    
+    
+    
+    //设置页面
+    if (indexPath.section==1 && indexPath.row==1)
+    {
+        TXSetUpViewController * setUpViewController=[[TXSetUpViewController alloc]init];
+        [self.getController presentViewController:setUpViewController animated:YES completion:nil];
+    }
+    
 }
 #pragma mark -------头像点击事件---------
 -(void)handLetap:(UITapGestureRecognizer*)sender

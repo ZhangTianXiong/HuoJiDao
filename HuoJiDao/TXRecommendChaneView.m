@@ -28,8 +28,8 @@
 -(void)setViewData
 {
     _chaneIcon.image                = [UIImage imageNamed:@"苹果6-UI设计_37"];
-    _chaneNameLabel.font=[UIFont systemFontOfSize:11.2];
-    _chaneNameLabel.text=_frameModel.model.type;
+    _chaneNameLabel.font            = [UIFont systemFontOfSize:11.2];
+    _chaneNameLabel.text            = _frameModel.model.type;
     
 }
 #pragma mark---------------设置视图框架-----------

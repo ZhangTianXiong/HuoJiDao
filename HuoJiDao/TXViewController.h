@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef NS_ENUM(NSInteger,Button_tag)
+{
+    backButton,//返回
+    searchButton,//搜索
+};
 @interface TXViewController : UIViewController
-             
 //返回
 @property(nonatomic,strong)UIButton * backBut;
 //主题

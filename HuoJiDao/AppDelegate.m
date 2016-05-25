@@ -58,7 +58,6 @@
                 
             case AFNetworkReachabilityStatusReachableViaWiFi:
             {
-                
                 NSLog(@"wifi的网络");
             }
                 

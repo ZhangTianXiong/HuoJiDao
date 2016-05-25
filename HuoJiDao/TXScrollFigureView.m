@@ -48,10 +48,10 @@ UIScrollViewDelegate
 -(void)ImageGesture:(UIGestureRecognizer *)gesture
 {
     NSLog(@"第%ld张图片被点击啦",gesture.view.tag);
-    TXScrollFigureViewController * scrollFigureViewController=[[TXScrollFigureViewController alloc]init];
+    TXScrollFigureViewController * scrollFigureViewController = [[TXScrollFigureViewController alloc]init];
     [self.getController presentViewController:scrollFigureViewController animated:NO completion:nil];
     
-    TXScrollFigureModel * model=_scrollFigureModel[gesture.view.tag];
+    TXScrollFigureModel          * model                      = _scrollFigureModel[gesture.view.tag];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getLink" object:self userInfo:
  
      @{@"link":model.link}
@@ -97,10 +97,10 @@ UIScrollViewDelegate
         _imageView                             = [[UIImageView alloc]initWithFrame:CM(viewW*i, 0, imageViewW, imageViewH)];
         _imageView.contentMode                 = UIViewContentModeScaleToFill;
         
-        TXScrollFigureModel * model=_scrollFigureModel[i];
+        TXScrollFigureModel * model            = _scrollFigureModel[i];
         //利用SDWebImageView加载图片
         [_imageView sd_setImageWithURL:[NSURL URLWithString:model.url]];
-        _imageView.tag=i;
+        _imageView.tag                         = i;
         //开启交互
         _imageView.userInteractionEnabled      = YES;
         [_scrollView addSubview:_imageView];
@@ -147,12 +147,13 @@ UIScrollViewDelegate
 // scrollview滚动的时候调用
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.tag==0) {
+    if (scrollView.tag==0)
+    {
         // 计算页码
         // 页码 = (contentoffset.x + scrollView一半宽度)/scrollView宽度
-        CGFloat scrollviewW =  scrollView.frame.size.width;
-        CGFloat x = scrollView.contentOffset.x;
-        int page = (x + scrollviewW / 2) /  scrollviewW;
+        CGFloat scrollviewW          =  scrollView.frame.size.width;
+        CGFloat x                    = scrollView.contentOffset.x;
+        int page                     = (x + scrollviewW / 2) /  scrollviewW;
         self.pageControl.currentPage = page;
     }
 }
@@ -160,7 +161,8 @@ UIScrollViewDelegate
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     
-    if (scrollView.tag==0) {
+    if (scrollView.tag==0)
+    {
         //关闭定时器(注意点; 定时器一旦被关闭,无法再开启)
         //[self.timer invalidate];
         [self removeTimer];
@@ -168,7 +170,8 @@ UIScrollViewDelegate
 }
 -(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (scrollView.tag==0) {
+    if (scrollView.tag==0)
+    {
         //开启定时器
         [self addTimer];
     }

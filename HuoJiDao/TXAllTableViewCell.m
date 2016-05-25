@@ -41,11 +41,11 @@
         _displaybarView                   = displaybarView;
         
         
-        [self addSubview:picture];
-        [self addSubview:titleLabel];
-        [self addSubview:chaneView];
-        [self addSubview:datelineLabel];
-        [self addSubview:displaybarView];
+        [self.contentView addSubview:picture];
+        [self.contentView addSubview:titleLabel];
+        [self.contentView addSubview:chaneView];
+        [self.contentView addSubview:datelineLabel];
+        [self.contentView addSubview:displaybarView];
     }
     return self;
 }
@@ -56,7 +56,7 @@
     //设置位置以及数据
     //设置图片
     _picture.frame                = _framemodel.pictureFrame;
-    _picture.layer.masksToBounds = YES; //是否显示圆角以外的部分
+    _picture.layer.masksToBounds  = YES; //是否显示圆角以外的部分
     _picture.layer.cornerRadius   = 5;
     [_picture sd_setImageWithURL:[NSURL URLWithString:_framemodel.model.img] placeholderImage:nil];
     

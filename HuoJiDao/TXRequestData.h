@@ -20,41 +20,51 @@
 #import "TXListModel.h"
 #import "TXListFrameModel.h"
 
+//用户数据模型
+#import "TXPersonalCenterModel.h"
 
 @interface TXRequestData : NSObject
 
 //网络请求首页数据
-@property(nonatomic,strong)NSMutableArray * scrollFigureModel;
-@property(nonatomic,strong)NSMutableArray * homeModel;
+@property(nonatomic,strong)NSMutableArray   * scrollFigureModel;
+@property(nonatomic,strong)NSMutableArray   * homeModel;
 -(void)requestHomeModelData;
 
 //网络请求
-@property(nonatomic,strong)NSMutableArray * picFrameModel;
-@property(nonatomic,strong)NSArray * array;
+@property(nonatomic,strong)NSMutableArray   * picFrameModel;
+@property(nonatomic,strong)NSArray          * array;
 
 //网络请求 推荐页面数据
-@property(nonatomic,strong)NSMutableArray * recommendFrameModel;
+@property(nonatomic,strong)NSMutableArray   * recommendFrameModel;
 -(void)requestRecommendData;
 -(void)addrecommendDataWithPag:(int)pag Number:(int)number;
 
 //网络请求 全部页面数据
-@property(nonatomic,strong)NSMutableArray * allFrameModel;
+@property(nonatomic,strong)NSMutableArray   * allFrameModel;
 -(void)requestAllData;
 -(void)addAllDataPag:(int)pag Number:(int)number;
 
 
 //网络请求 视频页面数据
-@property(nonatomic,strong)NSMutableArray * videoFrameModel;
+@property(nonatomic,strong)NSMutableArray   * videoFrameModel;
 -(void)requestVideoData;
 -(void)addVideoDataPag:(int)pag Number:(int)number;
 
 
 //网络请求 链接页面数据
-@property(nonatomic,strong)NSMutableArray * linkFrameModel;
+@property(nonatomic,strong)NSMutableArray   * linkFrameModel;
 -(void)requestLinkData;
 -(void)addLinkDataPag:(int)pag Number:(int)number;
 
 //网络请求
 -(void)requestPicTitleData;
+
+
+
+//登录
+-(void)signInWithUserAccount:(NSString*)userAccount UserPassword:(NSString*)userPassword;
+
+
+
 
 @end

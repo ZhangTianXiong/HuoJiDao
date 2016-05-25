@@ -14,10 +14,10 @@
 
 @property(nonatomic,strong)TXPic_titleFrameModel * picFrameModel;
 
-@property(nonatomic,strong)UILabel * titleLabel;
-@property(nonatomic,strong)UIImageView * pictureImageView;
+@property(nonatomic,strong)UILabel               * titleLabel;
+@property(nonatomic,strong)UIImageView           * pictureImageView;
 //功能条
-@property(nonatomic,weak)TXFunctionBarView *  functionBarView;
+@property(nonatomic,weak)TXFunctionBarView       *  functionBarView;
 
 -(instancetype)initWithTableView:(UITableView *)tableView;
 +(instancetype)pictureWithTableView:(UITableView * )tableView;

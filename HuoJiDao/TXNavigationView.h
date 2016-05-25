@@ -14,7 +14,7 @@
 //必需实现
 @required
 #pragma mark-----------TXNaVigtionViewDelegate 监听菜单按钮------------
--(void)navigationView:(TXNavigationView * )navigtionView MenuButton:(UIButton*)but;
+-(void)navigationView:(TXNavigationView * )navigtionView HandLetap:(UITapGestureRecognizer*)handLetap;
 #pragma mark-----------TXNaVigtionViewDelegate 监听搜索按钮------------
 -(void)navigationView:(TXNavigationView * )navigtionView SearchButton:(UIButton *)but;
 #pragma mark-----------TXNaVigtionViewDelegate 监听选项卡按钮----------
@@ -22,9 +22,9 @@
 @end
 @interface TXNavigationView : TXView
 @property(nonatomic,strong)id<TXNaVigtionViewDelegate> delegat;
-
+@property(nonatomic,strong)UITapGestureRecognizer * tapGesture;
 //菜单(以及用户头像)
-@property(nonatomic,strong)UIButton           * menuBut;
+@property(nonatomic,strong)UIImageView           * userHeadPortrait;
 //选项卡
 @property(nonatomic,strong)UISegmentedControl * tab;
 //搜索

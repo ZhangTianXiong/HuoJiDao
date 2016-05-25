@@ -40,11 +40,11 @@
         _displaybarView                   = displaybarView;
         
         
-        [self addSubview:picture];
-        [self addSubview:titleLabel];
-        [self addSubview:chaneView];
-        [self addSubview:datelineLabel];
-        [self addSubview:displaybarView];
+        [self.contentView addSubview:picture];
+        [self.contentView addSubview:titleLabel];
+        [self.contentView addSubview:chaneView];
+        [self.contentView addSubview:datelineLabel];
+        [self.contentView addSubview:displaybarView];
     }
     return self;
 }

@@ -18,25 +18,25 @@
 -(void)setViewFrame
 {
     //通用
-    CGFloat Y=0;
-    CGFloat W=self.frame.size.width/5;
-    CGFloat H=self.frame.size.height;
+    CGFloat Y                   = 0;
+    CGFloat W                   = self.frame.size.width/5;
+    CGFloat H                   = self.frame.size.height;
     //点赞
-    CGFloat thumbs_upViewX=0;
-    _thumbs_upView.frame=CGRectMake(thumbs_upViewX, Y, W, H);
+    CGFloat thumbs_upViewX      = 0;
+    _thumbs_upView.frame        = CGRectMake(thumbs_upViewX, Y, W, H);
     //点踩
-    CGFloat treadViewX=CGRectGetMaxX(_thumbs_upView.frame);
-    _treadView.frame=CGRectMake(treadViewX, Y, W, H);
+    CGFloat treadViewX          = CGRectGetMaxX(_thumbs_upView.frame);
+    _treadView.frame            = CGRectMake(treadViewX, Y, W, H);
     //收藏
-    CGFloat collectionViewX=CGRectGetMaxX(_treadView.frame);
-    _collectionView.frame=CGRectMake(collectionViewX, Y, W, H);
+    CGFloat collectionViewX     = CGRectGetMaxX(_treadView.frame);
+    _collectionView.frame       = CGRectMake(collectionViewX, Y, W, H);
     //评论
-    CGFloat commendViewX=CGRectGetMaxX(_collectionView.frame);
-    _commendView.frame=CGRectMake(commendViewX, Y, W, H);
+    CGFloat commendViewX        = CGRectGetMaxX(_collectionView.frame);
+    _commendView.frame          = CGRectMake(commendViewX, Y, W, H);
     
     //分享
-    CGFloat shareViewX=CGRectGetMaxX(_commendView.frame);
-    _shareView.frame=CGRectMake(shareViewX, Y, W, H);
+    CGFloat shareViewX          = CGRectGetMaxX(_commendView.frame);
+    _shareView.frame            = CGRectMake(shareViewX, Y, W, H);
     
 }
 
@@ -61,27 +61,27 @@
 {
     if (self=[super init])
     {
-        self.backgroundColor=[UIColor whiteColor];
-        TXTheDottedLineView * thumbs_upView=[[TXTheDottedLineView alloc]init];//点赞View
-        thumbs_upView.delegate=self;
+        self.backgroundColor                    = [UIColor whiteColor];
+        TXTheDottedLineView * thumbs_upView     = [[TXTheDottedLineView alloc]init];//点赞View
+        thumbs_upView.delegate                  = self;
         
-        _thumbs_upView=thumbs_upView;
+        _thumbs_upView                          = thumbs_upView;
         
-        TXTheDottedLineView * treadView=[[TXTheDottedLineView alloc]init];//点踩View
-        treadView.delegate=self;
+        TXTheDottedLineView * treadView         = [[TXTheDottedLineView alloc]init];//点踩View
+        treadView.delegate                      = self;
         _treadView=treadView;
         
-        TXTheDottedLineView * collectionView=[[TXTheDottedLineView alloc]init];//收藏View
-        collectionView.delegate=self;
-        _collectionView=collectionView;
+        TXTheDottedLineView * collectionView    = [[TXTheDottedLineView alloc]init];//收藏View
+        collectionView.delegate                 = self;
+        _collectionView                         = collectionView;
         
-        TXTheDottedLineView * commendView=[[TXTheDottedLineView alloc]init];;//评论
-        commendView.delegate=self;
-        _commendView=commendView;
+        TXTheDottedLineView * commendView       = [[TXTheDottedLineView alloc]init];;//评论
+        commendView.delegate                    = self;
+        _commendView                            = commendView;
         
-        TXTheDottedLineView * shareView=[[TXTheDottedLineView alloc]init];;//分享
-        shareView.delegate=self;
-        _shareView=shareView;
+        TXTheDottedLineView * shareView         = [[TXTheDottedLineView alloc]init];;//分享
+        shareView.delegate                      = self;
+        _shareView                              = shareView;
         
         
         [self addSubview:thumbs_upView];
@@ -89,26 +89,26 @@
         [self addSubview:collectionView];
         [self addSubview:commendView];
         [self addSubview:shareView];
-        _thumbs_upView.icon.image=[UIImage imageNamed:@"01点赞"];
-        _treadView.icon.image=[UIImage imageNamed:@"02点踩"];
-        _collectionView.icon.image=[UIImage imageNamed: @"03收藏"];
-        _commendView.icon.image=[UIImage imageNamed:@"04评论"];
-        _shareView.icon.image=[UIImage imageNamed:@"05分享"];
+        _thumbs_upView.icon.image               = [UIImage imageNamed:@"01点赞"];
+        _treadView.icon.image                   = [UIImage imageNamed:@"02点踩"];
+        _collectionView.icon.image              = [UIImage imageNamed: @"03收藏"];
+        _commendView.icon.image                 = [UIImage imageNamed:@"04评论"];
+        _shareView.icon.image                   = [UIImage imageNamed:@"05分享"];
         
         
-        _thumbs_upView.but.tag=0;
-        _treadView.but.tag=1;
-        _collectionView.but.tag=2;
-        _commendView.but.tag=3;
-        _shareView.but.tag=4;
+        _thumbs_upView.but.tag                  = 0;
+        _treadView.but.tag                      = 1;
+        _collectionView.but.tag                 = 2;
+        _commendView.but.tag                    = 3;
+        _shareView.but.tag                      = 4;
         
         
         
-        _thumbs_upView.label.text=@"123";
-        _treadView.label.text=@"426";
-        _collectionView.label.text=@"856";
-        _commendView.label.text=@"566";
-        _shareView.label.text=@"136";
+        _thumbs_upView.label.text               = @"123";
+        _treadView.label.text                   = @"426";
+        _collectionView.label.text              = @"856";
+        _commendView.label.text                 = @"566";
+        _shareView.label.text                   = @"136";
         
 
     }
@@ -120,15 +120,15 @@
     {
         if (theDottedLineView.state==NO)
         {
-           _thumbs_upView.icon.image=[UIImage imageNamed:@"0322_10"];
+           _thumbs_upView.icon.image = [UIImage imageNamed:@"0322_10"];
             
-            theDottedLineView.state=YES;
+            theDottedLineView.state  = YES;
            
         }
         else if (theDottedLineView.state==YES)
         {
-            _thumbs_upView.icon.image=[UIImage imageNamed:@"01点赞"];
-            theDottedLineView.state=NO;
+            _thumbs_upView.icon.image = [UIImage imageNamed:@"01点赞"];
+            theDottedLineView.state   = NO;
         }
         
     }
@@ -136,15 +136,15 @@
     {
         if (theDottedLineView.state==NO)
         {
-           _treadView.icon.image=[UIImage imageNamed:@"0322_13"];
+           _treadView.icon.image    = [UIImage imageNamed:@"0322_13"];
             
-            theDottedLineView.state=YES;
+            theDottedLineView.state = YES;
             
         }
         else if (theDottedLineView.state==YES)
         {
-            _treadView.icon.image=[UIImage imageNamed:@"02点踩"];
-            theDottedLineView.state=NO;
+            _treadView.icon.image   = [UIImage imageNamed:@"02点踩"];
+            theDottedLineView.state = NO;
         }
 
     }
@@ -152,15 +152,15 @@
     {
         if (theDottedLineView.state==NO)
         {
-            _collectionView.icon.image=[UIImage imageNamed:@"0322_15"];
+            _collectionView.icon.image = [UIImage imageNamed:@"0322_15"];
             
-            theDottedLineView.state=YES;
+            theDottedLineView.state = YES;
             
         }
         else if (theDottedLineView.state==YES)
         {
-            _collectionView.icon.image=[UIImage imageNamed:@"03收藏"];
-            theDottedLineView.state=NO;
+            _collectionView.icon.image = [UIImage imageNamed:@"03收藏"];
+            theDottedLineView.state    = NO;
         }
 
     }
@@ -168,15 +168,15 @@
     {
         if (theDottedLineView.state==NO)
         {
-            _commendView.icon.image=[UIImage imageNamed:@"0322_17"];
+            _commendView.icon.image = [UIImage imageNamed:@"0322_17"];
             
-            theDottedLineView.state=YES;
+            theDottedLineView.state = YES;
             
         }
         else if (theDottedLineView.state==YES)
         {
-            _commendView.icon.image=[UIImage imageNamed:@"04评论"];
-            theDottedLineView.state=NO;
+            _commendView.icon.image = [UIImage imageNamed:@"04评论"];
+            theDottedLineView.state = NO;
         }
 
     }
@@ -188,11 +188,11 @@
 }
 -(void)setModel:(TXListModel *)model
 {
-    _model=model;
-    _thumbs_upView.label.text=_model.like;//点赞数
-    _treadView.label.text=_model.unlike;//点踩数
-//    _collectionView.label.text=_model.favnum;//收藏数
-    _commendView.label.text=_model.replynum;//评论数
-//    _shareView.label.text=@"122";//分享数
+    _model                          = model;
+    _thumbs_upView.label.text       = _model.like;//点赞数
+    _treadView.label.text           = _model.unlike;//点踩数
+//    _collectionView.label.text    = _model.favnum;//收藏数
+    _commendView.label.text         = _model.replynum;//评论数
+//    _shareView.label.text         = @"122";//分享数
 }
 @end

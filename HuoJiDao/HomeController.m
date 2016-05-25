@@ -18,7 +18,7 @@
 #import "TXScrollFigureView.h"
 //添加TXHomeHeaderInSectionView
 #import "TXHomeHeaderInSectionView.h"
-
+#import "TXPersonalCenterModel.h"
 @interface HomeController ()
 <
 TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDataSource
@@ -44,8 +44,8 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     CGFloat                      _categoryViewTop;//设置分类距离Scroll的间距
     NSArray                    * _tit;//分类名称
     TXRequestData              * _data; //添加数据源
-    int                        _pag;//页数
-    int                        _number;//条数
+    int                          _pag;//页数
+    int                          _number;//条数
    
 }
 
@@ -63,10 +63,16 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
 #pragma mark+++++++++++++++++初始化变量initData+++++++++++++++++
 -(void)initData
 {
+    _notifiction=[NSNotificationCenter defaultCenter];
+    [_notifiction addObserver:self selector:@selector(requestHomeModelData) name:@"RequestHomeModelData" object:nil];
+    [_notifiction addObserver:self selector:@selector(personalCenter) name:@"个人中心" object:nil
+     ];
+    
     //初始化数据源
      _data  = [[TXRequestData alloc]init];
     [_data requestHomeModelData];
     [_data requestRecommendData];
+    
     
 }
 #pragma mark+++++++++++++++++初始化变量initVar+++++++++++++++++
@@ -84,30 +90,36 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
 #pragma mark==================设置NavigationView==================
 -(void)setNavigationView
 {
-    
     [self addNavigtionView];//添加NavigtionView
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(DELAY_DATE * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                   {
-                       
-                       [self addBottomView];//添加底层View
-                       [self addHomeTableView];//添加HomeTableView
-                       [self setHomeTableViewWithHeaderView];//设置HomeTableView的HeaderView
-                       [self addScrollFigureView];//添加图片轮播图
-                       [self addCategoryView];//添加CategoryView
-                       [self addRefreshView];//添加刷新机制
-                       [self addNewestTableView];//添加NewestTableView
-                       [self addMenu];//添加菜单
-                       [self addCategory];//增加分类
-                       
-                   });
-    
-    
+    [self addBottomView];//添加底层View
+    [self addHomeTableView];//添加HomeTableView
+    [self setHomeTableViewWithHeaderView];//设置HomeTableView的HeaderView
+    [self addScrollFigureView];//添加图片轮播图
+    [self addCategoryView];//添加CategoryView
+    [self addRefreshView];//添加刷新机制
+    [self addNewestTableView];//添加NewestTableView
+    [self addMenu];//添加菜单
+    [self addCategory];//增加分类
 }
 #pragma mark==================添加NavigtionView==================
 -(void)addNavigtionView
 {
-    _navigtionView                             = [[TXNavigationView alloc]initWithFrame:NavigationView_Frame];
+    
+    
+    _navigtionView                              = [[TXNavigationView alloc]initWithFrame:NavigationView_Frame];
     [self.view addSubview:_navigtionView];
+   NSUserDefaults        *  userInformation     = [NSUserDefaults standardUserDefaults];
+   NSData                *  userInformationData = [userInformation valueForKey:@"用户信息"];
+   TXPersonalCenterModel *  personalCenterModel = [NSKeyedUnarchiver unarchiveObjectWithData:userInformationData];
+    if (personalCenterModel)
+    {
+        [_navigtionView.userHeadPortrait sd_setImageWithURL:[NSURL URLWithString:personalCenterModel.avatar]];
+    }else if (!personalCenterModel)
+    {
+        _navigtionView.userHeadPortrait.image=[UIImage imageNamed:@"头像"];
+    }
+
+    
     _navigtionView.delegat                     = self;
 }
 
@@ -167,17 +179,12 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
 -(void)addHomeTableView
 {
     //初始化TableView
-    CGFloat homeTableViewX    =0;
-    CGFloat homeTableViewY    =0;
+    CGFloat homeTableViewX    = 0;
+    CGFloat homeTableViewY    = 0;
     CGFloat homeTableViewW    = self.homeView.frame.size.width;
     CGFloat homeTableViewH    = self.homeView.frame.size.height;
     _homeTableView=[[UITableView alloc]initWithFrame:CM(homeTableViewX, homeTableViewY, homeTableViewW, homeTableViewH) style:UITableViewStyleGrouped];
-    _homeTableView.tag        = 0;
-    _homeTableView.showsHorizontalScrollIndicator = NO;
-    _homeTableView.showsVerticalScrollIndicator   = NO;
-    _homeTableView.delegate   = self;
-    _homeTableView.dataSource = self;
-    [self.homeView addSubview:_homeTableView];
+       [self.homeView addSubview:_homeTableView];
 }
 #pragma mark==================设置HomeTableView的HeaderView=======
 -(void)setHomeTableViewWithHeaderView
@@ -195,8 +202,6 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     CGFloat scrollFigureViewW   = _scrollView.frame.size.width;
     CGFloat scrollFigureViewH   = _scrollFigureViewHeight;
     _scrollFigureView           = [[TXScrollFigureView alloc]initWithFrame:CM(scrollFigureViewX, scrollFigureViewY, scrollFigureViewW, scrollFigureViewH)];
-    //添加数据
-    _scrollFigureView.scrollFigureModel  = _data.scrollFigureModel;//轮播图网址
     [self.homeTableView addSubview:_scrollFigureView];
     
 }
@@ -240,16 +245,20 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
 -(void)addMenu
 {
     // 初始化
-    _menu  = [[TXMenuView alloc] init];
+    _menu  = [[TXMenuView alloc]init];
+    CGFloat menuW=self.view.frame.size.width;
+    CGFloat menuX=-menuW;
+    CGFloat menuY=0;
+    CGFloat menuH=self.view.frame.size.height;
+    _menu.frame=CGRectMake(menuX, menuY, menuW, menuH);
     [self.view addSubview:_menu];
-    CGFloat menuW=self.view.frame.size.width/1.4;
-    [_menu setWithViewWidth:menuW BackgroundImage:[UIImage imageNamed:@"星空"] SpringDamping:0 SpringVelocity:0 SpringFramesNum:0];
 }
 
 #pragma mark==================ViewDidLoad==================
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor=[UIColor whiteColor];
 }
 #pragma mark==================添加CategoryController==================
 -(void)addCategory
@@ -273,9 +282,10 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
  ***************************************************************************/
 
 #pragma mark-----------TXNaVigtionViewDelegate 监听菜单按钮---------
--(void)navigationView:(TXNavigationView *)navigtionView MenuButton:(UIButton *)but
+-(void)navigationView:(TXNavigationView *)navigtionView HandLetap:(UITapGestureRecognizer *)handLetap
 {
-    [_menu startAnimation];
+    //开始动画
+    [_menu animation];
 }
 #pragma mark-----------TXNaVigtionViewDelegate 监听选项卡按钮-------
 -(void)navigationView:(TXNavigationView *)navigtionView Tab:(UISegmentedControl *)tab
@@ -340,12 +350,12 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     if (tableView.tag==homeTableViewTag)
     {
         //创建组模型
-        TXHomeModelo * model=_data.homeModel[section];
+        TXHomeModelo * model = _data.homeModel[section];
         //创建HeaderInSectionView
-        TXHomeHeaderInSectionView * view=[[TXHomeHeaderInSectionView alloc]initWithFrame:CM(0, 0, _viewW, 70)];
+        TXHomeHeaderInSectionView * view = [[TXHomeHeaderInSectionView alloc]initWithFrame:CM(0, 0, _viewW, 70)];
         //处理数据
-        view.model=model;
-        view.backgroundColor=[UIColor whiteColor];
+        view.model = model;
+        view.backgroundColor = [UIColor whiteColor];
         return view;
     }
     return nil;
@@ -443,8 +453,6 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
         
         _exhibitionController=[[TXExhibitionController alloc]init];
         [self presentViewController:_exhibitionController animated:NO completion:nil];
-        
-        _notifiction=[NSNotificationCenter defaultCenter];
         [_notifiction postNotificationName:@"gitModel" object:self userInfo:@{
                                                                               @"model":listModel
                                                                               }];
@@ -457,7 +465,6 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
         TXListFrameModel              * frameModel    = _data.recommendFrameModel[indexPath.row];
         _exhibitionController=[[TXExhibitionController alloc]init];
         [self presentViewController:_exhibitionController animated:NO completion:nil];
-        _notifiction=[NSNotificationCenter defaultCenter];
         [_notifiction postNotificationName:@"gitModel" object:self userInfo:@{
                                                                               @"model":frameModel.model
                                                                               }];
@@ -483,11 +490,9 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     }
     
 }
-#pragma mark+++++++++++++++++++下拉加载原理+++++++++++++++++++
+#pragma mark+++++++++++++++++++下拉刷新原理+++++++++++++++++++
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
-
-    
     NSLog(@"scrollViewX:%f  scrollViewY:%f",scrollView.contentOffset.x ,scrollView.contentOffset.y);
     if (scrollView.contentOffset.y <-60)
     {
@@ -495,20 +500,12 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
          self.homeTableView.contentInset = UIEdgeInsetsMake(40.0f, 0.0f, 0.0f, 0.0f);
         } completion:^(BOOL finished){
             
-            [_data requestHomeModelData];
             /**
              *  发起网络请求,请求刷新数据
              */
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                [self.homeTableView reloadData];
-                _scrollFigureView.scrollFigureModel  = _data.scrollFigureModel;//轮播图网址
-                [UIView animateWithDuration:0.4 animations:^{
-                    
-                    self.homeTableView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
-                    
-                }];
-            });
+            
+            [_data requestHomeModelData];
+           
         }];
         
     }
@@ -546,5 +543,50 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
         
     }
 }
-
+#pragma mark+++++++++++++++++监听首页数据请求完毕+++++++++++++++++
+-(void)requestHomeModelData
+{
+    //心得
+    /**********************************************************************************
+     **  1.不要轻易创建对象。                                                            *
+     **  2.在创建对象时要分开数据以及框架                                                 *
+     **  3.再刷新页面时原理是重新调用的是重新设置数据的方法，一定要注意不要刷新数据是创建对象。     *
+     **********************************************************************************/
+    _homeTableView.tag        = 0;
+    _homeTableView.showsHorizontalScrollIndicator = NO;
+    _homeTableView.showsVerticalScrollIndicator   = NO;
+    _homeTableView.delegate   = self;
+    _homeTableView.dataSource = self;
+    [_homeTableView reloadData];
+    //添加数据
+    _scrollFigureView.scrollFigureModel  = _data.scrollFigureModel;//轮播图网址
+    [UIView animateWithDuration:0.4 animations:^{
+         self.homeTableView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+        
+    }];
+}
+#pragma mark-------------------个人中心实验区----------------
+//内存问题还没有解决
+-(void)personalCenter
+{
+    
+    
+    NSUserDefaults    * userInformation=[NSUserDefaults standardUserDefaults];
+    NSData            * userInformationData=[userInformation valueForKey:@"用户信息"];
+    TXPersonalCenterModel * personalCenterModel=[NSKeyedUnarchiver unarchiveObjectWithData:userInformationData];
+    
+       if (personalCenterModel)
+    {
+        [_navigtionView.userHeadPortrait sd_setImageWithURL:[NSURL URLWithString:personalCenterModel.avatar]];
+    }else if (!personalCenterModel)
+    {
+        _navigtionView.userHeadPortrait.image=[UIImage imageNamed:@"头像"];
+    }
+    
+    [self addMenu];
+}
+-(void)dealloc
+{
+    
+}
 @end

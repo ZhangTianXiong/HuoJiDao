@@ -19,9 +19,9 @@
 
 @property(nonatomic,strong)UIImageView            * picture;//图片
 @property(nonatomic,strong)UILabel                * titleLabel;
-@property(nonatomic,strong)TXChaneView         * chaneView;
+@property(nonatomic,strong)TXChaneView            * chaneView;
 @property(nonatomic,strong)UILabel                * datelineLabel;
-@property(nonatomic,strong)TXDisplaybarView    * displaybarView;
+@property(nonatomic,strong)TXDisplaybarView       * displaybarView;
 
 -(instancetype)initWithTableView:(UITableView *)tableView;
 +(instancetype)allWithTableView:(UITableView *)tableView;

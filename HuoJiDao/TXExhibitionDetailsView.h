@@ -12,12 +12,12 @@
 #import "TXFunctionBarView.h"
 
 @interface TXExhibitionDetailsView : TXView
-@property(nonatomic,strong)TXExhibitionDetailsViewFrameModel * frameModel;
-@property(nonatomic,strong)UILabel * titleLabel;//标题
-@property(nonatomic,strong)UIImageView * icon;//图标
-@property(nonatomic,strong)UILabel * num;//数量
-@property(nonatomic,strong)UILabel * briefIntroductionLabel;//介绍
-@property(nonatomic,strong)UIButton * but;//更多
-@property(nonatomic,strong)TXFunctionBarView * functionBarView;
+@property(nonatomic,strong)TXExhibitionDetailsViewFrameModel    * frameModel;
+@property(nonatomic,strong)UILabel                              * titleLabel;//标题
+@property(nonatomic,strong)UIImageView                          * icon;//图标
+@property(nonatomic,strong)UILabel                              * num;//数量
+@property(nonatomic,strong)UILabel                              * briefIntroductionLabel;//介绍
+@property(nonatomic,strong)UIButton                             * but;//更多
+@property(nonatomic,strong)TXFunctionBarView                    * functionBarView;
 
 @end

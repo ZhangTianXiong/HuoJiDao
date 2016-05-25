@@ -9,12 +9,22 @@
 #import "TXRequestData.h"
 //轮播图模型
 #import "TXScrollFigureModel.h"
-@interface TXRequestData ()<NSURLSessionDataDelegate>
-
+@interface TXRequestData ()<NSURLSessionTaskDelegate>
+{
+    NSNotificationCenter * _requestNotifiction;
+}
 @end
 @implementation TXRequestData
 
-
+-(instancetype)init
+{
+    if (self=[super init])
+    {
+        //初始化通知中心
+        _requestNotifiction=[NSNotificationCenter defaultCenter];
+    }
+    return self;
+}
 #pragma mark---------------请求首页数据-----------
 -(void)requestHomeModelData
 {
@@ -53,7 +63,7 @@
                 }
                 _scrollFigureModel=arrScrollFigureModel;//轮播图数据模型
                 _homeModel=arrHomeModel;
-                
+                [_requestNotifiction postNotificationName:@"RequestHomeModelData" object:self];
                 
             }
             
@@ -182,7 +192,7 @@
                 }
                 _picFrameModel                         = muarray;
                 
-                
+                 [_requestNotifiction postNotificationName:@"RequestPicTitleData" object:self];
             }
             
         }];
@@ -217,18 +227,15 @@
                 NSLog(@"Error: %@", error);
             } else
             {
-                
                 NSLog(@"%@",response);
-                
-                
                 for (NSDictionary * dic in responseObject[@"data"][@"content"])
                 {
-                    
                     TXListModel      * listModel  = [[TXListModel alloc]initWithDic:dic];
                     TXListFrameModel * frameModel = [TXListFrameModel recommendWithModel:listModel];
                     [muarray addObject:frameModel];
                 }
-                _allFrameModel                    = muarray;
+                 _allFrameModel                    = muarray;
+                [_requestNotifiction postNotificationName:@"RequestAllDataComplete" object:self];
          
             }
             
@@ -317,6 +324,8 @@
                 }
                  _videoFrameModel                   = muarray;
                 
+                [_requestNotifiction postNotificationName:@"RequestVideoDataComplete" object:self];
+                                     
                 
             }
             
@@ -405,6 +414,7 @@
                     [muarray addObject:frameModel];
                 }
                 _linkFrameModel                     = muarray;
+                [_requestNotifiction postNotificationName:@"RequestLinkDataComplete" object:self];
                 
                 
             }
@@ -440,9 +450,6 @@
             {
                 
                 NSLog(@"%@",response);
-                
-                
-                 
                 for (NSDictionary * dic in responseObject[@"data"][@"content"])
                 {
                     
@@ -456,10 +463,79 @@
             }
             
         }];
+        
         [dataTask resume];
+        
     }
 
 }
+
+#pragma mark-----------------------登录获取用户数据数据-------------------
+-(void)signInWithUserAccount:(NSString*)userAccount UserPassword:(NSString*)userPassword
+{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *URLString = [@"http://www.quumii.com/app/api.php?method=registerlogin&type=0" stringByAppendingString:@"usercenter"];
+    NSDictionary *parameters = @{@"type":@0,
+                                 @"username":userAccount,
+                                 @"password":userPassword
+                                 };
+    [manager POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers | NSJSONReadingMutableContainers error:nil];
+        TXPersonalCenterModel * personalCenterModel=[[TXPersonalCenterModel alloc]initWithDic:dic[@"userinfo"]];
+        NSData * data=[NSKeyedArchiver archivedDataWithRootObject:personalCenterModel];
+                NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+        [user setValue:data forKey:@"用户信息"];
+        [_requestNotifiction postNotificationName:@"个人中心" object:self];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        nil;
+    }];
+
+    
+    
+}
+
+
+
+-(void)requestBarrageModel
+{
+    
+}
+//#pragma mark - 上传进度的代理方法
+//- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
+//{
+//    // bytesSent totalBytesSent totalBytesExpectedToSend
+//    // 发送字节(本次发送的字节数)    总发送字节数(已经上传的字节数)     总希望要发送的字节(文件大小)
+//    NSLog(@"%lld-%lld-%lld-", bytesSent, totalBytesSent, totalBytesExpectedToSend);
+//    // 已经上传的百分比
+//    float progress = (float)totalBytesSent / totalBytesExpectedToSend;
+//    NSLog(@"%f", progress);
+//}
+//
+//
+//
+//
+//
+// // 下载进度跟进
+// - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
+// didWriteData:(int64_t)bytesWritten
+// totalBytesWritten:(int64_t)totalBytesWritten
+//totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
+//
+//{
+//    NSLog(@"sssssssssswsssssss");
+// }
+// 
+//
+// 
+// // 完成下载
+// - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
+//didFinishDownloadingToURL:(NSURL *)location{
+//     
+// }
+
 -(void)dealloc{
    
     NSLog(@"释放");

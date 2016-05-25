@@ -22,44 +22,44 @@
 -(void)setModel:(TXListModel *)model{
     _model=model;
     //边距
-    CGFloat  margin          = 10;
+    CGFloat  margin             = 10;
     //图片Frame
-    CGFloat  pictureX       = margin;
-    CGFloat  pictureY       = margin;
-    CGFloat  pictureW       = 100;
-    CGFloat  pictureH       = 80;
-    _pictureFrame           = CM(pictureX, pictureY, pictureW, pictureH);
+    CGFloat  pictureX           = margin;
+    CGFloat  pictureY           = margin;
+    CGFloat  pictureW           = 100;
+    CGFloat  pictureH           = 80;
+    _pictureFrame               = CM(pictureX, pictureY, pictureW, pictureH);
     
     //标题
-    UIFont * font           = [UIFont systemFontOfSize:13];
-    CGSize   titleSize      = [self.model.subject calculateTextSize:CGSizeMake(240, MAXFLOAT) andFoun:font];
-    CGFloat  titleX         = CGRectGetMaxX(_pictureFrame)+margin;
-    CGFloat  titleY         = margin;
-    CGFloat  titleW         = titleSize.width;
-    CGFloat  titleH         = titleSize.height;
-    _titleFrame             = CM(titleX, titleY, titleW, titleH);
+    UIFont * font               = [UIFont systemFontOfSize:13];
+    CGSize   titleSize          = [self.model.subject calculateTextSize:CGSizeMake(240, MAXFLOAT) andFoun:font];
+    CGFloat  titleX             = CGRectGetMaxX(_pictureFrame)+margin;
+    CGFloat  titleY             = margin;
+    CGFloat  titleW             = titleSize.width;
+    CGFloat  titleH             = titleSize.height;
+    _titleFrame                 = CM(titleX, titleY, titleW, titleH);
     
     //频道
-    CGFloat chaneViewX      = titleX;
-    CGFloat chaneViewY      = CGRectGetMaxY(_titleFrame)+margin;
-    CGFloat chaneViewW      = 80;
-    CGFloat chaneViewH      = 21;
-    _chaneViewFrame         = CM(chaneViewX, chaneViewY, chaneViewW, chaneViewH);
+    CGFloat chaneViewX          = titleX;
+    CGFloat chaneViewY          = CGRectGetMaxY(_titleFrame)+margin;
+    CGFloat chaneViewW          = 80;
+    CGFloat chaneViewH          = 21;
+    _chaneViewFrame             = CM(chaneViewX, chaneViewY, chaneViewW, chaneViewH);
     
     //时间显示
-    CGFloat datelineLabelX  = CGRectGetMaxX(_chaneViewFrame)+margin;
-    CGFloat datelineLabelY  = chaneViewY;
-    CGFloat datelineLabelW  = 80;
-    CGFloat datelineLabelH  = 21;
-    _datelineLabelFrame     = CM(datelineLabelX, datelineLabelY, datelineLabelW, datelineLabelH);
+    CGFloat datelineLabelX      = CGRectGetMaxX(_chaneViewFrame)+margin;
+    CGFloat datelineLabelY      = chaneViewY;
+    CGFloat datelineLabelW      = 80;
+    CGFloat datelineLabelH      = 21;
+    _datelineLabelFrame         = CM(datelineLabelX, datelineLabelY, datelineLabelW, datelineLabelH);
     
     
     //显示条
-    CGFloat displaybarViewX = titleX;
-    CGFloat displaybarViewY = CGRectGetMaxY(_datelineLabelFrame)+margin;
-    CGFloat displaybarViewW = 200;
-    CGFloat displaybarViewH = 21;
-    _displaybarViewFrame    = CM(displaybarViewX, displaybarViewY, displaybarViewW, displaybarViewH);
+    CGFloat displaybarViewX     = titleX;
+    CGFloat displaybarViewY     = CGRectGetMaxY(_datelineLabelFrame)+margin;
+    CGFloat displaybarViewW     = 200;
+    CGFloat displaybarViewH     = 21;
+    _displaybarViewFrame        = CM(displaybarViewX, displaybarViewY, displaybarViewW, displaybarViewH);
     
     //计算行高
     /****************************************************************************
@@ -85,12 +85,14 @@
  ************************************************/
 -(instancetype)initWithModel:(TXListModel*)model
 {
-    if (self=[super init]) {
-        self.model=model;
+    if (self=[super init])
+    {
+        self.model = model;
     }
     return self;
 }
-+(instancetype)recommendWithModel:(TXListModel*)model{
++(instancetype)recommendWithModel:(TXListModel*)model
+{
     return [[self alloc]initWithModel:model];
 }
 @end

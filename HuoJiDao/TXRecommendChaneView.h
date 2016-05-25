@@ -10,11 +10,11 @@
 
 #import "TXListFrameModel.h"
 @interface TXRecommendChaneView : UIView
-@property(nonatomic,strong)TXListFrameModel * frameModel;//创建模型
+@property(nonatomic,strong)TXListFrameModel         * frameModel;//创建模型
 
-@property(nonatomic,strong)UIImageView           * chaneIcon;//创建频道图标
-@property(nonatomic,strong)UILabel               * chaneNameLabel;//创建频道名称
-@property(nonatomic,strong)UIButton              * chaneBut;//创建频道点击事件
+@property(nonatomic,strong)UIImageView              * chaneIcon;//创建频道图标
+@property(nonatomic,strong)UILabel                  * chaneNameLabel;//创建频道名称
+@property(nonatomic,strong)UIButton                 * chaneBut;//创建频道点击事件
 
 
 @end

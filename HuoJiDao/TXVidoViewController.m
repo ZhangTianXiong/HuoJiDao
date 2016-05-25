@@ -32,7 +32,9 @@ UITableViewDelegate,UITableViewDataSource
 }
 -(void)initData
 {
-     _data  = [[TXRequestData alloc]init];
+    _notifiction = [NSNotificationCenter defaultCenter];
+    [_notifiction addObserver:self selector:@selector(requestVideoDataComplete) name:@"RequestVideoDataComplete" object:nil];
+     _data       = [[TXRequestData alloc]init];
     [_data requestVideoData];
     
 }
@@ -43,11 +45,6 @@ UITableViewDelegate,UITableViewDataSource
     CGFloat videoTableViewW       = self.view.frame.size.width;
     CGFloat videoTableViewH       = self.view.frame.size.height-videoTableViewY;
     _videoTableView               = [[UITableView alloc]initWithFrame:CM(videoTableViewX, videoTableViewY, videoTableViewW, videoTableViewH) style:UITableViewStylePlain];
-    _videoTableView.tag                            = 0;
-    _videoTableView.showsVerticalScrollIndicator   = NO;
-    _videoTableView.showsHorizontalScrollIndicator = NO;
-    _videoTableView.delegate                       = self;
-    _videoTableView.dataSource                     = self;
     self.videoTableView.tableFooterView            = [[[NSBundle mainBundle] loadNibNamed:@"videoJiaZai" owner:nil options:nil]lastObject];
     [self.view addSubview:_videoTableView];
     
@@ -66,20 +63,18 @@ UITableViewDelegate,UITableViewDataSource
 {
     if (tableView.tag==0)
     {
-        _videoExhibition=[[TXExhibitionController alloc]init];
+        _videoExhibition    = [[TXExhibitionController alloc]init];
         [self presentViewController:_videoExhibition animated:NO completion:nil];
-        _frameModel=_data.videoFrameModel[indexPath.row];
-        _notifiction=[NSNotificationCenter defaultCenter];
+        _frameModel         = _data.videoFrameModel[indexPath.row];
         [_notifiction postNotificationName:@"gitModel" object:self userInfo:@{
                                                                               @"model":_frameModel.model
                                                                               }];
-        
     }
     
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _frameModel=_data.videoFrameModel[indexPath.row];
+    _frameModel            = _data.videoFrameModel[indexPath.row];
     return _frameModel.rowH;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,11 +82,9 @@ UITableViewDelegate,UITableViewDataSource
     if (tableView.tag==0)
     {
         //创建模型
-        _frameModel=_data.videoFrameModel[indexPath.row];
-        
+        _frameModel                = _data.videoFrameModel[indexPath.row];
         //创建cell
         TXVideoTableVieCell * cell = [TXVideoTableVieCell videoWithTableView:tableView];
-        
         //设置单元格数据
         cell.framemodel            = _frameModel;
         //返回cell
@@ -130,21 +123,25 @@ UITableViewDelegate,UITableViewDataSource
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self addVideoTableView];
     self.view.backgroundColor = [UIColor whiteColor];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(DELAY_DATE * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                   {
-          [self addVideoTableView];
-                       
-                   });
     
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
    
 }
-
-
+#pragma mark+++++++++++++++++视频数据请求完毕+++++++++++++++++
+-(void)requestVideoDataComplete
+{
+    _videoTableView.tag                            = 0;
+    _videoTableView.showsVerticalScrollIndicator   = NO;
+    _videoTableView.showsHorizontalScrollIndicator = NO;
+    _videoTableView.delegate                       = self;
+    _videoTableView.dataSource                     = self;
+}
 -(void)dealloc
 {
     NSLog(@"dealloc 被调用");

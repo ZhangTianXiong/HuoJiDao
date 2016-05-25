@@ -15,11 +15,11 @@
 
 
 
-@property(nonatomic,strong)TXPic_title * pic_titleModel;
+@property(nonatomic,strong)TXPic_title *    pic_titleModel;
 
-@property(nonatomic,assign,readonly)CGRect titleLabelFrame;
-@property(nonatomic,assign,readonly)CGRect pictureImageFrame;
-@property(nonatomic,assign,readonly)CGRect functionBarViewFrame;
+@property(nonatomic,assign,readonly)CGRect  titleLabelFrame;
+@property(nonatomic,assign,readonly)CGRect  pictureImageFrame;
+@property(nonatomic,assign,readonly)CGRect  functionBarViewFrame;
 
 @property(nonatomic,assign,readonly)CGFloat rowH;//计算行高
 

@@ -57,15 +57,15 @@
 #pragma mark==============初始化视图==============
 -(void)initView
 {
-    UIImageView * icon      = [[UIImageView alloc]init];
+    UIImageView * icon       = [[UIImageView alloc]init];
     _icon=icon;
     //主题
-    UILabel     * themeLabel= [[UILabel alloc]init];
+    UILabel     * themeLabel = [[UILabel alloc]init];
     themeLabel.font=[UIFont systemFontOfSize:14];
-    _themeLabel             = themeLabel;
+    _themeLabel              = themeLabel;
     //按钮
-    UIButton    * but       = [UIButton buttonWithType:UIButtonTypeCustom];
-    NSString    * titleName = @"更多";
+    UIButton    * but        = [UIButton buttonWithType:UIButtonTypeCustom];
+    NSString    * titleName  = @"更多";
     [but setTitle:titleName forState:UIControlStateNormal];
     but.titleLabel.font=[UIFont systemFontOfSize:12];
     
@@ -74,7 +74,7 @@
 
     [but addTarget:self action:@selector(TXHomeHeaderInSectionViewButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    _but                    = but;
+    _but                     = but;
     
     [self addSubview:icon];
     [self addSubview:themeLabel];

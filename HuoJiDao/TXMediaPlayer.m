@@ -213,6 +213,7 @@
         
         float current = CMTimeGetSeconds(time);
         float total   = CMTimeGetSeconds([weakSelf.playerItme duration]);
+        weakSelf.maskView.totalLength=total;
         
         if (current)
         {
@@ -230,6 +231,9 @@
         weakSelf.maskView.currentTimeLabel.text    = [NSString stringWithFormat:@"%02zd:%02zd", proMin, proSec];
         weakSelf.maskView.totalTimeLabel.text      = [NSString stringWithFormat:@"%02zd:%02zd", durMin, durSec];
     } ];
+    
+    
+    
 }
 
 #pragma mark---------------------------横竖屏的切换------------------------------
@@ -346,8 +350,9 @@
     NSLog(@"播放完了");
     [_player seekToTime:CMTimeMake(0, 1) completionHandler:^(BOOL finish){
 
-        [self.maskView.videoSlider setValue:0.0 animated:YES];
-        self.maskView.currentTimeLabel.text = @"00:00";
+//        [self.maskView.videoSlider setValue:0.0 animated:YES];
+//        
+//        self.maskView.currentTimeLabel.text = @"00:00";
         
     }];
     
@@ -620,9 +625,10 @@
     
 
 }
+#pragma mark---------------计算拖动进度---------------
 -(void)horizontalMoved:(CGFloat)value
 {
-    self.maskView.videoSlider.value += value/10000;
+    self.maskView.videoSlider.value += value/100000;
 }
 
 #pragma mark - Setter

@@ -16,5 +16,5 @@
 //创建PageControl
 @property(nonatomic,strong)UIPageControl  * pageControl;
 //创建图片地址容器
-@property(nonatomic,strong)NSArray * scrollFigureModel;
+@property(nonatomic,strong)NSArray        * scrollFigureModel;
 @end

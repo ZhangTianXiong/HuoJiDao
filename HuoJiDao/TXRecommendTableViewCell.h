@@ -13,12 +13,12 @@
 
 #import "TXListFrameModel.h"
 @interface TXRecommendTableViewCell : UITableViewCell
-@property(nonatomic,strong)TXListFrameModel  * framemodel;
-@property(nonatomic,strong)UIImageView            * picture;//图片
-@property(nonatomic,strong)UILabel                * titleLabel;
-@property(nonatomic,strong)TXRecommendChaneView            * chaneView;
-@property(nonatomic,strong)UILabel                * datelineLabel;
-@property(nonatomic,strong)TXRecommendDisplaybarView       * displaybarView;
+@property(nonatomic,strong)TXListFrameModel                 * framemodel;
+@property(nonatomic,strong)UIImageView                      * picture;//图片
+@property(nonatomic,strong)UILabel                          * titleLabel;
+@property(nonatomic,strong)TXRecommendChaneView             * chaneView;
+@property(nonatomic,strong)UILabel                          * datelineLabel;
+@property(nonatomic,strong)TXRecommendDisplaybarView        * displaybarView;
 -(instancetype)initWithTableView:(UITableView * )tableView;
 +(instancetype)recommendWithTableView:(UITableView * )tableView;
 @end

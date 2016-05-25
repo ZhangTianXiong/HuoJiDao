@@ -40,45 +40,45 @@
         _displaybarView                   = displaybarView;
         
         
-        [self addSubview:picture];
-        [self addSubview:titleLabel];
-        [self addSubview:chaneView];
-        [self addSubview:datelineLabel];
-        [self addSubview:displaybarView];
+        [self.contentView addSubview:picture];
+        [self.contentView addSubview:titleLabel];
+        [self.contentView addSubview:chaneView];
+        [self.contentView addSubview:datelineLabel];
+        [self.contentView addSubview:displaybarView];
     }
     return self;
 }
 #pragma mark+++++++++++++++++重写setFramemodel方法设置视图数据++++++++++++
 -(void)setFramemodel:(TXListFrameModel *)framemodel
 {
-    _framemodel                   = framemodel;
+    _framemodel                     = framemodel;
     //设置位置以及数据
     //设置图片
-    _picture.frame                = _framemodel.pictureFrame;
-    _picture.layer.masksToBounds = YES; //是否显示圆角以外的部分
-    _picture.layer.cornerRadius   = 5;
+    _picture.frame                  = _framemodel.pictureFrame;
+    _picture.layer.masksToBounds    = YES; //是否显示圆角以外的部分
+    _picture.layer.cornerRadius     = 5;
     [_picture sd_setImageWithURL:[NSURL URLWithString:_framemodel.model.img] placeholderImage:[UIImage imageNamed:@"网络异常显示图"]];
     
     
     //设置标题
-    _titleLabel.frame            = _framemodel.titleFrame;
-    _titleLabel.text             = _framemodel.model.subject;
+    _titleLabel.frame               = _framemodel.titleFrame;
+    _titleLabel.text                = _framemodel.model.subject;
     
     
     //设置频道
     //注意：顺序解决位置问题
-    _chaneView.frame             = _framemodel.chaneViewFrame;
-    _chaneView.frameModel        = _framemodel;
+    _chaneView.frame                = _framemodel.chaneViewFrame;
+    _chaneView.frameModel           = _framemodel;
     
     
     //设置发布时间
-    _datelineLabel.frame         = _framemodel.datelineLabelFrame;
-    _datelineLabel.text          = _framemodel.model.dateline;
+    _datelineLabel.frame            = _framemodel.datelineLabelFrame;
+    _datelineLabel.text             = _framemodel.model.dateline;
     
     
     //设置显示条
-    _displaybarView.frame        = _framemodel.displaybarViewFrame;
-    _displaybarView.frameModel   = _framemodel;
+    _displaybarView.frame           = _framemodel.displaybarViewFrame;
+    _displaybarView.frameModel      = _framemodel;
     
 }
 #pragma mark---------------封装创建cell的对象方法-----------

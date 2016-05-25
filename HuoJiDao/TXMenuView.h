@@ -8,23 +8,19 @@
 
 #import "TXView.h"
 #import "LLSlideMenu.h"
-@interface TXMenuView :LLSlideMenu
-//获取父类Controller
-@property(nonatomic,strong)UIViewController * getController;
-//设置属性
--(void)setWithViewWidth:(CGFloat)width// 设置菜单宽度
-         BackgroundImage:(UIImage*)image// 设置菜单背图片
-           SpringDamping:(CGFloat)springDamping// 阻力
-          SpringVelocity:(CGFloat)springVelocity// 速度
-SpringFramesNum:(CGFloat )springFramesNum;// 关键帧数量
-//开始动画
--(void)startAnimation;
+@interface TXMenuView :TXView
+@property(nonatomic,assign)BOOL         isAnimation;
 //UI布局
--(void)initView;
-@property(nonatomic,strong)UIImageView * imageView;
-@property(nonatomic,strong)UIImageView * userImageView;
-@property(nonatomic,strong)UIButton    * userNameBut;
-@property(nonatomic,strong)UITableView * tableView;
+@property(nonatomic,strong)UIImageView * backgroundImageView;
+@property(nonatomic,strong)UIImageView * userImageView;//用户头像
+@property(nonatomic,strong)UIButton    * userNameBut;//用户昵称
+@property(nonatomic,strong)UIButton    * personalizedSignatureBut;//个性签名
+@property(nonatomic,strong)UIButton    * registerBut;//注册
+@property(nonatomic,strong)UIButton    * signInBut;//登录
+@property(nonatomic,strong)UITableView * tableView;//TableView
+
+@property(nonatomic,strong)UIButton    * closeMenuBut;//关闭菜单
+-(void)animation;
 //手势
 
 @end

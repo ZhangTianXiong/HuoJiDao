@@ -33,7 +33,10 @@ UITableViewDelegate,UITableViewDataSource
 }
 -(void)initData
 {
-     _data  =[[TXRequestData alloc]init];
+    _notifiction      = [NSNotificationCenter defaultCenter];
+    [_notifiction addObserver:self selector:@selector(requestLinkDataComplete) name:@"RequestLinkDataComplete" object:nil];
+    
+     _data            = [[TXRequestData alloc]init];
     [_data requestLinkData];
 }
 -(void)addVideoTableView
@@ -44,12 +47,6 @@ UITableViewDelegate,UITableViewDataSource
     CGFloat linkTableViewH       = self.view.frame.size.height-linkTableViewY;
     
     _linkTableView               = [[UITableView alloc]initWithFrame:CM(linkTableViewX, linkTableViewY, linkTableViewW, linkTableViewH) style:UITableViewStylePlain];
-    
-    _linkTableView.tag                            = 0;
-    _linkTableView.showsVerticalScrollIndicator   = NO;
-    _linkTableView.showsHorizontalScrollIndicator = NO;
-    _linkTableView.delegate                       = self;
-    _linkTableView.dataSource                     = self;
     
     self.linkTableView.tableFooterView            = [[[NSBundle mainBundle] loadNibNamed:@"videoJiaZai" owner:nil options:nil]lastObject];
     
@@ -65,12 +62,11 @@ UITableViewDelegate,UITableViewDataSource
 {
     if (tableView.tag==0)
     {
-        _linkExhibition=[[TXExhibitionController alloc]init];
+        _linkExhibition     = [[TXExhibitionController alloc]init];
         [self presentViewController:_linkExhibition animated:NO completion:nil];
-        _linkExhibition=[[TXExhibitionController alloc]init];
+        _linkExhibition     = [[TXExhibitionController alloc]init];
         [self presentViewController:_linkExhibition animated:NO completion:nil];
-        _frameModel=_data.linkFrameModel[indexPath.row];
-        _notifiction=[NSNotificationCenter defaultCenter];
+        _frameModel         = _data.linkFrameModel[indexPath.row];
         [_notifiction postNotificationName:@"gitModel" object:self userInfo:@{
                                                                              @"model":_frameModel.model
                                                                             }];
@@ -79,7 +75,7 @@ UITableViewDelegate,UITableViewDataSource
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _frameModel=_data.linkFrameModel[indexPath.row];
+    _frameModel             = _data.linkFrameModel[indexPath.row];
     return _frameModel.rowH;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,12 +125,20 @@ UITableViewDelegate,UITableViewDataSource
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self addVideoTableView];
     self.view.backgroundColor=[UIColor whiteColor];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(DELAY_DATE * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                   {
-                       [self addVideoTableView];
-                       
-                   });
+}
+
+#pragma mark+++++++++++++++++链接数据请求完毕+++++++++++++++++
+-(void)requestLinkDataComplete
+{
+    _linkTableView.tag                            = 0;
+    _linkTableView.showsVerticalScrollIndicator   = NO;
+    _linkTableView.showsHorizontalScrollIndicator = NO;
+    _linkTableView.delegate                       = self;
+    _linkTableView.dataSource                     = self;
+    
+
     
 }
 -(void)dealloc

@@ -11,11 +11,11 @@
 #import "TXView.h"
 #import "TXTheDottedLineView.h"
 @interface TXFunctionBarView :TXView
-@property(nonatomic,strong)TXListModel * model;//数据
-@property(nonatomic,weak)TXTheDottedLineView * thumbs_upView;//点赞View
-@property(nonatomic,weak)TXTheDottedLineView * treadView;//点踩View
-@property(nonatomic,weak)TXTheDottedLineView * collectionView;//收藏View
-@property(nonatomic,weak)TXTheDottedLineView * commendView;//评论
-@property(nonatomic,weak)TXTheDottedLineView * shareView;//分享
+@property(nonatomic,strong)TXListModel          * model;//数据
+@property(nonatomic,weak)TXTheDottedLineView    * thumbs_upView;//点赞View
+@property(nonatomic,weak)TXTheDottedLineView    * treadView;//点踩View
+@property(nonatomic,weak)TXTheDottedLineView    * collectionView;//收藏View
+@property(nonatomic,weak)TXTheDottedLineView    * commendView;//评论
+@property(nonatomic,weak)TXTheDottedLineView    * shareView;//分享
 
 @end

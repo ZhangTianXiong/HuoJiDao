@@ -15,10 +15,7 @@ typedef NS_ENUM(NSInteger, Direction)
    Cross_screen,//横屏
     
 };
-@interface TXExhibitionController ()
-<
-UITableViewDelegate,UITableViewDataSource
->
+@interface TXExhibitionController ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSNotificationCenter                   * _notifiction;//通知中心
     UIView                                 * _myTableHeaderView;//_myTableHeaderView
@@ -31,7 +28,6 @@ UITableViewDelegate,UITableViewDataSource
     NSMutableArray                         * _pinglunModel;//评论数据
     Direction                              * direction;//横竖屏的枚举
     BOOL                                     _isDirection;//横竖屏
-    
    
 }
 @end
@@ -56,18 +52,18 @@ UITableViewDelegate,UITableViewDataSource
 -(void)initVar
 {
     _navigationViewH = 64;//导航栏的高
-    _playerH        = 200;//播放器的高
-    _sectionHeader  = 20;//组头部View的高
+    _playerH         = 200;//播放器的高
+    _sectionHeader   = 20;//组头部View的高
     _isDirection     = Vertical_screen;//竖屏
 }
 
 #pragma mark+++++++++++++++++通知中心+++++++++++++++++
 -(void)gitModel:(NSNotification*)notification
 {
-    _model=notification.userInfo[@"model"];
+    _model                 = notification.userInfo[@"model"];
     //创建详情View数据模型
-    _frameModel=[[TXExhibitionDetailsViewFrameModel alloc]initWithModel:_model];
-    _exhibitionDetailsView=[[TXExhibitionDetailsView alloc]init];
+    _frameModel            = [[TXExhibitionDetailsViewFrameModel alloc]initWithModel:_model];
+    _exhibitionDetailsView = [[TXExhibitionDetailsView alloc]init];
     //判断类型是否是Video
     if ([_model.type isEqualToString: @"video"])
     {
@@ -89,22 +85,22 @@ UITableViewDelegate,UITableViewDataSource
 -(void)setNavigationView
 {
     //设置Frame
-    CGFloat exhibitionNavigationViewX=0;
-    CGFloat exhibitionNavigationViewY=0;
-    CGFloat exhibitionNavigationViewW=self.view.frame.size.width;
-    CGFloat exhibitionNavigationViewH=_navigationViewH;
-    _exhibitionNavigationView=[[TXExhibitionNavigationView alloc]initWithFrame:CM(exhibitionNavigationViewX, exhibitionNavigationViewY,exhibitionNavigationViewW,exhibitionNavigationViewH)];
-    _exhibitionNavigationView.backgroundColor=[UIColor colorWithWhite:1 alpha:0];
+    CGFloat exhibitionNavigationViewX         = 0;
+    CGFloat exhibitionNavigationViewY         = 0;
+    CGFloat exhibitionNavigationViewW         = self.view.frame.size.width;
+    CGFloat exhibitionNavigationViewH         = _navigationViewH;
+    _exhibitionNavigationView                 = [[TXExhibitionNavigationView alloc]initWithFrame:CM(exhibitionNavigationViewX, exhibitionNavigationViewY,exhibitionNavigationViewW,exhibitionNavigationViewH)];
+    _exhibitionNavigationView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     [_exhibitionNavigationView.backBut addTarget:self action:@selector(navigationViewBack:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_exhibitionNavigationView];
-    _exhibitionNavigationView.but.alpha=0;
+    _exhibitionNavigationView.but.alpha       = 0;
     [_exhibitionNavigationView.but addTarget:self action:@selector(startAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 #pragma mark=============viewDidLoad===================
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor=[UIColor whiteColor];
+    self.view.backgroundColor                 = [UIColor whiteColor];
     [self interfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation]];//强制竖屏
     
 }
@@ -114,18 +110,18 @@ UITableViewDelegate,UITableViewDataSource
 -(void)addExhibitionTableView
 {
     //设置位置
-    CGFloat viewW=self.view.frame.size.width;
-    CGFloat viewH=self.view.frame.size.height;
-    CGFloat exhibitionTableViewX=0;
-    CGFloat exhibitionTableViewY=0;
-    CGFloat exhibitionTableViewW=viewW;
-    CGFloat exhibitionTableViewH=viewH;
-    _exhibitionTableView=[[UITableView alloc]initWithFrame:CM(exhibitionTableViewX, exhibitionTableViewY, exhibitionTableViewW, exhibitionTableViewH) style:UITableViewStyleGrouped];
-    _exhibitionTableView.separatorStyle = NO;//隐藏分割线
-    _exhibitionTableView.delegate=self;
-    _exhibitionTableView.dataSource=self;
-    _exhibitionTableView.showsVerticalScrollIndicator=YES;
-    _exhibitionTableView.showsHorizontalScrollIndicator=YES;
+    CGFloat viewW                             = self.view.frame.size.width;
+    CGFloat viewH                             = self.view.frame.size.height;
+    CGFloat exhibitionTableViewX              = 0;
+    CGFloat exhibitionTableViewY              = 0;
+    CGFloat exhibitionTableViewW              = viewW;
+    CGFloat exhibitionTableViewH              = viewH;
+    _exhibitionTableView                      = [[UITableView alloc]initWithFrame:CM(exhibitionTableViewX, exhibitionTableViewY, exhibitionTableViewW, exhibitionTableViewH) style:UITableViewStyleGrouped];
+    _exhibitionTableView.separatorStyle       = NO;//隐藏分割线
+    _exhibitionTableView.delegate             = self;
+    _exhibitionTableView.dataSource           = self;
+    _exhibitionTableView.showsVerticalScrollIndicator   = YES;
+    _exhibitionTableView.showsHorizontalScrollIndicator = YES;
     [self.view addSubview:_exhibitionTableView];
     //设置exhibitionTableViewWithHeaderView
     [self setExhibitionTableViewWithHeaderView];
@@ -134,14 +130,14 @@ UITableViewDelegate,UITableViewDataSource
 -(void)setExhibitionTableViewWithHeaderView
 {
     //设置位置
-    CGFloat myTableHeaderViewX=0;
-    CGFloat myTableHeaderViewY=0;
-    CGFloat myTableHeaderViewW=self.view.frame.size.width;
-    CGFloat myTableHeaderViewH=_playerH+_frameModel.H;
-    _myTableHeaderView = [[UIView alloc]init];
-    _myTableHeaderView.frame=CGRectMake(myTableHeaderViewX, myTableHeaderViewY, myTableHeaderViewW, myTableHeaderViewH);
-    _myTableHeaderView.backgroundColor=Color(239, 239, 244, 1);
-    _exhibitionTableView.tableHeaderView  =_myTableHeaderView;
+    CGFloat myTableHeaderViewX               = 0;
+    CGFloat myTableHeaderViewY               = 0;
+    CGFloat myTableHeaderViewW               = self.view.frame.size.width;
+    CGFloat myTableHeaderViewH               = _playerH+_frameModel.H;
+    _myTableHeaderView                       = [[UIView alloc]init];
+    _myTableHeaderView.frame                 = CGRectMake(myTableHeaderViewX, myTableHeaderViewY, myTableHeaderViewW, myTableHeaderViewH);
+    _myTableHeaderView.backgroundColor       = Color(239, 239, 244, 1);
+    _exhibitionTableView.tableHeaderView     = _myTableHeaderView;
 }
 #pragma mark=============创建MediaPlayer=============
 -(void)createMediaPlayer:(NSString*)strURL
@@ -149,15 +145,16 @@ UITableViewDelegate,UITableViewDataSource
     [self addExhibitionTableView];//添加TableView
     [self setNavigationView];//设置导航条
     //设置player的Frame
-    CGFloat playerX=0;
-    CGFloat playerY=0;
-    CGFloat playerW=self.view.frame.size.width;
-    CGFloat playerH=_playerH;
-    _player=[[TXMediaPlayer alloc]initWithFrame:CGRectMake(playerX, playerY,playerW ,playerH)];
-    _player.videoURL=[NSURL URLWithString: strURL];//添加URL
+    CGFloat playerX                         = 0;
+    CGFloat playerY                         = 0;
+    CGFloat playerW                         = self.view.frame.size.width;
+    CGFloat playerH                         = _playerH;
+    _player                                 = [[TXMediaPlayer alloc]initWithFrame:CGRectMake(playerX, playerY,playerW ,playerH)];
+    _player.videoURL                        = [NSURL URLWithString: strURL];//添加URL
     [_player.maskView.bigstartBut addTarget:self action:@selector(bigStartAction:) forControlEvents:UIControlEventTouchUpInside];//添加大播放按钮
     [self.exhibitionTableView.tableHeaderView addSubview:_player];//将player添加在tableHeaderView上
     [self addExhibitionDetailsView];//调用添加详情View
+    [self setupDanmakuData];
 }
 
 #pragma mark=============创建picView=============
@@ -170,11 +167,11 @@ UITableViewDelegate,UITableViewDataSource
                        [self setNavigationView];//设置导航条
                        
                        //设置picView的Frame
-                       CGFloat picViewX=0;
-                       CGFloat picViewY=0;
-                       CGFloat picViewW=self.view.frame.size.width;
-                       CGFloat picViewH=_playerH;
-                       _picView=[[TXPicView alloc]initWithFrame:CM(picViewX, picViewY, picViewW, picViewH)];
+                       CGFloat picViewX            = 0;
+                       CGFloat picViewY            = 0;
+                       CGFloat picViewW            = self.view.frame.size.width;
+                       CGFloat picViewH            = _playerH;
+                       _picView                    =[[TXPicView alloc]initWithFrame:CM(picViewX, picViewY, picViewW, picViewH)];
                        
                        //判断是否是pic和gif
                        if ([_model.type isEqualToString:@"pic"])
@@ -195,12 +192,12 @@ UITableViewDelegate,UITableViewDataSource
 -(void)addExhibitionDetailsView
 {
     //设置Frame
-    CGFloat exhibitionDetailsViewX=0;
-    CGFloat exhibitionDetailsViewY=_playerH;
-    CGFloat exhibitionDetailsViewW=self.view.frame.size.width;
-    CGFloat exhibitionDetailsViewH=_frameModel.H;
-    _exhibitionDetailsView.frame=CGRectMake(exhibitionDetailsViewX,exhibitionDetailsViewY ,exhibitionDetailsViewW,exhibitionDetailsViewH);
-    _exhibitionDetailsView.frameModel=_frameModel;
+    CGFloat exhibitionDetailsViewX             = 0;
+    CGFloat exhibitionDetailsViewY             = _playerH;
+    CGFloat exhibitionDetailsViewW             = self.view.frame.size.width;
+    CGFloat exhibitionDetailsViewH             = _frameModel.H;
+    _exhibitionDetailsView.frame               = CGRectMake(exhibitionDetailsViewX,exhibitionDetailsViewY ,exhibitionDetailsViewW,exhibitionDetailsViewH);
+    _exhibitionDetailsView.frameModel          = _frameModel;
     [self.exhibitionTableView.tableHeaderView addSubview:_exhibitionDetailsView];
 }
 
@@ -223,14 +220,14 @@ UITableViewDelegate,UITableViewDataSource
 #pragma mark==================监听HeadersView的高===============
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-     TXCommentFrameModel * frameModel=_pinglunModel[indexPath.row];
+     TXCommentFrameModel    * frameModel = _pinglunModel[indexPath.row];
     return frameModel.rowH;
 }
 #pragma mark==================监听HeaderInSectionView===============
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    _commentHeadView=[[TXCommentHeadView alloc]initWithFrame:CM(0, 0, 0, _sectionHeader)];
-    _commentHeadView.num=(int)_pinglunModel.count;
+    _commentHeadView                    = [[TXCommentHeadView alloc]initWithFrame:CM(0, 0, 0, _sectionHeader)];
+    _commentHeadView.num                = (int)_pinglunModel.count;
     return _commentHeadView;
 }
 #pragma mark==================监听HeaderInSectionView的高===============
@@ -283,8 +280,8 @@ UITableViewDelegate,UITableViewDataSource
 {
     
     //改变播放按钮状态
-    _player.maskView.startBut.selected=!button.selected;
-    _player.maskView.bigstartBut.selected=!button.selected;
+    _player.maskView.startBut.selected    = !button.selected;
+    _player.maskView.bigstartBut.selected = !button.selected;
     
     if ( _player.maskView.bigstartBut.selected)
     {
@@ -294,8 +291,8 @@ UITableViewDelegate,UITableViewDataSource
         //点击播放按钮后将player添加在self.view上
         [self.view addSubview:_player];
         [self.view addSubview:_exhibitionNavigationView];
-        _exhibitionNavigationView.backgroundColor=Color(90,179, 240, 0);
-        _exhibitionNavigationView.but.alpha=0;
+        _exhibitionNavigationView.backgroundColor = Color(90,179, 240, 0);
+        _exhibitionNavigationView.but.alpha       = 0;
         
         
     }
@@ -303,8 +300,8 @@ UITableViewDelegate,UITableViewDataSource
 #pragma mark---------------大播放按钮点击事件-------------------------
 -(void)bigStartAction:(UIButton *)button
 {
-    _player.maskView.startBut.selected=!button.selected;
-    button.selected = !button.selected;
+    _player.maskView.startBut.selected = !button.selected;
+    button.selected                    = !button.selected;
    if (button.selected)
     {
         [self myPlay];
@@ -312,6 +309,7 @@ UITableViewDelegate,UITableViewDataSource
         //点击播放按钮后将player添加在self.view上
         [self.view addSubview:_player];
         [self.view addSubview:_exhibitionNavigationView];
+        [self.player.maskView.danmakuView start];
         
     }
     else
@@ -323,7 +321,7 @@ UITableViewDelegate,UITableViewDataSource
             //点击播放按钮后将videoExhibitionTableView添加在self.view上
             [_exhibitionTableView.tableHeaderView addSubview:_player];
             //将TableView置顶
-            [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH+_sectionHeader+72) animated:YES];
+            [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH-_navigationViewH) animated:YES];
             
         }
         
@@ -350,7 +348,7 @@ UITableViewDelegate,UITableViewDataSource
         }
         if (_isDirection==Vertical_screen)
         {   //将TableView置顶
-            [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH+_sectionHeader+72) animated:YES];
+            [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH-_navigationViewH) animated:YES];
         }
 
     }
@@ -465,26 +463,26 @@ UITableViewDelegate,UITableViewDataSource
     if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
     {
         NSLog(@"现在是竖屏");
-        _isDirection=Vertical_screen;//竖屏
-        _exhibitionNavigationView.hidden=NO;//显示导航栏
-        _player.maskView.topImageView.hidden=YES;//隐藏topImageView
+        _isDirection                          = Vertical_screen;//竖屏
+        _exhibitionNavigationView.hidden      = NO;//显示导航栏
+        _player.maskView.topImageView.hidden  = YES;//隐藏topImageView
         //设置exhibitionNavigationView的Frame
-        CGFloat exhibitionNavigationViewX=0;
-        CGFloat exhibitionNavigationViewY=0;
-        CGFloat exhibitionNavigationViewW=self.view.frame.size.width;
-        CGFloat exhibitionNavigationViewH=_navigationViewH;
+        CGFloat exhibitionNavigationViewX     = 0;
+        CGFloat exhibitionNavigationViewY     = 0;
+        CGFloat exhibitionNavigationViewW     = self.view.frame.size.width;
+        CGFloat exhibitionNavigationViewH     = _navigationViewH;
         [_exhibitionNavigationView setFrame:CGRectMake(exhibitionNavigationViewX, exhibitionNavigationViewY, exhibitionNavigationViewW,exhibitionNavigationViewH )];
         //播放器的Frame
-        CGFloat playerX=0;
-        CGFloat playerY=0;
-        CGFloat playerW=self.view.frame.size.width;
-        CGFloat playerH=_playerH;
+        CGFloat playerX                       = 0;
+        CGFloat playerY                       = 0;
+        CGFloat playerW                       = self.view.frame.size.width;
+        CGFloat playerH                       = _playerH;
         [_player setFrame:CM(playerX, playerY,playerW , playerH)];
         //exhibitionTableView的Frame
-        CGFloat exhibitionTableViewX=0;
-        CGFloat exhibitionTableViewY=0;
-        CGFloat exhibitionTableViewW=self.view.frame.size.width;
-        CGFloat exhibitionTableViewH=self.view.frame.size.height;
+        CGFloat exhibitionTableViewX          = 0;
+        CGFloat exhibitionTableViewY          = 0;
+        CGFloat exhibitionTableViewW          = self.view.frame.size.width;
+        CGFloat exhibitionTableViewH          = self.view.frame.size.height;
         [_exhibitionTableView setFrame:CM(exhibitionTableViewX,exhibitionTableViewY,exhibitionTableViewW, exhibitionTableViewH)];
         [self.view addSubview:_exhibitionTableView];
         if (_player.isPauseByUser==YES)
@@ -493,8 +491,8 @@ UITableViewDelegate,UITableViewDataSource
         }
         else if (_player.isPauseByUser==NO)
         {
-            _exhibitionNavigationView.but.alpha=0;
-            _exhibitionNavigationView.backgroundColor=Color(90,179, 240, 0);
+            _exhibitionNavigationView.but.alpha       = 0;
+            _exhibitionNavigationView.backgroundColor = Color(90,179, 240, 0);
             [self.view addSubview:_player];
         }
         //添加导航栏
@@ -505,21 +503,21 @@ UITableViewDelegate,UITableViewDataSource
         if (_player.isPauseByUser==YES)
         {
             //将TableView置顶
-            [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH+_sectionHeader+72) animated:YES];
+            [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH-_navigationViewH) animated:YES];
         }
         
     }
     if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation))
     {
         NSLog(@"现在是横屏");
-        _isDirection=Cross_screen;//竖屏
-        _exhibitionNavigationView.hidden=YES;//隐藏导航栏
-        _player.maskView.topImageView.hidden=NO;//显示topImageView
+        _isDirection                         = Cross_screen;//竖屏
+        _exhibitionNavigationView.hidden     = YES;//隐藏导航栏
+        _player.maskView.topImageView.hidden = NO;//显示topImageView
         //设置player的Frame
-        CGFloat playerX=0;
-        CGFloat playerY=0;
-        CGFloat playerW=VIEW_WIDTH;
-        CGFloat playerH=VIEW_HEIGHT;
+        CGFloat playerX                      = 0;
+        CGFloat playerY                      = 0;
+        CGFloat playerW                      = VIEW_WIDTH;
+        CGFloat playerH                      = VIEW_HEIGHT;
         [_player setFrame:CM(playerX, playerY,playerW , playerH)];
         [self.view addSubview:_player];
         //移除exhibitionTableView
@@ -528,6 +526,62 @@ UITableViewDelegate,UITableViewDataSource
         [_player.maskView.fullScreenBtn setImage:[UIImage imageNamed:@"最小化_icon"] forState:UIControlStateNormal];
         
     }
+}
+#pragma mark---------------------弹幕数据源----------------
+-(void)setupDanmakuData
+{
+ 
+    NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.quumii.com/app/api.php?method=getv&vid=%@",_model.vid]];
+    
+    NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
+                                                 {
+                                                     if (error)
+                                                     {
+                                                         NSLog(@"Error: %@", error);
+                                                     } else
+                                                     {
+                                                         
+                                                         NSMutableArray     * danmakus = [NSMutableArray array];
+                                                         for (NSDictionary  * dict in responseObject[@"danmu"])
+                                                         {
+                                                             CFDanmaku      * danmaku  = [[CFDanmaku alloc] init];
+                                                             
+                                                             NSMutableAttributedString *contentStr = [[NSMutableAttributedString alloc] initWithString:dict[@"txt"] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15], NSForegroundColorAttributeName : [UIColor colorWithRed:arc4random_uniform(256) / 255.0 green:arc4random_uniform(256) / 255.0 blue:arc4random_uniform(256) / 255.0 alpha:1]}];
+                                                             
+                                                             NSString          * emotionName                 = [NSString stringWithFormat:@"smile_%zd", arc4random_uniform(90)];
+                                                             UIImage           * emotion                     = [UIImage imageNamed:emotionName];
+                                                             NSTextAttachment  * attachment                  = [[NSTextAttachment alloc] init];
+                                                             attachment.image                                = emotion;
+                                                             attachment.bounds                               = CGRectMake(0, -[UIFont systemFontOfSize:15].lineHeight*0.3, [UIFont systemFontOfSize:15].lineHeight*1.5, [UIFont systemFontOfSize:15].lineHeight*1.5);
+                                                             NSAttributedString * emotionAttr                = [NSAttributedString attributedStringWithAttachment:attachment];
+                                                             
+                                                             [contentStr appendAttributedString:emotionAttr];
+                                                             danmaku.contentStr                             = contentStr;
+                                                             
+                                                             NSString* attributesStr                        = dict[@"start"];
+                                                             NSArray* attarsArray                           = [attributesStr componentsSeparatedByString:@","];
+                                                             danmaku.timePoint                              = [[attarsArray firstObject] doubleValue];
+                                                             danmaku.position                               = 0;
+                                                             //        if (danmaku.position != 0) {
+                                                             [danmakus addObject:danmaku];
+                                                             //        }
+
+           
+                                                         }
+                                                         
+                                                         [self.player.maskView.danmakuView prepareDanmakus:danmakus];
+                                                         
+                                                         
+                                                     }
+                                                     
+                                                 }];
+    [dataTask resume];
 }
 -(void)dealloc
 {

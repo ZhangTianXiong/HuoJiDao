@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D503AA821CED8E6F00990E74 /* TXMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D503AA811CED8E6F00990E74 /* TXMenuTableViewCell.m */; };
+		D507DA2D1CED4EC50065B843 /* TXSetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D507DA2C1CED4EC50065B843 /* TXSetPasswordViewController.m */; };
+		D507DA341CED512F0065B843 /* TXSetPasswordbackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D507DA331CED512F0065B843 /* TXSetPasswordbackgroundView.m */; };
+		D51BAD3D1CEDA8420028E746 /* TXPersonalCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D51BAD3C1CEDA8420028E746 /* TXPersonalCenterModel.m */; };
 		D5288A771CCB718700D99B64 /* TXAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5288A701CCB718700D99B64 /* TXAllViewController.m */; };
 		D5288A781CCB718700D99B64 /* TXVidoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5288A721CCB718700D99B64 /* TXVidoViewController.m */; };
 		D5288A791CCB718700D99B64 /* TXPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5288A741CCB718700D99B64 /* TXPictureViewController.m */; };
@@ -16,6 +20,10 @@
 		D596B0241CD1A35E00704CCA /* TXListFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D596B0231CD1A35E00704CCA /* TXListFrameModel.m */; };
 		D596B02A1CD1E36400704CCA /* TXAllTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D596B0291CD1E36400704CCA /* TXAllTableViewCell.m */; };
 		D596B03B1CD1EE5F00704CCA /* TXLinkTableVieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D596B03A1CD1EE5F00704CCA /* TXLinkTableVieCell.m */; };
+		D59D85C61CEAFB070034DF31 /* TXSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D59D85C51CEAFB070034DF31 /* TXSignInViewController.m */; };
+		D59D85CE1CEB03FD0034DF31 /* TXSignInNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D59D85CD1CEB03FD0034DF31 /* TXSignInNavigationView.m */; };
+		D59D85D11CEB0D5A0034DF31 /* TXSignInbackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D59D85D01CEB0D5A0034DF31 /* TXSignInbackgroundView.m */; };
+		D59D85D61CEB100A0034DF31 /* TXInputBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = D59D85D51CEB100A0034DF31 /* TXInputBoxView.m */; };
 		D5B028901CBF86A50085D7D9 /* LLAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B028871CBF86A50085D7D9 /* LLAnimationManager.m */; };
 		D5B028911CBF86A50085D7D9 /* LLCircleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B028891CBF86A50085D7D9 /* LLCircleLayer.m */; };
 		D5B028921CBF86A50085D7D9 /* LLDisplayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B0288B1CBF86A50085D7D9 /* LLDisplayLayer.m */; };
@@ -30,6 +38,8 @@
 		D5BD5A761CD2E74F00D88984 /* TXSearchNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BD5A751CD2E74F00D88984 /* TXSearchNavigationView.m */; };
 		D5C0A9BD1CD9AFA40092823D /* TXMediaPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C0A9BA1CD9AFA40092823D /* TXMediaPlayerMaskView.m */; };
 		D5C0A9BE1CD9AFA40092823D /* TXMediaPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C0A9BC1CD9AFA40092823D /* TXMediaPlayer.m */; };
+		D5CA14F71CEFF0C6005D86DD /* TXPersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CA14F61CEFF0C6005D86DD /* TXPersonalCenterViewController.m */; };
+		D5CA15001CF00008005D86DD /* TXPersonalCenterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CA14FF1CF00008005D86DD /* TXPersonalCenterTableViewCell.m */; };
 		D5CA195C1CE30F5000E8FA5D /* TXChaneView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CA195B1CE30F5000E8FA5D /* TXChaneView.m */; };
 		D5CA195F1CE30F6600E8FA5D /* TXDisplaybarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CA195E1CE30F6600E8FA5D /* TXDisplaybarView.m */; };
 		D5CA19631CE31A0500E8FA5D /* QiDongTu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5CA19621CE31A0500E8FA5D /* QiDongTu.xib */; };
@@ -45,6 +55,13 @@
 		D5D4B50A1CC22E7600B06CE2 /* TXHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D4B5091CC22E7600B06CE2 /* TXHomeTableViewCell.m */; };
 		D5D95B3C1CE4192100FA0938 /* TXPicView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D95B3B1CE4192100FA0938 /* TXPicView.m */; };
 		D5D95B431CE452BC00FA0938 /* TXScrollFigureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D95B421CE452BC00FA0938 /* TXScrollFigureViewController.m */; };
+		D5DE5E651CEBFD03001B2DEE /* TXThirdPartyIoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DE5E641CEBFD03001B2DEE /* TXThirdPartyIoginView.m */; };
+		D5DE5E6C1CEC3813001B2DEE /* TXRegisteredNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DE5E6B1CEC3813001B2DEE /* TXRegisteredNavigationView.m */; };
+		D5DE5E741CEC3ADB001B2DEE /* TXRegisteredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DE5E731CEC3ADB001B2DEE /* TXRegisteredViewController.m */; };
+		D5DE5E771CEC3FAC001B2DEE /* TXRegisteredbackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DE5E761CEC3FAC001B2DEE /* TXRegisteredbackgroundView.m */; };
+		D5DE5E7A1CEC4646001B2DEE /* TXRegisteredInputBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DE5E791CEC4646001B2DEE /* TXRegisteredInputBoxView.m */; };
+		D5DE5E801CEC6241001B2DEE /* TXVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DE5E7F1CEC6241001B2DEE /* TXVerificationViewController.m */; };
+		D5DE5E851CEC653C001B2DEE /* TXVerificationbackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DE5E841CEC653C001B2DEE /* TXVerificationbackgroundView.m */; };
 		D5E17F471CD0482700F1690A /* TXExhibitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E17F461CD0482700F1690A /* TXExhibitionController.m */; };
 		D5E17F551CD0521D00F1690A /* TXVideoTableVieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E17F541CD0521D00F1690A /* TXVideoTableVieCell.m */; };
 		D5E17FB41CD06B9700F1690A /* videoJiaZai.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5E17FB31CD06B9700F1690A /* videoJiaZai.xib */; };
@@ -73,6 +90,9 @@
 		D5E9FCCF1CBE407F000452D9 /* TXNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E9FCCE1CBE407F000452D9 /* TXNavigationView.m */; };
 		D5ED62D11CC8AF5C0027120B /* TXHomeHeaderInSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5ED62D01CC8AF5C0027120B /* TXHomeHeaderInSectionView.m */; };
 		D5EF79221CC73E9F0081ABDD /* TXScrollFigureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5EF79211CC73E9F0081ABDD /* TXScrollFigureView.m */; };
+		D5F3F9201CF299BF00F5E55E /* CFDanmaku.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F3F91B1CF299BF00F5E55E /* CFDanmaku.m */; };
+		D5F3F9211CF299BF00F5E55E /* CFDanmakuInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F3F91D1CF299BF00F5E55E /* CFDanmakuInfo.m */; };
+		D5F3F9221CF299BF00F5E55E /* CFDanmakuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F3F91F1CF299BF00F5E55E /* CFDanmakuView.m */; };
 		D5F91E301CE5B01E007A1F52 /* TXCommentHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F91E2F1CE5B01E007A1F52 /* TXCommentHeadView.m */; };
 		D5FA76C61CC4691B00A54535 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D5FA76A61CC4691B00A54535 /* MKAnnotationView+WebCache.m */; };
 		D5FA76C71CC4691B00A54535 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = D5FA76A81CC4691B00A54535 /* NSData+ImageContentType.m */; };
@@ -110,6 +130,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D503AA801CED8E6F00990E74 /* TXMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXMenuTableViewCell.h; sourceTree = "<group>"; };
+		D503AA811CED8E6F00990E74 /* TXMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXMenuTableViewCell.m; sourceTree = "<group>"; };
+		D507DA2B1CED4EC50065B843 /* TXSetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXSetPasswordViewController.h; sourceTree = "<group>"; };
+		D507DA2C1CED4EC50065B843 /* TXSetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXSetPasswordViewController.m; sourceTree = "<group>"; };
+		D507DA321CED512F0065B843 /* TXSetPasswordbackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXSetPasswordbackgroundView.h; sourceTree = "<group>"; };
+		D507DA331CED512F0065B843 /* TXSetPasswordbackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXSetPasswordbackgroundView.m; sourceTree = "<group>"; };
+		D51BAD3B1CEDA8420028E746 /* TXPersonalCenterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXPersonalCenterModel.h; sourceTree = "<group>"; };
+		D51BAD3C1CEDA8420028E746 /* TXPersonalCenterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXPersonalCenterModel.m; sourceTree = "<group>"; };
 		D5288A6E1CCB718700D99B64 /* TXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXCategory.h; sourceTree = "<group>"; };
 		D5288A6F1CCB718700D99B64 /* TXAllViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXAllViewController.h; sourceTree = "<group>"; };
 		D5288A701CCB718700D99B64 /* TXAllViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXAllViewController.m; sourceTree = "<group>"; };
@@ -130,6 +158,14 @@
 		D596B0291CD1E36400704CCA /* TXAllTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXAllTableViewCell.m; sourceTree = "<group>"; };
 		D596B0391CD1EE5F00704CCA /* TXLinkTableVieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLinkTableVieCell.h; sourceTree = "<group>"; };
 		D596B03A1CD1EE5F00704CCA /* TXLinkTableVieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLinkTableVieCell.m; sourceTree = "<group>"; };
+		D59D85C41CEAFB070034DF31 /* TXSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXSignInViewController.h; sourceTree = "<group>"; };
+		D59D85C51CEAFB070034DF31 /* TXSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXSignInViewController.m; sourceTree = "<group>"; };
+		D59D85CC1CEB03FD0034DF31 /* TXSignInNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXSignInNavigationView.h; sourceTree = "<group>"; };
+		D59D85CD1CEB03FD0034DF31 /* TXSignInNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXSignInNavigationView.m; sourceTree = "<group>"; };
+		D59D85CF1CEB0D5A0034DF31 /* TXSignInbackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXSignInbackgroundView.h; sourceTree = "<group>"; };
+		D59D85D01CEB0D5A0034DF31 /* TXSignInbackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXSignInbackgroundView.m; sourceTree = "<group>"; };
+		D59D85D41CEB100A0034DF31 /* TXInputBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXInputBoxView.h; sourceTree = "<group>"; };
+		D59D85D51CEB100A0034DF31 /* TXInputBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXInputBoxView.m; sourceTree = "<group>"; };
 		D5B028861CBF86A50085D7D9 /* LLAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAnimationManager.h; sourceTree = "<group>"; };
 		D5B028871CBF86A50085D7D9 /* LLAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAnimationManager.m; sourceTree = "<group>"; };
 		D5B028881CBF86A50085D7D9 /* LLCircleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLCircleLayer.h; sourceTree = "<group>"; };
@@ -158,6 +194,10 @@
 		D5C0A9BA1CD9AFA40092823D /* TXMediaPlayerMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXMediaPlayerMaskView.m; sourceTree = "<group>"; };
 		D5C0A9BB1CD9AFA40092823D /* TXMediaPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXMediaPlayer.h; sourceTree = "<group>"; };
 		D5C0A9BC1CD9AFA40092823D /* TXMediaPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXMediaPlayer.m; sourceTree = "<group>"; };
+		D5CA14F51CEFF0C6005D86DD /* TXPersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXPersonalCenterViewController.h; sourceTree = "<group>"; };
+		D5CA14F61CEFF0C6005D86DD /* TXPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXPersonalCenterViewController.m; sourceTree = "<group>"; };
+		D5CA14FE1CF00008005D86DD /* TXPersonalCenterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXPersonalCenterTableViewCell.h; sourceTree = "<group>"; };
+		D5CA14FF1CF00008005D86DD /* TXPersonalCenterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXPersonalCenterTableViewCell.m; sourceTree = "<group>"; };
 		D5CA195A1CE30F5000E8FA5D /* TXChaneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXChaneView.h; sourceTree = "<group>"; };
 		D5CA195B1CE30F5000E8FA5D /* TXChaneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXChaneView.m; sourceTree = "<group>"; };
 		D5CA195D1CE30F6600E8FA5D /* TXDisplaybarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXDisplaybarView.h; sourceTree = "<group>"; };
@@ -187,6 +227,20 @@
 		D5D95B3B1CE4192100FA0938 /* TXPicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXPicView.m; sourceTree = "<group>"; };
 		D5D95B411CE452BC00FA0938 /* TXScrollFigureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXScrollFigureViewController.h; sourceTree = "<group>"; };
 		D5D95B421CE452BC00FA0938 /* TXScrollFigureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXScrollFigureViewController.m; sourceTree = "<group>"; };
+		D5DE5E631CEBFD03001B2DEE /* TXThirdPartyIoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXThirdPartyIoginView.h; sourceTree = "<group>"; };
+		D5DE5E641CEBFD03001B2DEE /* TXThirdPartyIoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXThirdPartyIoginView.m; sourceTree = "<group>"; };
+		D5DE5E6A1CEC3813001B2DEE /* TXRegisteredNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXRegisteredNavigationView.h; sourceTree = "<group>"; };
+		D5DE5E6B1CEC3813001B2DEE /* TXRegisteredNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXRegisteredNavigationView.m; sourceTree = "<group>"; };
+		D5DE5E721CEC3ADB001B2DEE /* TXRegisteredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXRegisteredViewController.h; sourceTree = "<group>"; };
+		D5DE5E731CEC3ADB001B2DEE /* TXRegisteredViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXRegisteredViewController.m; sourceTree = "<group>"; };
+		D5DE5E751CEC3FAC001B2DEE /* TXRegisteredbackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXRegisteredbackgroundView.h; sourceTree = "<group>"; };
+		D5DE5E761CEC3FAC001B2DEE /* TXRegisteredbackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXRegisteredbackgroundView.m; sourceTree = "<group>"; };
+		D5DE5E781CEC4646001B2DEE /* TXRegisteredInputBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXRegisteredInputBoxView.h; sourceTree = "<group>"; };
+		D5DE5E791CEC4646001B2DEE /* TXRegisteredInputBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXRegisteredInputBoxView.m; sourceTree = "<group>"; };
+		D5DE5E7E1CEC6241001B2DEE /* TXVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXVerificationViewController.h; sourceTree = "<group>"; };
+		D5DE5E7F1CEC6241001B2DEE /* TXVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXVerificationViewController.m; sourceTree = "<group>"; };
+		D5DE5E831CEC653C001B2DEE /* TXVerificationbackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXVerificationbackgroundView.h; sourceTree = "<group>"; };
+		D5DE5E841CEC653C001B2DEE /* TXVerificationbackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXVerificationbackgroundView.m; sourceTree = "<group>"; };
 		D5E17F451CD0482700F1690A /* TXExhibitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXExhibitionController.h; sourceTree = "<group>"; };
 		D5E17F461CD0482700F1690A /* TXExhibitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXExhibitionController.m; sourceTree = "<group>"; };
 		D5E17F531CD0521D00F1690A /* TXVideoTableVieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXVideoTableVieCell.h; sourceTree = "<group>"; };
@@ -243,6 +297,12 @@
 		D5ED62D01CC8AF5C0027120B /* TXHomeHeaderInSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXHomeHeaderInSectionView.m; sourceTree = "<group>"; };
 		D5EF79201CC73E9F0081ABDD /* TXScrollFigureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXScrollFigureView.h; sourceTree = "<group>"; };
 		D5EF79211CC73E9F0081ABDD /* TXScrollFigureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXScrollFigureView.m; sourceTree = "<group>"; };
+		D5F3F91A1CF299BF00F5E55E /* CFDanmaku.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFDanmaku.h; path = CFDanmaku/CFDanmaku.h; sourceTree = "<group>"; };
+		D5F3F91B1CF299BF00F5E55E /* CFDanmaku.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFDanmaku.m; path = CFDanmaku/CFDanmaku.m; sourceTree = "<group>"; };
+		D5F3F91C1CF299BF00F5E55E /* CFDanmakuInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFDanmakuInfo.h; path = CFDanmaku/CFDanmakuInfo.h; sourceTree = "<group>"; };
+		D5F3F91D1CF299BF00F5E55E /* CFDanmakuInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFDanmakuInfo.m; path = CFDanmaku/CFDanmakuInfo.m; sourceTree = "<group>"; };
+		D5F3F91E1CF299BF00F5E55E /* CFDanmakuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFDanmakuView.h; path = CFDanmaku/CFDanmakuView.h; sourceTree = "<group>"; };
+		D5F3F91F1CF299BF00F5E55E /* CFDanmakuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CFDanmakuView.m; path = CFDanmaku/CFDanmakuView.m; sourceTree = "<group>"; };
 		D5F91E2E1CE5B01E007A1F52 /* TXCommentHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXCommentHeadView.h; sourceTree = "<group>"; };
 		D5F91E2F1CE5B01E007A1F52 /* TXCommentHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXCommentHeadView.m; sourceTree = "<group>"; };
 		D5FA76A51CC4691B00A54535 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -305,13 +365,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D5288A5F1CCB604B00D99B64 /* other */ = {
+		D507DA241CED4C8A0065B843 /* 设置密码 */ = {
+			isa = PBXGroup;
+			children = (
+				D507DA2B1CED4EC50065B843 /* TXSetPasswordViewController.h */,
+				D507DA2C1CED4EC50065B843 /* TXSetPasswordViewController.m */,
+			);
+			name = "设置密码";
+			sourceTree = "<group>";
+		};
+		D507DA2E1CED508D0065B843 /* 设置密码View */ = {
+			isa = PBXGroup;
+			children = (
+				D507DA321CED512F0065B843 /* TXSetPasswordbackgroundView.h */,
+				D507DA331CED512F0065B843 /* TXSetPasswordbackgroundView.m */,
+			);
+			name = "设置密码View";
+			sourceTree = "<group>";
+		};
+		D51BAD3A1CEDA7A20028E746 /* 用户信息 */ = {
+			isa = PBXGroup;
+			children = (
+				D51BAD3B1CEDA8420028E746 /* TXPersonalCenterModel.h */,
+				D51BAD3C1CEDA8420028E746 /* TXPersonalCenterModel.m */,
+			);
+			name = "用户信息";
+			sourceTree = "<group>";
+		};
+		D5288A5F1CCB604B00D99B64 /* Other */ = {
 			isa = PBXGroup;
 			children = (
 				D5BB16001CC9BB3C007BC582 /* NSString+TXCalculateSize.h */,
 				D5BB16011CC9BB3C007BC582 /* NSString+TXCalculateSize.m */,
 			);
-			name = other;
+			name = Other;
 			sourceTree = "<group>";
 		};
 		D5733CC91CE1C42800172BBF /* 轮播图模型 */ = {
@@ -382,6 +469,42 @@
 			name = "链接文章";
 			sourceTree = "<group>";
 		};
+		D59D85C71CEAFBDC0034DF31 /* 登录注册 */ = {
+			isa = PBXGroup;
+			children = (
+				D5DE5E6D1CEC3A72001B2DEE /* 登录 */,
+				D5DE5E6E1CEC3A7F001B2DEE /* 注册 */,
+			);
+			name = "登录注册";
+			sourceTree = "<group>";
+		};
+		D59D85C81CEB01200034DF31 /* 登录注册 */ = {
+			isa = PBXGroup;
+			children = (
+				D5DE5E681CEC370F001B2DEE /* 登录 */,
+				D5DE5E691CEC3726001B2DEE /* 注册 */,
+			);
+			name = "登录注册";
+			sourceTree = "<group>";
+		};
+		D59D85D21CEB0EEF0034DF31 /* 登录导航栏 */ = {
+			isa = PBXGroup;
+			children = (
+				D59D85CC1CEB03FD0034DF31 /* TXSignInNavigationView.h */,
+				D59D85CD1CEB03FD0034DF31 /* TXSignInNavigationView.m */,
+			);
+			name = "登录导航栏";
+			sourceTree = "<group>";
+		};
+		D59D85D31CEB0F040034DF31 /* 登录背景View */ = {
+			isa = PBXGroup;
+			children = (
+				D59D85CF1CEB0D5A0034DF31 /* TXSignInbackgroundView.h */,
+				D59D85D01CEB0D5A0034DF31 /* TXSignInbackgroundView.m */,
+			);
+			name = "登录背景View";
+			sourceTree = "<group>";
+		};
 		D5B028851CBF86780085D7D9 /* 第三方侧拉栏 */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +549,8 @@
 				D5D4B5061CC22DF600B06CE2 /* 首页分类View */,
 				D5EF791F1CC730770081ABDD /* 首页轮播图View */,
 				D5D4B5071CC22E2600B06CE2 /* 首页TableViewCell */,
+				D59D85C81CEB01200034DF31 /* 登录注册 */,
+				D5CA14F41CEFEF50005D86DD /* 个人中心 */,
 			);
 			name = "首页View";
 			sourceTree = "<group>";
@@ -481,6 +606,8 @@
 				D5E9FC911CBE1EA6000452D9 /* HomeController.h */,
 				D5E9FC921CBE1EA6000452D9 /* HomeController.m */,
 				D5D95B401CE4528100FA0938 /* 轮播图链接Controller */,
+				D59D85C71CEAFBDC0034DF31 /* 登录注册 */,
+				D5CA14F81CEFF121005D86DD /* 个人中心 */,
 			);
 			name = "首页";
 			sourceTree = "<group>";
@@ -494,6 +621,24 @@
 				D5C0A9BC1CD9AFA40092823D /* TXMediaPlayer.m */,
 			);
 			name = TXPlayer;
+			sourceTree = "<group>";
+		};
+		D5CA14F41CEFEF50005D86DD /* 个人中心 */ = {
+			isa = PBXGroup;
+			children = (
+				D5CA14FE1CF00008005D86DD /* TXPersonalCenterTableViewCell.h */,
+				D5CA14FF1CF00008005D86DD /* TXPersonalCenterTableViewCell.m */,
+			);
+			name = "个人中心";
+			sourceTree = "<group>";
+		};
+		D5CA14F81CEFF121005D86DD /* 个人中心 */ = {
+			isa = PBXGroup;
+			children = (
+				D5CA14F51CEFF0C6005D86DD /* TXPersonalCenterViewController.h */,
+				D5CA14F61CEFF0C6005D86DD /* TXPersonalCenterViewController.m */,
+			);
+			name = "个人中心";
 			sourceTree = "<group>";
 		};
 		D5CB42FC1CE0718900737BEB /* 公用View */ = {
@@ -616,6 +761,8 @@
 			children = (
 				D5D3C94B1CBF49180075391B /* TXMenuView.h */,
 				D5D3C94C1CBF49180075391B /* TXMenuView.m */,
+				D503AA801CED8E6F00990E74 /* TXMenuTableViewCell.h */,
+				D503AA811CED8E6F00990E74 /* TXMenuTableViewCell.m */,
 			);
 			name = "首页菜单View";
 			sourceTree = "<group>";
@@ -665,6 +812,125 @@
 				D5D95B421CE452BC00FA0938 /* TXScrollFigureViewController.m */,
 			);
 			name = "轮播图链接Controller";
+			sourceTree = "<group>";
+		};
+		D5DC72741CF3FF8A00B95140 /* 第三方弹幕框架CFDanmaku */ = {
+			isa = PBXGroup;
+			children = (
+				D5F3F91A1CF299BF00F5E55E /* CFDanmaku.h */,
+				D5F3F91B1CF299BF00F5E55E /* CFDanmaku.m */,
+				D5F3F91C1CF299BF00F5E55E /* CFDanmakuInfo.h */,
+				D5F3F91D1CF299BF00F5E55E /* CFDanmakuInfo.m */,
+				D5F3F91E1CF299BF00F5E55E /* CFDanmakuView.h */,
+				D5F3F91F1CF299BF00F5E55E /* CFDanmakuView.m */,
+			);
+			name = "第三方弹幕框架CFDanmaku";
+			sourceTree = "<group>";
+		};
+		D5DE5E661CEC30F2001B2DEE /* 输入框View */ = {
+			isa = PBXGroup;
+			children = (
+				D59D85D41CEB100A0034DF31 /* TXInputBoxView.h */,
+				D59D85D51CEB100A0034DF31 /* TXInputBoxView.m */,
+			);
+			name = "输入框View";
+			sourceTree = "<group>";
+		};
+		D5DE5E671CEC3156001B2DEE /* 第三方登录View */ = {
+			isa = PBXGroup;
+			children = (
+				D5DE5E631CEBFD03001B2DEE /* TXThirdPartyIoginView.h */,
+				D5DE5E641CEBFD03001B2DEE /* TXThirdPartyIoginView.m */,
+			);
+			name = "第三方登录View";
+			sourceTree = "<group>";
+		};
+		D5DE5E681CEC370F001B2DEE /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				D59D85D21CEB0EEF0034DF31 /* 登录导航栏 */,
+				D59D85D31CEB0F040034DF31 /* 登录背景View */,
+				D5DE5E661CEC30F2001B2DEE /* 输入框View */,
+				D5DE5E671CEC3156001B2DEE /* 第三方登录View */,
+			);
+			name = "登录";
+			sourceTree = "<group>";
+		};
+		D5DE5E691CEC3726001B2DEE /* 注册 */ = {
+			isa = PBXGroup;
+			children = (
+				D5DE5E7B1CEC5F18001B2DEE /* 注册导航View */,
+				D5DE5E7C1CEC5F2B001B2DEE /* 注册背景View */,
+				D5DE5E7D1CEC5F3C001B2DEE /* 注册输入View */,
+				D5DE5E821CEC649F001B2DEE /* 验证手机号 */,
+				D507DA2E1CED508D0065B843 /* 设置密码View */,
+			);
+			name = "注册";
+			sourceTree = "<group>";
+		};
+		D5DE5E6D1CEC3A72001B2DEE /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				D59D85C41CEAFB070034DF31 /* TXSignInViewController.h */,
+				D59D85C51CEAFB070034DF31 /* TXSignInViewController.m */,
+			);
+			name = "登录";
+			sourceTree = "<group>";
+		};
+		D5DE5E6E1CEC3A7F001B2DEE /* 注册 */ = {
+			isa = PBXGroup;
+			children = (
+				D5DE5E721CEC3ADB001B2DEE /* TXRegisteredViewController.h */,
+				D5DE5E731CEC3ADB001B2DEE /* TXRegisteredViewController.m */,
+				D5DE5E811CEC63D7001B2DEE /* 验证手机号 */,
+				D507DA241CED4C8A0065B843 /* 设置密码 */,
+			);
+			name = "注册";
+			sourceTree = "<group>";
+		};
+		D5DE5E7B1CEC5F18001B2DEE /* 注册导航View */ = {
+			isa = PBXGroup;
+			children = (
+				D5DE5E6A1CEC3813001B2DEE /* TXRegisteredNavigationView.h */,
+				D5DE5E6B1CEC3813001B2DEE /* TXRegisteredNavigationView.m */,
+			);
+			name = "注册导航View";
+			sourceTree = "<group>";
+		};
+		D5DE5E7C1CEC5F2B001B2DEE /* 注册背景View */ = {
+			isa = PBXGroup;
+			children = (
+				D5DE5E751CEC3FAC001B2DEE /* TXRegisteredbackgroundView.h */,
+				D5DE5E761CEC3FAC001B2DEE /* TXRegisteredbackgroundView.m */,
+			);
+			name = "注册背景View";
+			sourceTree = "<group>";
+		};
+		D5DE5E7D1CEC5F3C001B2DEE /* 注册输入View */ = {
+			isa = PBXGroup;
+			children = (
+				D5DE5E781CEC4646001B2DEE /* TXRegisteredInputBoxView.h */,
+				D5DE5E791CEC4646001B2DEE /* TXRegisteredInputBoxView.m */,
+			);
+			name = "注册输入View";
+			sourceTree = "<group>";
+		};
+		D5DE5E811CEC63D7001B2DEE /* 验证手机号 */ = {
+			isa = PBXGroup;
+			children = (
+				D5DE5E7E1CEC6241001B2DEE /* TXVerificationViewController.h */,
+				D5DE5E7F1CEC6241001B2DEE /* TXVerificationViewController.m */,
+			);
+			name = "验证手机号";
+			sourceTree = "<group>";
+		};
+		D5DE5E821CEC649F001B2DEE /* 验证手机号 */ = {
+			isa = PBXGroup;
+			children = (
+				D5DE5E831CEC653C001B2DEE /* TXVerificationbackgroundView.h */,
+				D5DE5E841CEC653C001B2DEE /* TXVerificationbackgroundView.m */,
+			);
+			name = "验证手机号";
 			sourceTree = "<group>";
 		};
 		D5E17F481CD048F400F1690A /* 图片 */ = {
@@ -862,7 +1128,8 @@
 				D596B0251CD1AB7D00704CCA /* 公用数据模型 */,
 				D5BB15F91CC9AD07007BC582 /* 首页model */,
 				D5E93BC31CCDACC400B00DA0 /* 分类 */,
-				D5288A5F1CCB604B00D99B64 /* other */,
+				D5288A5F1CCB604B00D99B64 /* Other */,
+				D51BAD3A1CEDA7A20028E746 /* 用户信息 */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -939,6 +1206,7 @@
 				D5B028851CBF86780085D7D9 /* 第三方侧拉栏 */,
 				D5E93BCC1CCDC65800B00DA0 /* AFNetworking */,
 				D5CD52FC1CC0CE370051CD04 /* 第三方SDWebImage */,
+				D5DC72741CF3FF8A00B95140 /* 第三方弹幕框架CFDanmaku */,
 			);
 			name = "第三方库";
 			sourceTree = "<group>";
@@ -1011,7 +1279,7 @@
 				TargetAttributes = {
 					D5E9FC871CBE1EA6000452D9 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 39R685P985;
+						DevelopmentTeam = 6B72GXH32H;
 					};
 					D5E9FCA01CBE1EA6000452D9 = {
 						CreatedOnToolsVersion = 7.3;
@@ -1086,37 +1354,50 @@
 				D5C0A9BE1CD9AFA40092823D /* TXMediaPlayer.m in Sources */,
 				D5FA76CB1CC4691B00A54535 /* SDWebImageDownloader.m in Sources */,
 				D5E93BCB1CCDB58F00B00DA0 /* TXPic_title.m in Sources */,
+				D5CA15001CF00008005D86DD /* TXPersonalCenterTableViewCell.m in Sources */,
+				D59D85CE1CEB03FD0034DF31 /* TXSignInNavigationView.m in Sources */,
 				D5D3C94D1CBF49180075391B /* TXMenuView.m in Sources */,
 				D5E93BE31CCDE2F800B00DA0 /* TXPictureTableViewCell.m in Sources */,
 				D5D95B3C1CE4192100FA0938 /* TXPicView.m in Sources */,
 				D5D95B431CE452BC00FA0938 /* TXScrollFigureViewController.m in Sources */,
 				D5288A771CCB718700D99B64 /* TXAllViewController.m in Sources */,
+				D5CA14F71CEFF0C6005D86DD /* TXPersonalCenterViewController.m in Sources */,
 				D5B028941CBF86A50085D7D9 /* UIView+SetRect.m in Sources */,
 				D5FA76CE1CC4691B00A54535 /* SDWebImagePrefetcher.m in Sources */,
 				D5E93BDC1CCDC67600B00DA0 /* AFSecurityPolicy.m in Sources */,
 				D5FA76D51CC4691B00A54535 /* UIView+WebCacheOperation.m in Sources */,
 				D5EF79221CC73E9F0081ABDD /* TXScrollFigureView.m in Sources */,
 				D596B0211CD195A200704CCA /* TXListModel.m in Sources */,
+				D51BAD3D1CEDA8420028E746 /* TXPersonalCenterModel.m in Sources */,
 				D5B028911CBF86A50085D7D9 /* LLCircleLayer.m in Sources */,
+				D5F3F9201CF299BF00F5E55E /* CFDanmaku.m in Sources */,
 				D5E93BE61CCDE6E600B00DA0 /* TXPic_titleFrameModel.m in Sources */,
+				D59D85D61CEB100A0034DF31 /* TXInputBoxView.m in Sources */,
 				D5E5BED01CDDB5BD004A9BD8 /* TXExhibitionDetailsView.m in Sources */,
+				D507DA341CED512F0065B843 /* TXSetPasswordbackgroundView.m in Sources */,
 				D596B0241CD1A35E00704CCA /* TXListFrameModel.m in Sources */,
 				D5FA76D11CC4691B00A54535 /* UIImage+MultiFormat.m in Sources */,
+				D5DE5E741CEC3ADB001B2DEE /* TXRegisteredViewController.m in Sources */,
+				D5F3F9221CF299BF00F5E55E /* CFDanmakuView.m in Sources */,
 				D596B02A1CD1E36400704CCA /* TXAllTableViewCell.m in Sources */,
 				D5E93BDD1CCDC67600B00DA0 /* AFURLRequestSerialization.m in Sources */,
+				D5DE5E651CEBFD03001B2DEE /* TXThirdPartyIoginView.m in Sources */,
 				D5BD5A721CD2E11D00D88984 /* TXSearchViewController.m in Sources */,
 				D5288A791CCB718700D99B64 /* TXPictureViewController.m in Sources */,
 				D5BB16141CC9F8E8007BC582 /* TXRequestData.m in Sources */,
 				D5FA76D21CC4691B00A54535 /* UIImage+WebP.m in Sources */,
 				D5B028931CBF86A50085D7D9 /* LLSlideMenu.m in Sources */,
+				D59D85D11CEB0D5A0034DF31 /* TXSignInbackgroundView.m in Sources */,
 				D5E9FC931CBE1EA6000452D9 /* HomeController.m in Sources */,
 				D5E93BDE1CCDC67600B00DA0 /* AFURLResponseSerialization.m in Sources */,
 				D5BB16111CC9E366007BC582 /* TXRecommendDisplaybarView.m in Sources */,
 				D5FA76D41CC4691B00A54535 /* UIImageView+WebCache.m in Sources */,
+				D5DE5E771CEC3FAC001B2DEE /* TXRegisteredbackgroundView.m in Sources */,
 				D5CD530E1CC0DBF60051CD04 /* TXCategoryView.m in Sources */,
 				D5B028901CBF86A50085D7D9 /* LLAnimationManager.m in Sources */,
 				D5288A781CCB718700D99B64 /* TXVidoViewController.m in Sources */,
 				D5E9FC901CBE1EA6000452D9 /* AppDelegate.m in Sources */,
+				D5F3F9211CF299BF00F5E55E /* CFDanmakuInfo.m in Sources */,
 				D5E9FC8D1CBE1EA6000452D9 /* main.m in Sources */,
 				D5D4B50A1CC22E7600B06CE2 /* TXHomeTableViewCell.m in Sources */,
 				D5E9FCCF1CBE407F000452D9 /* TXNavigationView.m in Sources */,
@@ -1125,6 +1406,8 @@
 				D5E9FCC61CBE23F0000452D9 /* TXViewController.m in Sources */,
 				D5E17F551CD0521D00F1690A /* TXVideoTableVieCell.m in Sources */,
 				D5E17F471CD0482700F1690A /* TXExhibitionController.m in Sources */,
+				D5DE5E7A1CEC4646001B2DEE /* TXRegisteredInputBoxView.m in Sources */,
+				D5DE5E6C1CEC3813001B2DEE /* TXRegisteredNavigationView.m in Sources */,
 				D5B028921CBF86A50085D7D9 /* LLDisplayLayer.m in Sources */,
 				D5FA76CD1CC4691B00A54535 /* SDWebImageManager.m in Sources */,
 				D5D28C4F1CCF4E3A000CED18 /* TXTheDottedLineView.m in Sources */,
@@ -1133,6 +1416,7 @@
 				D5FA76CA1CC4691B00A54535 /* SDWebImageDecoder.m in Sources */,
 				D5FA76CC1CC4691B00A54535 /* SDWebImageDownloaderOperation.m in Sources */,
 				D5D4B5031CC229B100B06CE2 /* TXHomeModelo.m in Sources */,
+				D5DE5E851CEC653C001B2DEE /* TXVerificationbackgroundView.m in Sources */,
 				D5CB43001CE07AEF00737BEB /* TXCommentModel.m in Sources */,
 				D5CA195C1CE30F5000E8FA5D /* TXChaneView.m in Sources */,
 				D5E9FCCB1CBE3EC8000452D9 /* TXView.m in Sources */,
@@ -1142,19 +1426,23 @@
 				D5CB2C471CDACC4400C86334 /* TXDetailsTableVieewCell.m in Sources */,
 				D596B03B1CD1EE5F00704CCA /* TXLinkTableVieCell.m in Sources */,
 				D5D28C501CCF4E3A000CED18 /* TXFunctionBarView.m in Sources */,
+				D59D85C61CEAFB070034DF31 /* TXSignInViewController.m in Sources */,
 				D5FA76C91CC4691B00A54535 /* SDWebImageCompat.m in Sources */,
 				D5E93BDA1CCDC67600B00DA0 /* AFHTTPSessionManager.m in Sources */,
 				D5BB160B1CC9C594007BC582 /* TXRecommendTableViewCell.m in Sources */,
 				D5FA76CF1CC4691B00A54535 /* UIButton+WebCache.m in Sources */,
 				D5BD5A761CD2E74F00D88984 /* TXSearchNavigationView.m in Sources */,
+				D507DA2D1CED4EC50065B843 /* TXSetPasswordViewController.m in Sources */,
 				D5E5BED81CDDBC09004A9BD8 /* TXExhibitionDetailsViewFrameModel.m in Sources */,
 				D5288A7A1CCB718700D99B64 /* TXLinkViewController.m in Sources */,
 				D5FA76D31CC4691B00A54535 /* UIImageView+HighlightedWebCache.m in Sources */,
 				D5FA76D01CC4691B00A54535 /* UIImage+GIF.m in Sources */,
+				D5DE5E801CEC6241001B2DEE /* TXVerificationViewController.m in Sources */,
 				D5FA76C81CC4691B00A54535 /* SDImageCache.m in Sources */,
 				D5ED62D11CC8AF5C0027120B /* TXHomeHeaderInSectionView.m in Sources */,
 				D5F91E301CE5B01E007A1F52 /* TXCommentHeadView.m in Sources */,
 				D5733CCC1CE1C46A00172BBF /* TXScrollFigureModel.m in Sources */,
+				D503AA821CED8E6F00990E74 /* TXMenuTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1303,7 +1591,7 @@
 				INFOPLIST_FILE = HuoJiDao/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = YCJ.HoJiDao.com;
+				PRODUCT_BUNDLE_IDENTIFIER = ZX.HoJiDao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1319,7 +1607,7 @@
 				INFOPLIST_FILE = HuoJiDao/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = YCJ.HoJiDao.com;
+				PRODUCT_BUNDLE_IDENTIFIER = ZX.HoJiDao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

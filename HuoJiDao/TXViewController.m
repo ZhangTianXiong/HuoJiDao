@@ -9,15 +9,8 @@
 #import "TXViewController.h"
 #import "TXSearchViewController.h"
 #import "TXRequestData.h"
-typedef NS_ENUM(NSInteger,Button_tag)
-{
-    backButton,//返回
-    searchButton,//搜索
-};
+
 @interface TXViewController ()
-{
-    NSString * titleName;
-}
 @end
 
 @implementation TXViewController
@@ -76,8 +69,7 @@ typedef NS_ENUM(NSInteger,Button_tag)
     //navigationView
     _navigationView.backgroundColor = Navigation_Color;
     //标题
-    _titleLabel.text                = titleName;
-    _titleLabel.font                = [UIFont systemFontOfSize:20];
+    _titleLabel.font                = [UIFont systemFontOfSize:18];
     _titleLabel.textColor           = TitleLab_Color;
     _titleLabel.textAlignment       = NSTextAlignmentCenter;
     //返回按钮
@@ -101,8 +93,8 @@ typedef NS_ENUM(NSInteger,Button_tag)
 {
     _navigationView.frame        = NavigationView_Frame;
     //设置Frame
-    CGFloat viewW       = _navigationView.frame.size.width;
-    CGFloat viewH       = _navigationView.frame.size.height+20;
+    CGFloat viewW                = _navigationView.frame.size.width;
+    CGFloat viewH                = _navigationView.frame.size.height+20;
     
     //返回
     CGFloat backX                = 10;

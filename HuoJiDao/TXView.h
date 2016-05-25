@@ -14,6 +14,7 @@
 -(void)initView;
 -(void)setViewFrame;
 -(void)setViewData;
+-(void)initVar;
 
 /*************************************************
  **                                             **

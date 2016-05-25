@@ -64,26 +64,26 @@
 {
     if (self=[super init])
     {
-        UIButton    * backBut      = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIButton    * backBut           = [UIButton buttonWithType:UIButtonTypeCustom];
         backBut.tag=0;
-        _backBut                   = backBut;
-        UIView      * carrierView  = [[UIView alloc]init];
-        carrierView.layer.masksToBounds=YES;
-        carrierView.layer.cornerRadius=5;
-        carrierView.backgroundColor=[UIColor whiteColor];
-        _carrierView               = carrierView;
+        _backBut                        = backBut;
+        UIView      * carrierView       = [[UIView alloc]init];
+        carrierView.layer.masksToBounds = YES;
+        carrierView.layer.cornerRadius  = 5;
+        carrierView.backgroundColor     = [UIColor whiteColor];
+        _carrierView                    = carrierView;
         
-        UIImageView * icon         = [[UIImageView alloc]init];
-        _icon                      = icon;
-        UITextField * textField    = [[UITextField alloc]init];
-        _textField                 = textField;
-        UIButton    * searchBut    = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImageView * icon              = [[UIImageView alloc]init];
+        _icon                           = icon;
+        UITextField * textField         = [[UITextField alloc]init];
+        _textField                      = textField;
+        UIButton    * searchBut         = [UIButton buttonWithType:UIButtonTypeCustom];
         searchBut.tag=1;
-        _searchBut                 = searchBut;
-        UIButton    * cancelBut    = [UIButton buttonWithType:UIButtonTypeCustom];
-        cancelBut.hidden=YES;
+        _searchBut                      = searchBut;
+        UIButton    * cancelBut         = [UIButton buttonWithType:UIButtonTypeCustom];
+        cancelBut.hidden                = YES;
         cancelBut.tag=2;
-        _cancelBut                 = cancelBut;
+        _cancelBut                      = cancelBut;
         
         
         [self addSubview:backBut];

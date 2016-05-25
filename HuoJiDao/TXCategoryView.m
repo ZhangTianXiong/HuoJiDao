@@ -89,13 +89,13 @@
     [_linkBut addTarget:self action:@selector(CategoryViewButton:) forControlEvents:UIControlEventTouchUpInside];
     
     //设置Label
-//    UIColor             * textColor = [UIColor orangeColor];//同一设置颜色
+
     UIFont              * textFont  = [UIFont systemFontOfSize:12];
     
-    _allLabel.text                = @"全部";
-    _allLabel.textColor           = Color(241, 194, 56, 1);
-    _allLabel.font                = textFont;
-    _allLabel.textAlignment       = NSTextAlignmentCenter;
+    _allLabel.text                  = @"全部";
+    _allLabel.textColor             = Color(241, 194, 56, 1);
+    _allLabel.font                  = textFont;
+    _allLabel.textAlignment         = NSTextAlignmentCenter;
     
     _viewoLabel.text                = @"视频";
     _viewoLabel.textColor           = Color(157, 188, 240, 1);
@@ -123,8 +123,8 @@
     CGFloat viewH                    = self.frame.size.height;
    
     
-    int num=4;//button的个数
-    CGFloat fillet=8;//圆角
+    int num                          = 4;//button的个数
+    CGFloat fillet                   = 8;//圆角
     
     
     //全部Button

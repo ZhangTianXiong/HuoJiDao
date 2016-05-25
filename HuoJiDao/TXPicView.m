@@ -36,21 +36,21 @@
 }
 -(void)initView
 {
-    UIImageView        * picImageView     = [[UIImageView alloc]init];
-    _picImageView                         = picImageView;
+    UIImageView        * picImageView       = [[UIImageView alloc]init];
+    _picImageView                           = picImageView;
     [self addSubview:picImageView];
 }
 
 -(void)setViewFrame
 {
-    CGFloat viewW=self.frame.size.width;
-    CGFloat viewH=self.frame.size.height;
+    CGFloat viewW                           = self.frame.size.width;
+    CGFloat viewH                           = self.frame.size.height;
     
-    CGFloat picImageViewX=0;
-    CGFloat picImageViewY=0;
-    CGFloat picImageViewW=viewW;
-    CGFloat picImageViewH=viewH;
-    _picImageView.frame=CM(picImageViewX, picImageViewY, picImageViewW, picImageViewH);
+    CGFloat picImageViewX                   = 0;
+    CGFloat picImageViewY                   = 0;
+    CGFloat picImageViewW                   = viewW;
+    CGFloat picImageViewH                   = viewH;
+    _picImageView.frame                     = CM(picImageViewX, picImageViewY, picImageViewW, picImageViewH);
     
 }
 -(void)drawRect:(CGRect)rect

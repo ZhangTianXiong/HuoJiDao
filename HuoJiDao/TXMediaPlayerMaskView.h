@@ -1,9 +1,10 @@
 
 #import <UIKit/UIKit.h>
+#import "CFDanmakuView.h"
 typedef NS_ENUM(NSInteger)
 {
-    display,
-    hide
+    display,//显示
+    hide//隐藏
     
 }navigationBarState;
 
@@ -25,7 +26,7 @@ typedef NS_ENUM(NSInteger)
 #pragma mark-------------------底部导航栏View-----------------
 @property(nonatomic,strong)UIImageView              * bottomImageView;
 //打开弹幕
-@property(nonatomic,strong)UIButton                 * openBarrageBut;
+@property(nonatomic,strong)UIButton                 * barrageBut;
 //开始播放按钮
 @property(nonatomic,strong)UIButton                 * startBut;
 //当前播放时长label
@@ -40,12 +41,12 @@ typedef NS_ENUM(NSInteger)
 @property (strong, nonatomic)UIButton               * fullScreenBtn;
 //系统菊花
 @property (nonatomic,strong)UIActivityIndicatorView * activity;
-
-
 //状态栏状态
 @property(nonatomic,assign)navigationBarState       * barState;
 @property (nonatomic,strong)NSTimer                 * timer;
 @property (nonatomic,assign)BOOL                      state;
 -(void)addTimer;
-
+//弹幕View
+@property(nonatomic,strong)CFDanmakuView * danmakuView;
+@property(nonatomic,assign)CGFloat  totalLength;
 @end

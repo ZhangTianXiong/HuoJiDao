@@ -21,14 +21,14 @@
 -(void)cancel:(UIButton*)but
 {
     but.hidden=YES;
-    _searchNavigationView.searchBut.hidden=NO;
+    _searchNavigationView.searchBut.hidden = NO;
     NSLog(@"取消");
     
 }
 -(void)search:(UIButton*)but
 {
     but.hidden=YES;
-    _searchNavigationView.cancelBut.hidden=NO;
+    _searchNavigationView.cancelBut.hidden = NO;
     
     NSLog(@"搜索");
     
@@ -41,9 +41,9 @@
     [_searchNavigationView.backBut addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     
     //设置icon
-    _searchNavigationView.icon.image=[UIImage imageNamed:@"012_03"];
+    _searchNavigationView.icon.image            = [UIImage imageNamed:@"012_03"];
     //设置textfield水印
-    _searchNavigationView.textField.placeholder=@"请输入关键词或编号";
+    _searchNavigationView.textField.placeholder = @"请输入关键词或编号";
     //设置搜索按钮
     [_searchNavigationView.searchBut setTitle:@"搜索" forState:UIControlStateNormal];
     [_searchNavigationView.searchBut addTarget:self action:@selector(search:) forControlEvents:UIControlEventTouchUpInside];
@@ -57,9 +57,9 @@
 //重写导航栏
 -(void)setNavigationView
 {
-    _searchNavigationView=[[TXSearchNavigationView alloc ]init];
-    _searchNavigationView.frame=NavigationView_Frame;
-    _searchNavigationView.backgroundColor=Navigation_Color;
+    _searchNavigationView                 = [[TXSearchNavigationView alloc ]init];
+    _searchNavigationView.frame           = NavigationView_Frame;
+    _searchNavigationView.backgroundColor = Navigation_Color;
     [self.view addSubview:_searchNavigationView];
     [self setNavigationViewData];
 }

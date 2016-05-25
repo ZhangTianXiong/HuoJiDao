@@ -12,5 +12,5 @@
 
 @property(nonatomic,strong)UIView  * view;
 @property(nonatomic,strong)UILabel * numLabel;
-@property(nonatomic,assign)int num;
+@property(nonatomic,assign)int       num;
 @end

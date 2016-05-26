@@ -21,58 +21,43 @@
         UIButton          * gestureBut           = [[UIButton alloc]init];
         [gestureBut addTarget:self action:@selector(addTop_bottom_ViewGesture:) forControlEvents:UIControlEventTouchUpInside];
         _gestureBut=gestureBut;
-        
-        
-        
         UIColor          * backgroundColor       = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.3];
         //实例化头部View
         UIImageView      * topImageView          = [[UIImageView alloc]init];
         topImageView.hidden                      = YES;
         topImageView.backgroundColor             = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0];
         topImageView.userInteractionEnabled      = YES;
-        
         _topImageView                            = topImageView;
-        
         UIButton         * backBut               = [UIButton buttonWithType:UIButtonTypeCustom];
         [backBut setImage:[UIImage imageNamed:@"back-2"] forState:UIControlStateNormal];
-        
         _backBut=backBut;
-        
         UILabel          * titleLabel           = [[UILabel alloc]init];
         _titleLabel                             = titleLabel;
-        
         //大播放按钮
         UIButton         * bigstartBut          = [UIButton buttonWithType:UIButtonTypeCustom];
         [bigstartBut setImage:[UIImage imageNamed:@"big_播放_icon"] forState:UIControlStateNormal];
         _bigstartBut                            = bigstartBut;
-        
         //实例化底部View
         UIImageView      * bottomImageView      = [[UIImageView alloc]init];
         bottomImageView.backgroundColor         = backgroundColor;
         bottomImageView.userInteractionEnabled  = YES;
         _bottomImageView                        = bottomImageView;
-        
         //打开弹幕
         UIButton         * barrageBut           = [UIButton buttonWithType:UIButtonTypeCustom];
-        [barrageBut setImage:[UIImage imageNamed:@"弹幕-1"] forState:UIControlStateNormal];
         _barrageBut                             = barrageBut;
-        
         //开始播放按钮
         UIButton         * startBut             = [UIButton buttonWithType:UIButtonTypeCustom];
         [startBut setImage:[UIImage imageNamed:@"small_播放_icon"] forState:UIControlStateNormal];
         _startBut                               = startBut;
-        
-        
         UIColor          * textColor            = [UIColor whiteColor];
         UIFont           * textFont             = [UIFont systemFontOfSize:14];
-        
         //当前播放时长label
         UILabel          * currentTimeLabel     = [[UILabel alloc]init];
         currentTimeLabel.text                   = @"00:00";
         currentTimeLabel.textColor              = textColor;
         currentTimeLabel.textAlignment          = NSTextAlignmentCenter;
         currentTimeLabel.font                   = textFont;
-        
+
         _currentTimeLabel                       = currentTimeLabel;
         //视频总时长label
         UILabel         * totalTimeLabel        = [[UILabel alloc]init];
@@ -107,6 +92,18 @@
         danmakuView.maxShowLineCount   = 8;
         danmakuView.maxCenterLineCount = 8;
         danmakuView.delegate           = self;
+        //判断是否显示弹幕
+        NSUserDefaults * user=[NSUserDefaults standardUserDefaults];
+        if ([[user valueForKey:@"whetherToAllowDisplayBarrage"] intValue]==0)
+        {
+           danmakuView.hidden=YES;
+           [barrageBut setImage:[UIImage imageNamed:@"弹幕-1"] forState:UIControlStateNormal];
+        }else
+        {
+            danmakuView.hidden=NO;
+            [barrageBut setImage:[UIImage imageNamed:@"弹幕-2"] forState:UIControlStateNormal];
+            
+        }
         _danmakuView                   = danmakuView;
         //添加显示关闭导航条BUtton
         [self addSubview:gestureBut];
@@ -132,6 +129,8 @@
         [self addTimer];
         //添加弹幕View
         [self addSubview:danmakuView];
+        
+    
     }
     return self;
 }
@@ -324,5 +323,12 @@
 - (BOOL)danmakuViewIsBuffering:(CFDanmakuView *)danmakuView
 {
     return NO;
+}
+-(void)notification{
+    NSUserDefaults * user=[NSUserDefaults standardUserDefaults];
+    BOOL whetherToAllowDisplayBarrage=[user valueForKey:@"whetherToAllowDisplayBarrage"];
+    _danmakuView.hidden=whetherToAllowDisplayBarrage;
+    NSLog(@"%i",whetherToAllowDisplayBarrage);
+    NSLog(@"通知啦");
 }
 @end

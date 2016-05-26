@@ -4,7 +4,9 @@
 
 
 @interface TXMediaPlayer ()<UIGestureRecognizerDelegate>
-
+{
+    NSUserDefaults  * _userDefaults;
+}
 @end
 @implementation TXMediaPlayer
 -(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
@@ -43,6 +45,7 @@
         [self addSubview:self.maskView];
         //返回按钮点击事件
         [self.maskView.backBut addTarget:self action:@selector(backBut:) forControlEvents:UIControlEventTouchUpInside];
+        [self.maskView.barrageBut addTarget:self action:@selector(barrageBut:) forControlEvents:UIControlEventTouchUpInside];
         //全屏按钮点击事件
         [self.maskView.fullScreenBtn addTarget:self action:@selector(fullScreenBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         // 播放按钮点击事件
@@ -69,6 +72,7 @@
         pan.delegate                = self;
         [self addGestureRecognizer:pan];
         
+        _userDefaults=[NSUserDefaults standardUserDefaults];
         
         [_player pause];
         self.isPauseByUser         = YES;
@@ -79,11 +83,6 @@
     }
     return self;
 }
-
-
-
-
-
 #pragma mark - slider事件
 
 // slider开始滑动事件
@@ -197,7 +196,38 @@
     
     
 }
+#pragma mark--------------------------打开/关闭弹幕按钮--------------------------
+-(void)barrageBut:(UIButton*)button
+{
+    if ([[_userDefaults valueForKey:@"whetherToAllowDisplayBarrage"] intValue]==0)
+    {
 
+        if (button.selected)
+        {
+            self.maskView.danmakuView.hidden=YES;
+            button.selected=NO;
+            [button setImage:[UIImage imageNamed:@"弹幕-1"] forState:UIControlStateNormal];
+        }else
+        {
+            self.maskView.danmakuView.hidden=NO;
+            button.selected=YES;
+            [button setImage:[UIImage imageNamed:@"弹幕-2"] forState:UIControlStateNormal];
+        }
+    }else
+    {
+        if (button.selected)
+        {
+            self.maskView.danmakuView.hidden=NO;
+            button.selected=NO;
+            [button setImage:[UIImage imageNamed:@"弹幕-2"] forState:UIControlStateNormal];
+        }else
+        {
+            self.maskView.danmakuView.hidden=YES;
+            button.selected=YES;
+            [button setImage:[UIImage imageNamed:@"弹幕-1"] forState:UIControlStateNormal];
+        }
+    }
+}
 #pragma mark--------------------------设置播放进度和时间------------------------
 -(void)setTheProgressOfPlayTime
 {

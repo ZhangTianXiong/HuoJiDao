@@ -28,7 +28,7 @@
 }
 -(void)getLink:(NSNotification*)notifiction
 {
-    NSString * strURL = notifiction.userInfo[@"link"];
+    NSString * strURL = @"http://www.baidu.com";
     CGFloat viewW     = self.view.frame.size.width;
     CGFloat viewH     = self.view.frame.size.height;
     CGFloat webViewX  = 0;

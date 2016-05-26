@@ -36,7 +36,8 @@
     _titleArray                              = @[@"头像",@"性别",@"手机号"];
     
 }
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
     // Do any additional setup after loading the view.

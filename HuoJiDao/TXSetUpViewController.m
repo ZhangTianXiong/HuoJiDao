@@ -17,9 +17,7 @@
     NSArray         * _sectionsII;
     NSArray         * _sectionsIII;
     HomeController  * _homeViewController;
-    BOOL              _whetherToAllowMobileNetworkBroadcast;//是否允许移动网络下播放
-    BOOL              _whetherToAllowDisplayBarrage;//是否显示弹幕
-    
+    NSUserDefaults * _userDefaults;
 }
 @property(nonatomic,strong)UIButton * signOut;
 @end
@@ -76,8 +74,8 @@
 #pragma mark++++++++++++++初始化变量++++++++++++++
 -(void)initVar
 {
-    _whetherToAllowMobileNetworkBroadcast   = NO;
-    _whetherToAllowDisplayBarrage           = NO;
+    _userDefaults=[NSUserDefaults standardUserDefaults];
+  
 }
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -114,10 +112,20 @@
     
     TXSetUpTableViewCell * cell=[[TXSetUpTableViewCell alloc]initWithTableView:tableView];
     
-    if (indexPath.section==0) {
+    if (indexPath.section==0)
+    {
         cell.titleLabel.text=_sectionsI[indexPath.row];
         cell.mySwitch.tag=indexPath.row;
         [cell.mySwitch addTarget:self action:@selector(mySwitch:) forControlEvents:UIControlEventValueChanged];
+        
+        if (cell.mySwitch.tag==0) {
+            cell.mySwitch.on=[[_userDefaults valueForKey:@"whetherToAllowMobileNetworkBroadcast"] intValue];//是否允许移动网络下播放
+        }
+        
+        if (cell.mySwitch.tag==1)
+        {
+            cell.mySwitch.on=[[_userDefaults valueForKey:@"whetherToAllowDisplayBarrage"] intValue];//是否允许显示弹幕
+        }
         
     }else if (indexPath.section==1)
     {
@@ -127,6 +135,7 @@
     {
         cell.titleLabel.text=_sectionsIII[indexPath.row];
         cell.mySwitch.hidden=YES;
+        
     }
     return cell;
 }
@@ -137,35 +146,39 @@
     {
         case 0:
         {
-            if (_whetherToAllowMobileNetworkBroadcast==YES)
+           
+            if (mySwitch.isOn==NO)
             {
-                NSLog(@"不允许移动网络播放");
-                
-                _whetherToAllowMobileNetworkBroadcast=NO;
+                NSLog(@"不允许网络下播放视频");
+                [_userDefaults setValue:@"0" forKey:@"whetherToAllowMobileNetworkBroadcast"];
+                mySwitch.on=NO;
             }else
             {
-                NSLog(@"允许移动网络下播放");
-                _whetherToAllowMobileNetworkBroadcast=YES;
+                NSLog(@"允许网络下播放视频");
+                [_userDefaults setValue:@"1" forKey:@"whetherToAllowMobileNetworkBroadcast"];
+                mySwitch.on=YES;
+                
             }
-            
+
             
         }
             break;
          case 1:
         {
             
-            if (_whetherToAllowDisplayBarrage==YES)
+            if (mySwitch.isOn==NO)
             {
                 NSLog(@"不显示弹幕");
-                
-                
-                _whetherToAllowDisplayBarrage=NO;
+                [_userDefaults setValue:@"0" forKey:@"whetherToAllowDisplayBarrage"];
+                mySwitch.on=NO;
             }else
             {
                 NSLog(@"显示弹幕");
-                _whetherToAllowDisplayBarrage=YES;
+                [_userDefaults setValue:@"1" forKey:@"whetherToAllowDisplayBarrage"];
+                mySwitch.on=YES;
+                
             }
-        
+            
         }
         default:
             break;

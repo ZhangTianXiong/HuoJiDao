@@ -60,11 +60,17 @@
 -(void)requestPicTitleData;
 
 
+//请求搜索数据
+-(void)requestSeachDataWithString:(NSString *)string;
+@property(nonatomic,strong)NSMutableArray * seachFrameModel;
+
+
+
+#pragma mark----------------------个人中心------------------
 
 //登录
 -(void)signInWithUserAccount:(NSString*)userAccount UserPassword:(NSString*)userPassword;
-
-
-
+//短信验证
+-(void)SMSVerificationWithPhone:(NSString*)phone;
 
 @end

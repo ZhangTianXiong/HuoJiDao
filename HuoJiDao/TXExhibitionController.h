@@ -18,6 +18,7 @@
 #import "TXCommentFrameModel.h"//Cell的数据模型
 #import "TXCommentHeadView.h"//CommentHeadView评论组头部View
 #import "TXListModel.h"
+#import "TXSendABarrageView.h"//发送弹幕View
 @interface TXExhibitionController : TXViewController
 @property(nonatomic,strong)TXListModel                     * model;
 @property(nonatomic,strong)TXExhibitionNavigationView      * exhibitionNavigationView;

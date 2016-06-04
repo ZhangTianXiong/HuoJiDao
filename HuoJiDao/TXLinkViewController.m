@@ -62,11 +62,12 @@ UITableViewDelegate,UITableViewDataSource
 {
     if (tableView.tag==0)
     {
-        _linkExhibition     = [[TXExhibitionController alloc]init];
+        _linkExhibition                         = [[TXExhibitionController alloc]init];
+        _linkExhibition.modalTransitionStyle    =  UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:_linkExhibition animated:YES completion:nil];
+        _linkExhibition                         = [[TXExhibitionController alloc]init];
         [self presentViewController:_linkExhibition animated:NO completion:nil];
-        _linkExhibition     = [[TXExhibitionController alloc]init];
-        [self presentViewController:_linkExhibition animated:NO completion:nil];
-        _frameModel         = _data.linkFrameModel[indexPath.row];
+        _frameModel                             = _data.linkFrameModel[indexPath.row];
         [_notifiction postNotificationName:@"gitModel" object:self userInfo:@{
                                                                              @"model":_frameModel.model
                                                                             }];

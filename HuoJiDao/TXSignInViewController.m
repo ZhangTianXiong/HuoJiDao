@@ -83,7 +83,7 @@
 #pragma mark----------------导航栏返回按钮-------------------
 -(void)signInNavigationViewBackBut:(UIButton * )but
 {
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark----------------导航栏忘记密码按钮-------------------
 -(void)signInNavigationViewforgetPasswordBut:(UIButton *)but
@@ -95,6 +95,7 @@
 {
     
     HomeController * homeViewController=[[HomeController alloc]init];
+    homeViewController.modalTransitionStyle =  UIModalTransitionStyleCrossDissolve;
     [self presentViewController:homeViewController animated:YES completion:^{
         TXRequestData * data=[[TXRequestData alloc]init];
         [data signInWithUserAccount:_signInbackgroundView.userAccount.textField.text UserPassword:_signInbackgroundView.userPassword.textField.text];
@@ -106,8 +107,9 @@
 -(void)signInbackgroundViewRegisteredBut:(UIButton*)but
 {
     NSLog(@"注册按钮");
-    _registeredViewController=[[TXRegisteredViewController alloc]init];
-    [self presentViewController:_registeredViewController animated:NO completion:nil];
+    _registeredViewController                       =[[TXRegisteredViewController alloc]init];
+    _registeredViewController.modalTransitionStyle  =  UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:_registeredViewController animated:YES completion:nil];
 }
 #pragma mark----------------第三方登录———微博按钮-------------------
 -(void)thirdPartyIoginViewWeiBoBut:(UIButton *)but

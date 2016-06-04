@@ -17,29 +17,23 @@
         //图片
         UIImageView  * picture                      = [[UIImageView alloc]init];
         _picture                                    = picture;
-        
         //标题
         UILabel * titleLabel                        = [[UILabel alloc]init];
         titleLabel.numberOfLines                    = 0;
         _titleLabel                                 = titleLabel;
         _titleLabel.font                            = [UIFont systemFontOfSize:13];
-        
         //频道
         TXRecommendChaneView * chaneView            = [[TXRecommendChaneView alloc]init];
         _chaneView                                  = chaneView;
-        
         //发布时间
         UILabel * datelineLabel                     = [[UILabel alloc]init];
         datelineLabel.font                          = [UIFont systemFontOfSize:11];
         datelineLabel.textColor                     = [UIColor grayColor];
         datelineLabel.textAlignment                 = NSTextAlignmentRight;
         _datelineLabel=datelineLabel;
-        
         //显示条
         TXRecommendDisplaybarView * displaybarView  = [[TXRecommendDisplaybarView alloc]init];
         _displaybarView                             = displaybarView;
-        
-        
         [self.contentView addSubview:picture];
         [self.contentView addSubview:titleLabel];
         [self.contentView addSubview:chaneView];
@@ -102,7 +96,6 @@
 {
     [super awakeFromNib];
 }
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

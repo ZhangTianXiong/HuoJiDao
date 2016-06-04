@@ -64,7 +64,8 @@ UITableViewDelegate,UITableViewDataSource
     if (tableView.tag==0)
     {
         _videoExhibition    = [[TXExhibitionController alloc]init];
-        [self presentViewController:_videoExhibition animated:NO completion:nil];
+        _videoExhibition.modalTransitionStyle =  UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:_videoExhibition animated:YES completion:nil];
         _frameModel         = _data.videoFrameModel[indexPath.row];
         [_notifiction postNotificationName:@"gitModel" object:self userInfo:@{
                                                                               @"model":_frameModel.model

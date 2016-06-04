@@ -13,9 +13,9 @@
 UITableViewDelegate,UITableViewDataSource
 >
 {
-    NSNotificationCenter      * _notifiction;//通知中心
-    TXRequestData * data;
-    TXPic_titleFrameModel * model;
+    NSNotificationCenter        * _notifiction;//通知中心
+    TXRequestData               * data;
+    TXPic_titleFrameModel       * model;
     
 }
 
@@ -78,7 +78,7 @@ UITableViewDelegate,UITableViewDataSource
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor=[UIColor whiteColor];
+    self.view.backgroundColor   = [UIColor whiteColor];
     [self addPicTableView];
     
    

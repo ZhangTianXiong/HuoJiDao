@@ -96,7 +96,6 @@
          **************************************************/
         [self initView];
         [self setViewFrame];
-        
     }
     return self;
 }

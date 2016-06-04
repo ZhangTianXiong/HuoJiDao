@@ -18,7 +18,7 @@
     //返回
     
     CGFloat backX                = margin;
-    CGFloat backW_H              = 30;
+    CGFloat backW_H              = 25;
     CGFloat Y                    = (viewH-backW_H)/2;
     _backBut.frame               = CM(backX, Y, backW_H, backW_H);
     
@@ -26,7 +26,7 @@
     CGFloat carrierViewX         = CGRectGetMaxX(_backBut.frame)+margin+5;
     CGFloat carrierViewY         = Y;
     CGFloat carrierViewW         = viewW-(margin+backW_H+margin+60+margin);
-    CGFloat carrierViewH         = 30;
+    CGFloat carrierViewH         = 25;
     _carrierView.frame           = CM(carrierViewX, carrierViewY, carrierViewW, carrierViewH);
     
    
@@ -46,7 +46,7 @@
     //搜索按钮
     CGFloat searchX              = CGRectGetMaxX(_carrierView.frame)+margin;
     CGFloat searchW              = 50;
-    CGFloat searchH              = 30;
+    CGFloat searchH              = 25;
     _searchBut.frame             = CM(searchX,Y, searchW, searchH);
     
     CGFloat cancelButX           = CGRectGetMaxX(_carrierView.frame)+margin;

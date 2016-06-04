@@ -5,9 +5,7 @@
 //  Created by IOS开发 on 16/4/26.
 //  Copyright © 2016年 IOS开发. All rights reserved.
 //
-
 #import "TXTheDottedLineView.h"
-
 @implementation TXTheDottedLineView
 
 -(void)theDottedLineViewBut:(UIButton * )but
@@ -105,10 +103,6 @@
      *  注意：必须记住                          *
      *  init 初始化控件                        *
      *  drawRect:(CGRect)rect设置控件的位置    *
-     *                                       *
-     *                                      *
-     *                                      *
-     *                                      *
      *****************************************/
   
     [self setViewFrame];

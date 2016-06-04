@@ -305,7 +305,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
 -(void)navigationView:(TXNavigationView * )navigtionView SearchButton:(UIButton *)but
 {
     TXSearchViewController * searchViewController=[[TXSearchViewController alloc]init];
-    [self presentViewController:searchViewController animated:NO completion:nil];
+    [self presentViewController:searchViewController animated:YES completion:nil];
 }
 #pragma mark-----------TXCategoryViewDelegate 监听全部按钮按钮-----------
 - (void)categoryView:(TXCategoryView    * )categoryView AllBut:(UIButton *)but
@@ -451,8 +451,9 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
         TXHomeModelo          * homeModel      = _data.homeModel[indexPath.section];
         TXListModel           * listModel      = homeModel.content[indexPath.row];
         
-        _exhibitionController=[[TXExhibitionController alloc]init];
-        [self presentViewController:_exhibitionController animated:NO completion:nil];
+        _exhibitionController                       =[[TXExhibitionController alloc]init];
+        _exhibitionController.modalTransitionStyle  =  UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:_exhibitionController animated:YES completion:nil];
         [_notifiction postNotificationName:@"gitModel" object:self userInfo:@{
                                                                               @"model":listModel
                                                                               }];
@@ -462,9 +463,10 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     {
         //初始化数据源
         //创建数据源
-        TXListFrameModel              * frameModel    = _data.recommendFrameModel[indexPath.row];
+        TXListFrameModel              * frameModel      = _data.recommendFrameModel[indexPath.row];
         _exhibitionController=[[TXExhibitionController alloc]init];
-        [self presentViewController:_exhibitionController animated:NO completion:nil];
+        _exhibitionController.modalTransitionStyle      =  UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:_exhibitionController animated:YES completion:nil];
         [_notifiction postNotificationName:@"gitModel" object:self userInfo:@{
                                                                               @"model":frameModel.model
                                                                               }];
@@ -571,16 +573,16 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
 {
     
     
-    NSUserDefaults    * userInformation=[NSUserDefaults standardUserDefaults];
-    NSData            * userInformationData=[userInformation valueForKey:@"用户信息"];
-    TXPersonalCenterModel * personalCenterModel=[NSKeyedUnarchiver unarchiveObjectWithData:userInformationData];
+    NSUserDefaults          * userInformation       = [NSUserDefaults standardUserDefaults];
+    NSData                  * userInformationData   = [userInformation valueForKey:@"用户信息"];
+    TXPersonalCenterModel   * personalCenterModel   = [NSKeyedUnarchiver unarchiveObjectWithData:userInformationData];
     
        if (personalCenterModel)
     {
         [_navigtionView.userHeadPortrait sd_setImageWithURL:[NSURL URLWithString:personalCenterModel.avatar]];
     }else if (!personalCenterModel)
     {
-        _navigtionView.userHeadPortrait.image=[UIImage imageNamed:@"头像"];
+        _navigtionView.userHeadPortrait.image       = [UIImage imageNamed:@"头像"];
     }
     
     [self addMenu];

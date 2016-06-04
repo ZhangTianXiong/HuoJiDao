@@ -34,11 +34,11 @@
     _setPasswordbackgroundView.frame          = CM(setPasswordbackgroundViewX, setPasswordbackgroundViewY, setPasswordbackgroundViewW, setPasswordbackgroundViewH);
     
     //昵称
-    _setPasswordbackgroundView.nickname.textField.text     = @"西门吹雪";
+    _setPasswordbackgroundView.nickname.textField.text       = @"西门吹雪";
     //密码
-    _setPasswordbackgroundView.password.textField.text     = @"123456";
+    _setPasswordbackgroundView.password.textField.text       = @"123456";
     //密码验证
-    _setPasswordbackgroundView.verifyPassword.textField.text=@"123456";
+    _setPasswordbackgroundView.verifyPassword.textField.text = @"123456";
     
     
     
@@ -65,6 +65,6 @@
 {
     NSLog(@"完成按钮");
     TXSignInViewController * signInViewController=[[TXSignInViewController alloc]init];
-    [self presentViewController:signInViewController animated:NO completion:nil];
+    [self presentViewController:signInViewController animated:YES completion:nil];
 }
 @end

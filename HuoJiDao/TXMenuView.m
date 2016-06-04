@@ -33,6 +33,7 @@
 {
     if (self=[super init])
     {
+        self.alpha=0;
         self.backgroundColor                     = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0];
         
         UIButton    * closeMenuBut               = [[UIButton alloc]init];
@@ -195,7 +196,7 @@
     [_userNameBut addTarget:self action:@selector(MenuButton:) forControlEvents:UIControlEventTouchUpInside];
     //个性签名Button
     _personalizedSignatureBut.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;//button字体左边对其
-    _personalizedSignatureBut.titleLabel.font=[UIFont systemFontOfSize:13];
+    _personalizedSignatureBut.titleLabel.font            =[UIFont systemFontOfSize:13];
   
     //注册
     _registerBut.layer.borderColor   = [UIColor whiteColor].CGColor;
@@ -239,17 +240,17 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    TXMenuTableViewCell * cell=[[TXMenuTableViewCell alloc]initWithTableView:tableView];
+    TXMenuTableViewCell * cell  = [[TXMenuTableViewCell alloc]initWithTableView:tableView];
     if (indexPath.section==0)
     {
-        cell.icon.image=[UIImage imageNamed:_arrayI[indexPath.row]];
-        cell.titleLabel.text=_arrayI[indexPath.row];
+        cell.icon.image         = [UIImage imageNamed:_arrayI[indexPath.row]];
+        cell.titleLabel.text    = _arrayI[indexPath.row];
     }
     
     if (indexPath.section==1)
     {
-        cell.icon.image=[UIImage imageNamed:_arrayII[indexPath.row]];
-        cell.titleLabel.text=_arrayII[indexPath.row];
+        cell.icon.image         = [UIImage imageNamed:_arrayII[indexPath.row]];
+        cell.titleLabel.text    = _arrayII[indexPath.row];
     }
     //背景透明
     _tableView.alpha=1;
@@ -261,13 +262,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"菜单 Cell被点击啦");
-    
-    
-    
     //设置页面
     if (indexPath.section==1 && indexPath.row==1)
     {
-        TXSetUpViewController * setUpViewController=[[TXSetUpViewController alloc]init];
+        TXSetUpViewController * setUpViewController     =[[TXSetUpViewController alloc]init];
+        setUpViewController.modalTransitionStyle        =  UIModalTransitionStyleCoverVertical;
         [self.getController presentViewController:setUpViewController animated:YES completion:nil];
     }
     
@@ -275,7 +274,8 @@
 #pragma mark -------头像点击事件---------
 -(void)handLetap:(UITapGestureRecognizer*)sender
 {
-    TXPersonalCenterViewController * personalCenterViewController = [[TXPersonalCenterViewController alloc]init];
+    TXPersonalCenterViewController * personalCenterViewController   = [[TXPersonalCenterViewController alloc]init];
+    personalCenterViewController.modalTransitionStyle               =UIModalTransitionStyleCoverVertical;
     [self.getController presentViewController:personalCenterViewController animated:YES completion:nil];
     NSLog(@"用户头像");
 }
@@ -288,20 +288,23 @@
 #pragma mark -------注册按钮点击事件--------
 -(void)registerBut:(UIButton * )but
 {
-    TXRegisteredViewController  * registeredViewController = [[TXRegisteredViewController alloc]init];
-    [self.getController presentViewController:registeredViewController animated:NO completion:nil];
+    TXRegisteredViewController  * registeredViewController  = [[TXRegisteredViewController alloc]init];
+    registeredViewController.modalTransitionStyle           =UIModalTransitionStyleCoverVertical;
+    [self.getController presentViewController:registeredViewController animated:YES completion:nil];
     NSLog(@"注册按钮");
 }
 #pragma mark -------登录按钮点击事件--------
 -(void)signInBut:(UIButton*)but
 {
-    TXSignInViewController     * signInViewController      = [[TXSignInViewController alloc]init];
-    [self.getController presentViewController:signInViewController animated:NO completion:nil];
+    TXSignInViewController     * signInViewController       = [[TXSignInViewController alloc]init];
+    signInViewController.modalTransitionStyle               =UIModalTransitionStyleCoverVertical;
+    [self.getController presentViewController:signInViewController animated:YES completion:nil];
     NSLog(@"登录");
 }
 //动画
 -(void)animation
 {
+    
     CGFloat viewW            = self.frame.size.width;
     CGFloat viewX            = -viewW;
     CGFloat viewY            = 0;
@@ -309,15 +312,20 @@
     if (self.isAnimation==NO)
     {
         [UIView animateWithDuration:_second animations:^{
-            self.frame=CGRectMake(0, viewY, viewW,viewH);
+            self.alpha       =1;
+            self.frame=CGRectMake(0, viewY,viewW,viewH);
             self.isAnimation = YES;
+            
         }];
     }else if (self.isAnimation==YES)
     {
         
         [UIView animateWithDuration:_second animations:^{
+            
             self.frame       = CGRectMake(viewX, viewY, viewW, viewH);
             self.isAnimation = NO;
+            self.alpha       =0;
+            
         }];
         
         
@@ -333,6 +341,7 @@
      {
          self.frame         = CM(viewX, viewY, viewW, viewH);
          self.isAnimation   = NO;
+         self.alpha=0;
      }];
     
 }

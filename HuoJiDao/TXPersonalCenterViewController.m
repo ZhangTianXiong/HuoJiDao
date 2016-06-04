@@ -8,6 +8,7 @@
 
 #import "TXPersonalCenterViewController.h"
 #import "TXPersonalCenterTableViewCell.h"
+#import "TXPhotoGalleryViewController.h"
 @interface TXPersonalCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray * _titleArray;
@@ -75,13 +76,16 @@
     {
         TXPersonalCenterTableViewCell * cell=[[TXPersonalCenterTableViewCell alloc]initWithTableView:tableView];
         cell.titleLabel.text=_titleArray[indexPath.row];
-        cell.userHeadPortrait.image=[UIImage imageNamed:@"头像"];
+        NSUserDefaults * user=[NSUserDefaults standardUserDefaults];
+        
+        cell.userHeadPortrait.image=[UIImage imageWithData:[user valueForKey:@"icon"]];
+        
         return cell;
     }else
     {
-        static NSString * ID=@"Cell";
+        static NSString * ID   = @"Cell";
         
-        UITableViewCell * cell=[tableView dequeueReusableCellWithIdentifier:ID ];
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:ID ];
         if (!cell)
         {
             cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
@@ -101,7 +105,13 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TXPhotoGalleryViewController * photoGalleryViewController=[[TXPhotoGalleryViewController alloc]init];
+    [self presentViewController:photoGalleryViewController animated:YES completion:nil];
+    
+    NSLog(@"个人中心Cell");
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

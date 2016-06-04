@@ -7,6 +7,7 @@
 //
 
 #import "TXViewController.h"
+#import "TXRequestData.h"
 #import "TXRegisteredNavigationView.h"
 #import "TXRegisteredbackgroundView.h"
 #import "TXVerificationViewController.h"

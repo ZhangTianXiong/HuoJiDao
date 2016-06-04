@@ -45,13 +45,14 @@
 {
     switch (sender.tag)
     {
-        case backButton:
-            [self dismissViewControllerAnimated:NO completion:nil];
+        case backButton:{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
             break;
         case searchButton:
         {
             TXSearchViewController * searchViewController=[[TXSearchViewController alloc]init];
-            [self presentViewController:searchViewController animated:NO completion:nil];
+            [self presentViewController:searchViewController animated:YES completion:nil];
         }
         default:
             break;
@@ -69,7 +70,7 @@
     //navigationView
     _navigationView.backgroundColor = Navigation_Color;
     //标题
-    _titleLabel.font                = [UIFont systemFontOfSize:18];
+    _titleLabel.font                = [UIFont systemFontOfSize:19];
     _titleLabel.textColor           = TitleLab_Color;
     _titleLabel.textAlignment       = NSTextAlignmentCenter;
     //返回按钮
@@ -98,7 +99,7 @@
     
     //返回
     CGFloat backX                = 10;
-    CGFloat backW_H              = 30;
+    CGFloat backW_H              = 25;
     CGFloat backY                = (viewH-backW_H)/2;
     _backBut.frame               = CM(backX, backY, backW_H, backW_H);
     
@@ -108,7 +109,7 @@
     CGFloat titleLabH            = 30;
     _titleLabel.frame            = CM(titleLabX, titleLabY, titleLabW, titleLabH);
     //搜索按钮
-    _searchBut.frame             = CM(viewW-40, backY, 30, 30);
+    _searchBut.frame             = CM(viewW-35, backY, backW_H, backW_H);
     
 }
 - (void)didReceiveMemoryWarning

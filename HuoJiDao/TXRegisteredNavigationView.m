@@ -41,13 +41,13 @@
     CGFloat viewH                   = self.frame.size.height+20;
     //返回
     CGFloat backX                   = 10;
-    CGFloat backW_H                 = 30;
+    CGFloat backW_H                 = 25;
     CGFloat backY                   = (viewH-backW_H)/2;
     _backBut.frame                  = CM(backX, backY, backW_H, backW_H);
     CGFloat titleLabW               = 100;
     CGFloat titleLabX               = (viewW-titleLabW)/2;
     CGFloat titleLabY               = backY;
-    CGFloat titleLabH               = 30;
+    CGFloat titleLabH               = backW_H;
     _titleLabel.frame               = CM(titleLabX, titleLabY, titleLabW, titleLabH);
 
 }
@@ -55,14 +55,14 @@
 {
     [_backBut setImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
     [_backBut addTarget:self action:@selector(backBut:) forControlEvents:UIControlEventTouchUpInside];
-    _titleLabel.font                = [UIFont systemFontOfSize:18];
+    _titleLabel.font                = [UIFont systemFontOfSize:19];
     _titleLabel.textColor           = TitleLab_Color;
     _titleLabel.textAlignment       = NSTextAlignmentCenter;
    
 }
 -(void)backBut:(UIButton *)but
 {
-    [self.getController dismissViewControllerAnimated:NO completion:nil];
+    [self.getController dismissViewControllerAnimated:YES completion:nil];
     
 }
 

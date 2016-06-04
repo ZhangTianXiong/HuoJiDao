@@ -7,7 +7,42 @@
 //
 
 #ifndef HuoJiDao_pch
-#define HuoJiDao_pch
+//友盟
+#define AppKey @"57494ffe67e58e1795000684"
+
+
+#define WeiXinAppID  @"wx776a7473e95e707a"
+#define WeiXinAppSecret @"88e736730a2b5679c65862155c179dd6"
+
+#define QQAppID @"1104847641"
+#define QQAPPKey @"c0RQTBrfsRpclgrv"
+
+//APP_ID
+#define APP_ID @"7f5133db96a3f3e19a"
+//APP_KEY
+#define APP_KEY @"88f9cec25baadaa9a8209c49db4"
+//网络数据接口文件
+//首页
+#define ShouYe_URL @"http://api.huojidao.com/HomePage/token/7f5133db96a3f3e19a-88f9cec25baadaa9a8209c49db4"
+//推荐
+#define TuiJian_URL @"http://api.huojidao.com/RecommendPage"
+//全部
+#define QuanBu_URL @"http://api.huojidao.com/ChannelPage/1_0"
+//视频
+#define ShiPin_URL @"http://api.huojidao.com/ChannelPage/1_3"
+//图片
+#define TuPian_URL @"http://api.huojidao.com/ChannelPage/1_2_1_15/7f5133db96a3f3e19a-88f9cec25baadaa9a8209c49db4"
+//文章
+#define WenZhang_URL @"http://api.huojidao.com/ChannelPage/1_4"
+//视频播放 VID
+#define ShiPin_Vid_URL @"http://api.huojidao.com/PalyPage/"
+//评论 BLOGID
+#define PingLun_blogID_URL @"http://api.huojidao.com/CommentPage/"
+//用户中心
+#define YongHuZhongXin_URL @"http://api.huojidao.com/UserInfo/2/7f5133db96a3f3e19a-88f9cec25baadaa9a8209c49db4"
+
+
+
 
 //设备主屏宽高
 #define VIEW_WIDTH ([UIScreen  mainScreen].bounds.size.width)

@@ -56,9 +56,12 @@ UITableViewDelegate,UITableViewDataSource
 {
     if (tableView.tag==0)
     {
-        _allExhibition = [[TXExhibitionController alloc]init];
-        [self presentViewController:_allExhibition animated:NO completion:nil];
-        _frameModel    = _data.allFrameModel[indexPath.row];
+        _allExhibition                      = [[TXExhibitionController alloc]init];
+        _allExhibition.modalTransitionStyle =  UIModalTransitionStyleFlipHorizontal;
+        
+        
+        [self presentViewController:_allExhibition animated:YES completion:nil];
+        _frameModel                         = _data.allFrameModel[indexPath.row];
         [_notifiction postNotificationName:@"gitModel" object:self userInfo:@{
                                                                              @"model":_frameModel.model
                                                                              }];
@@ -125,7 +128,7 @@ UITableViewDelegate,UITableViewDataSource
     _allTableView.delegate                       = self;
     _allTableView.dataSource                     = self;
     
-    
+   
     
 }
 -(void)dealloc
@@ -134,6 +137,9 @@ UITableViewDelegate,UITableViewDataSource
     [_notifiction removeObserver:self name:@"gitModel" object:nil];
     
 }
-
-
+#pragma mark----------------二次进入程序界面----------------
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"二次进入程序界面");
+}
 @end

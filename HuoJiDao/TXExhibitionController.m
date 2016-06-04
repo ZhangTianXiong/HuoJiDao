@@ -19,8 +19,10 @@ typedef NS_ENUM(NSInteger, Direction)
 {
     NSNotificationCenter                   * _notifiction;//通知中心
     UIView                                 * _myTableHeaderView;//_myTableHeaderView
+    TXSendABarrageView                     * _sendABarrageView;//发送View
     TXExhibitionDetailsView                * _exhibitionDetailsView;//添加在_myTableHeaderView上的详情View
     TXCommentHeadView                      * _commentHeadView;//CommentHeadView评论组头部View
+    
     TXExhibitionDetailsViewFrameModel      * _frameModel;//详情View的FrameModel
     CGFloat                                  _navigationViewH;//导航栏的高
     CGFloat                                  _playerH;//视频播放器的高
@@ -28,6 +30,7 @@ typedef NS_ENUM(NSInteger, Direction)
     NSMutableArray                         * _pinglunModel;//评论数据
     Direction                              * direction;//横竖屏的枚举
     BOOL                                     _isDirection;//横竖屏
+    
    
 }
 @end
@@ -46,6 +49,8 @@ typedef NS_ENUM(NSInteger, Direction)
     _notifiction=[NSNotificationCenter defaultCenter];
     [_notifiction addObserver:self selector:@selector(gitModel:) name:@"gitModel" object:nil];
     [_notifiction addObserver:self selector:@selector(smallStartAction:) name:@"small_startAction" object:nil];
+    // app进入前台
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterPlayGround) name:UIApplicationDidBecomeActiveNotification object:nil];
     
 }
 #pragma mark+++++++++++++++++初始化变量+++++++++++++++++
@@ -122,6 +127,7 @@ typedef NS_ENUM(NSInteger, Direction)
     _exhibitionTableView.dataSource           = self;
     _exhibitionTableView.showsVerticalScrollIndicator   = YES;
     _exhibitionTableView.showsHorizontalScrollIndicator = YES;
+    _exhibitionTableView.tag                            = 0;
     [self.view addSubview:_exhibitionTableView];
     //设置exhibitionTableViewWithHeaderView
     [self setExhibitionTableViewWithHeaderView];
@@ -154,9 +160,22 @@ typedef NS_ENUM(NSInteger, Direction)
     [_player.maskView.bigstartBut addTarget:self action:@selector(bigStartAction:) forControlEvents:UIControlEventTouchUpInside];//添加大播放按钮
     [self.exhibitionTableView.tableHeaderView addSubview:_player];//将player添加在tableHeaderView上
     [self addExhibitionDetailsView];//调用添加详情View
-    [self setupDanmakuData];
+    [self setupDanmakuData];//弹幕数据源
+    [self createSendABarrageView];//创建发送弹幕View
 }
-
+#pragma mark=============创建SendABarrageView=============
+-(void)createSendABarrageView
+{
+    CGFloat viewW                   = self.view.frame.size.width;
+    CGFloat sendABarrageViewX       = 0;
+    CGFloat sendABarrageViewY       = _playerH;
+    CGFloat sendABarrageViewW       = viewW;
+    CGFloat sendABarrageViewH       = 40;
+    _sendABarrageView               = [[TXSendABarrageView alloc]init];
+     _sendABarrageView.frame        = CM(sendABarrageViewX, sendABarrageViewY, sendABarrageViewW, sendABarrageViewH);
+    _sendABarrageView.textField.placeholder = @"一起填充弹幕吧(( ^_^ ))";
+    [_sendABarrageView.sendBut addTarget:self action:@selector(sendBut:) forControlEvents:UIControlEventTouchUpInside];
+}
 #pragma mark=============创建picView=============
 -(void)createPicViewWithStrURL:(NSString *)strURL
 {
@@ -266,7 +285,6 @@ typedef NS_ENUM(NSInteger, Direction)
 /*********************************注意返回时请清除缓存。*********************************/
 -(void)navigationViewBack:(UIButton*)button
 {
-    [self dismissViewControllerAnimated:NO completion:nil];
     if ([_model.type isEqualToString:@"video"])
     {
         _player.isPauseByUser = YES;//播放状态标记
@@ -274,6 +292,7 @@ typedef NS_ENUM(NSInteger, Direction)
         _player.playState     = ZFPlayerStatePause;//暂停中
         [_pinglunModel removeAllObjects];//删除所有
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark---------------导航栏播放按钮------------
 -(void)startAction:(UIButton*)button
@@ -282,7 +301,6 @@ typedef NS_ENUM(NSInteger, Direction)
     //改变播放按钮状态
     _player.maskView.startBut.selected    = !button.selected;
     _player.maskView.bigstartBut.selected = !button.selected;
-    
     if ( _player.maskView.bigstartBut.selected)
     {
         [_exhibitionTableView setContentOffset:CGPointMake(0,0) animated:YES];
@@ -293,10 +311,11 @@ typedef NS_ENUM(NSInteger, Direction)
         [self.view addSubview:_exhibitionNavigationView];
         _exhibitionNavigationView.backgroundColor = Color(90,179, 240, 0);
         _exhibitionNavigationView.but.alpha       = 0;
-        
-        
+        //发送弹幕View
+        [self.view addSubview:_sendABarrageView];
     }
 }
+
 #pragma mark---------------大播放按钮点击事件-------------------------
 -(void)bigStartAction:(UIButton *)button
 {
@@ -311,6 +330,8 @@ typedef NS_ENUM(NSInteger, Direction)
         [self.view addSubview:_exhibitionNavigationView];
         [self.player.maskView.danmakuView start];
         
+        //发送弹幕View
+        [self.view addSubview:_sendABarrageView];
     }
     else
     {
@@ -320,24 +341,30 @@ typedef NS_ENUM(NSInteger, Direction)
         {
             //点击播放按钮后将videoExhibitionTableView添加在self.view上
             [_exhibitionTableView.tableHeaderView addSubview:_player];
-            //将TableView置顶
-            [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH-_navigationViewH) animated:YES];
-            
+            if (_exhibitionTableView.contentOffset.y>0)
+            {
+                  [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH-_navigationViewH+40) animated:YES];
+            }
+           //发送弹幕View
+            [self.exhibitionTableView.tableHeaderView addSubview:_sendABarrageView];
         }
         
         
     }
-
 }
 #pragma mark---------------小播放按钮点击事件----------------
 -(void)smallStartAction:(NSNotification*)notification
 {
     UIButton * button=notification.userInfo[@"button"];
+   
     if (button.selected)
     {
         //点击播放按钮后将player添加在self.view上
         [self.view addSubview:_player];
         [self.view addSubview:_exhibitionNavigationView];
+        
+        //发送弹幕View
+        [self.view addSubview:_sendABarrageView];
     }else
     {
     
@@ -347,8 +374,13 @@ typedef NS_ENUM(NSInteger, Direction)
             [_exhibitionTableView.tableHeaderView addSubview:_player];
         }
         if (_isDirection==Vertical_screen)
-        {   //将TableView置顶
-            [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH-_navigationViewH) animated:YES];
+        {
+            if (_exhibitionTableView.contentOffset.y>0)
+            {
+                [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH-_navigationViewH+40) animated:YES];
+            }
+            //发送弹幕View
+            [self.exhibitionTableView.tableHeaderView addSubview:_sendABarrageView];
         }
 
     }
@@ -356,12 +388,13 @@ typedef NS_ENUM(NSInteger, Direction)
 #pragma mark---------------scrollView滑动事件 -------------------
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    CGFloat  a=scrollView.contentOffset.y/(_playerH-_navigationViewH);
-    if (_player.isPauseByUser==YES)
-    {
-        _exhibitionNavigationView.backgroundColor=Color(90,179, 240, a);
-        _exhibitionNavigationView.but.alpha=a;
-    }
+    
+        CGFloat  a=scrollView.contentOffset.y/(_playerH-_navigationViewH);
+        if (_player.isPauseByUser==YES)
+        {
+            _exhibitionNavigationView.backgroundColor=Color(90,179, 240, a);
+            _exhibitionNavigationView.but.alpha=a;
+        }
 }
 
 #pragma mark+++++++++++++++++请求video的数据+++++++++++++++++
@@ -369,8 +402,7 @@ typedef NS_ENUM(NSInteger, Direction)
 {
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.huojidao.com/PalyPage/%@",strURL]];
-    
+    NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@-%@",ShiPin_Vid_URL,strURL,APP_ID,APP_KEY]];
     NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
     
     NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
@@ -383,7 +415,6 @@ typedef NS_ENUM(NSInteger, Direction)
                                                          //调用创建视频播放前器
                                                          [self createMediaPlayer:responseObject[@"data"][@"url"]];
                                                      }
-                                                     
                                                  }];
     [dataTask resume];
     
@@ -391,11 +422,10 @@ typedef NS_ENUM(NSInteger, Direction)
 #pragma mark+++++++++++++++++请求评论的数据+++++++++++++++++
 -(void)requestPingLunDataWithBlogid:(NSString*)blogid
 {
-    
     NSMutableArray * muarray =[NSMutableArray array];
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"http://api.huojidao.com/CommentPage/33375"]];
+    NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@-%@",PingLun_blogID_URL,blogid,APP_ID,APP_KEY]];
     NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
     NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
                                                  {
@@ -485,15 +515,27 @@ typedef NS_ENUM(NSInteger, Direction)
         CGFloat exhibitionTableViewH          = self.view.frame.size.height;
         [_exhibitionTableView setFrame:CM(exhibitionTableViewX,exhibitionTableViewY,exhibitionTableViewW, exhibitionTableViewH)];
         [self.view addSubview:_exhibitionTableView];
+        
+        
+        //发送弹幕View
+        CGFloat sendABarrageViewX=0;
+        CGFloat sendABarrageViewY=CGRectGetMaxY(_player.frame);
+        CGFloat sendABarrageViewW=self.view.frame.size.width
+        ;
+        CGFloat sendABarrageViewH=40;
+        _sendABarrageView.frame=CM(sendABarrageViewX, sendABarrageViewY, sendABarrageViewW, sendABarrageViewH);
+        
         if (_player.isPauseByUser==YES)
         {
             [_exhibitionTableView.tableHeaderView addSubview:_player];
+            [_exhibitionTableView.tableHeaderView addSubview:_sendABarrageView];
         }
         else if (_player.isPauseByUser==NO)
         {
             _exhibitionNavigationView.but.alpha       = 0;
             _exhibitionNavigationView.backgroundColor = Color(90,179, 240, 0);
             [self.view addSubview:_player];
+            [self.view addSubview:_sendABarrageView];
         }
         //添加导航栏
         [self.view addSubview:_exhibitionNavigationView];
@@ -503,7 +545,7 @@ typedef NS_ENUM(NSInteger, Direction)
         if (_player.isPauseByUser==YES)
         {
             //将TableView置顶
-            [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH-_navigationViewH) animated:YES];
+            [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH-_navigationViewH+40) animated:YES];
         }
         
     }
@@ -517,9 +559,17 @@ typedef NS_ENUM(NSInteger, Direction)
         CGFloat playerX                      = 0;
         CGFloat playerY                      = 0;
         CGFloat playerW                      = VIEW_WIDTH;
-        CGFloat playerH                      = VIEW_HEIGHT;
+        CGFloat playerH                      = VIEW_HEIGHT-40;
         [_player setFrame:CM(playerX, playerY,playerW , playerH)];
         [self.view addSubview:_player];
+        
+        //发送弹幕View
+        CGFloat sendABarrageViewX=0;
+        CGFloat sendABarrageViewY=CGRectGetMaxY(_player.frame);
+        CGFloat sendABarrageViewW=VIEW_WIDTH;
+        CGFloat sendABarrageViewH=40;
+        _sendABarrageView.frame=CM(sendABarrageViewX, sendABarrageViewY, sendABarrageViewW, sendABarrageViewH);
+        [self.view addSubview:_sendABarrageView];
         //移除exhibitionTableView
         [_exhibitionTableView removeFromSuperview];
         //设置fullScreenBtn的图标;
@@ -582,6 +632,25 @@ typedef NS_ENUM(NSInteger, Direction)
                                                      
                                                  }];
     [dataTask resume];
+}
+#pragma mark-----------------发送弹幕-----------------
+-(void)sendBut:(UIButton*)but
+{
+    int time            = (int)self.player.maskView.videoSlider.value*120.0+1;
+    NSString *mString   = _sendABarrageView.textField.text;
+    CFDanmaku* danmaku  = [[CFDanmaku alloc] init];
+    danmaku.contentStr  = [[NSMutableAttributedString alloc] initWithString:mString attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15], NSForegroundColorAttributeName : [UIColor colorWithRed:arc4random_uniform(256) / 255.0 green:arc4random_uniform(256) / 255.0 blue:arc4random_uniform(256) / 255.0 alpha:1]}];
+    danmaku.timePoint   = time;
+    [self.player.maskView.danmakuView sendDanmakuSource:danmaku];
+}
+#pragma mark-----------------APP进入前台-----------------
+-(void)appDidEnterPlayGround
+{
+    //将TableView置顶
+    [_exhibitionTableView setContentOffset:CGPointMake(0,_playerH-_navigationViewH+40) animated:YES];
+    [self.exhibitionTableView.tableHeaderView addSubview:self.player];
+    [_exhibitionTableView.tableHeaderView addSubview:_sendABarrageView];
+    
 }
 -(void)dealloc
 {

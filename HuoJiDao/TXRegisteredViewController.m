@@ -9,11 +9,16 @@
 #import "TXRegisteredViewController.h"
 @interface TXRegisteredViewController ()
 {
+    TXRequestData                * _data;
     TXVerificationViewController * _verificationViewController;
 }
 @end
 
 @implementation TXRegisteredViewController
+-(void)initData
+{
+    _data=[[TXRequestData alloc]init];
+}
 -(void)setNavigationView
 {
     CGFloat  registeredNavigationViewX        = 0;
@@ -40,6 +45,9 @@
     _registeredbackgroundView                = [[TXRegisteredbackgroundView alloc]init];
     _registeredbackgroundView.frame          = CM(registeredbackgroundViewX, registeredbackgroundViewY, registeredbackgroundViewW, registeredbackgroundViewH);
     
+    _registeredbackgroundView.phoneNumber.textField.text=@"15934862072";
+    
+    
     //获取验证码按钮
     
     [_registeredbackgroundView.obtainBut addTarget:self action:@selector(registeredbackgroundViewObtainBut:) forControlEvents:UIControlEventTouchUpInside];
@@ -64,8 +72,9 @@
 -(void)registeredbackgroundViewObtainBut:(UIButton *)but
 {
     NSLog(@"获取验证码按钮");
-    _verificationViewController=[[TXVerificationViewController alloc]init];
-    [self presentViewController:_verificationViewController animated:NO completion:nil];
+    [_data SMSVerificationWithPhone:_registeredbackgroundView.phoneNumber.textField.text];
+    _verificationViewController     = [[TXVerificationViewController alloc]init];
+    [self presentViewController:_verificationViewController animated:YES completion:nil];
 }
 #pragma mark------------------注册协议按钮-----------------
 -(void)registeredbackgroundViewProtocolButBut:(UIButton *)but

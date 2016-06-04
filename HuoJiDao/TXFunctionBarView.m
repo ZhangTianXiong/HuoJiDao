@@ -7,7 +7,8 @@
 //
 
 #import "TXFunctionBarView.h"
-@interface TXFunctionBarView()<TXTheDottedLineViewDelegate>
+#import "UMSocial.h"
+@interface TXFunctionBarView()<TXTheDottedLineViewDelegate,UMSocialUIDelegate>
 @end
 @implementation TXFunctionBarView
 
@@ -47,10 +48,6 @@
      *  注意：必须记住                          *
      *  init 初始化控件                        *
      *  drawRect:(CGRect)rect设置控件的位置    *
-     *                                       *
-     *                                      *
-     *                                      *
-     *                                      *
      *****************************************/
    
     [self setViewFrame];
@@ -121,7 +118,6 @@
         if (theDottedLineView.state==NO)
         {
            _thumbs_upView.icon.image = [UIImage imageNamed:@"0322_10"];
-            
             theDottedLineView.state  = YES;
            
         }
@@ -183,6 +179,13 @@
     if (but.tag==4)
     {
         NSLog(@"分享");
+        //如果需要分享回调，请将delegate对象设置self，并实现下面的回调方法
+        [UMSocialSnsService presentSnsIconSheetView:self.getController
+                                             appKey:AppKey
+                                          shareText:@"友盟社会化分享让您快速实现分享等社会化功能，http://umeng.com/social"
+                                         shareImage:[UIImage imageNamed:@"icon"]
+                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToQQ,UMShareToSina,UMShareToWechatTimeline,UMShareToQzone]
+                                           delegate:self];
         
     }
 }
@@ -194,5 +197,15 @@
 //    _collectionView.label.text    = _model.favnum;//收藏数
     _commendView.label.text         = _model.replynum;//评论数
 //    _shareView.label.text         = @"122";//分享数
+}
+#pragma mark------------------友盟第三方分享回调------------------
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        //得到分享到的平台名
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    }
 }
 @end

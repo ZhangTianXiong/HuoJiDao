@@ -7,12 +7,19 @@
 //
 
 #import "TXVerificationViewController.h"
+#import "TXRequestData.h"
 #import "TXSetPasswordViewController.h"
 @interface TXVerificationViewController ()
-
+{
+    TXRequestData * _data;
+}
 @end
 
 @implementation TXVerificationViewController
+-(void)initData
+{
+    _data=[[TXRequestData alloc]init];
+}
 -(void)setNavigationView
 {
     CGFloat  registeredNavigationViewX           = 0;
@@ -35,7 +42,6 @@
     
     //验证码输入框
     _verificationbackgroundView.textField.text   = @"146875";
-    
     [_verificationbackgroundView.nextBut setTitle:@"下一步" forState:UIControlStateNormal];
     [_verificationbackgroundView.nextBut addTarget:self action:@selector(verificationbackgroundViewNextBut:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -44,7 +50,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor=[UIColor whiteColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
 }
 
@@ -56,8 +62,15 @@
 -(void)verificationbackgroundViewNextBut:(UIButton *)but
 {
     NSLog(@"下一步按钮");
-    TXSetPasswordViewController * setPasswordViewController=[[TXSetPasswordViewController alloc]init];
-    [self presentViewController:setPasswordViewController animated:NO completion:nil];
+    NSUserDefaults * user=[NSUserDefaults standardUserDefaults];
+  
+    if ([[user  valueForKey:@"verificationCode"] isEqualToString:_verificationbackgroundView.textField.text]) {
+        TXSetPasswordViewController * setPasswordViewController=[[TXSetPasswordViewController alloc]init];
+        [self presentViewController:setPasswordViewController animated:YES completion:nil];
+    }else{
+        NSLog(@"验证码不正确");
+    }
+    
     
 }
 

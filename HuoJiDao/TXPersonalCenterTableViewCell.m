@@ -64,7 +64,6 @@
     _titleLabel.font                        = [UIFont systemFontOfSize:15];
     _titleLabel.textColor                   = [UIColor blackColor];
     _titleLabel.textAlignment               = NSTextAlignmentCenter;
-    
     _userHeadPortrait.layer.masksToBounds   = YES;//是否显示圆角以外的部分
     _userHeadPortrait.layer.borderWidth     = 2;//边框宽度
     _userHeadPortrait.layer.borderColor     = USERPROFILE_Color;//边框颜色
@@ -79,7 +78,6 @@
         cell=[[TXPersonalCenterTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID ];
     }
     return cell;
-
 }
 +(instancetype)personalCenterWithTableView:(UITableView *)tableVeiw
 {

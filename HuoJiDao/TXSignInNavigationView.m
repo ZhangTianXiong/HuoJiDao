@@ -39,17 +39,17 @@
     CGFloat viewH                = self.frame.size.height+20;
     //返回
     CGFloat backX                = 10;
-    CGFloat backW_H              = 30;
+    CGFloat backW_H              = 25;
     CGFloat backY                = (viewH-backW_H)/2;
     _backBut.frame               = CM(backX, backY, backW_H, backW_H);
     CGFloat titleLabW            = 100;
     CGFloat titleLabX            = (viewW-titleLabW)/2;
     CGFloat titleLabY            = backY;
-    CGFloat titleLabH            = 30;
+    CGFloat titleLabH            = backW_H;
     _titleLabel.frame            = CM(titleLabX, titleLabY, titleLabW, titleLabH);
     
     CGFloat rightButX            = viewW-95;
-    CGFloat rightButH            = 20;
+    CGFloat rightButH            = backW_H;
     CGFloat rightButY            = (viewH-rightButH)/2;
     CGFloat rightButW            = 100;
     _rightBut.frame              = CM(rightButX,rightButY ,rightButW ,rightButH);
@@ -58,10 +58,7 @@
 -(void)setViewData
 {
     [_backBut setImage:[UIImage imageNamed:@"Back"] forState:UIControlStateNormal];
-   
-    
-    _titleLabel.font                = [UIFont systemFontOfSize:18];
-    
+    _titleLabel.font                = [UIFont systemFontOfSize:19];
     _titleLabel.textColor           = TitleLab_Color;
     _titleLabel.textAlignment       = NSTextAlignmentCenter;
     _rightBut.titleLabel.font=[UIFont systemFontOfSize:17];

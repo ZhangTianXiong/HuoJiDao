@@ -17,7 +17,7 @@
     NSArray         * _sectionsII;
     NSArray         * _sectionsIII;
     HomeController  * _homeViewController;
-    NSUserDefaults * _userDefaults;
+    NSUserDefaults  * _userDefaults;
 }
 @property(nonatomic,strong)UIButton * signOut;
 @end
@@ -114,27 +114,27 @@
     
     if (indexPath.section==0)
     {
-        cell.titleLabel.text=_sectionsI[indexPath.row];
-        cell.mySwitch.tag=indexPath.row;
+        cell.titleLabel.text = _sectionsI[indexPath.row];
+        cell.mySwitch.tag    = indexPath.row;
         [cell.mySwitch addTarget:self action:@selector(mySwitch:) forControlEvents:UIControlEventValueChanged];
         
         if (cell.mySwitch.tag==0) {
-            cell.mySwitch.on=[[_userDefaults valueForKey:@"whetherToAllowMobileNetworkBroadcast"] intValue];//是否允许移动网络下播放
+            cell.mySwitch.on = [[_userDefaults valueForKey:@"whetherToAllowMobileNetworkBroadcast"] intValue];//是否允许移动网络下播放
         }
         
         if (cell.mySwitch.tag==1)
         {
-            cell.mySwitch.on=[[_userDefaults valueForKey:@"whetherToAllowDisplayBarrage"] intValue];//是否允许显示弹幕
+            cell.mySwitch.on = [[_userDefaults valueForKey:@"whetherToAllowDisplayBarrage"] intValue];//是否允许显示弹幕
         }
         
     }else if (indexPath.section==1)
     {
-        cell.titleLabel.text=_sectionsII[indexPath.row];
-        cell.mySwitch.hidden=YES;
+        cell.titleLabel.text = _sectionsII[indexPath.row];
+        cell.mySwitch.hidden = YES;
     }else
     {
-        cell.titleLabel.text=_sectionsIII[indexPath.row];
-        cell.mySwitch.hidden=YES;
+        cell.titleLabel.text = _sectionsIII[indexPath.row];
+        cell.mySwitch.hidden = YES;
         
     }
     return cell;
@@ -151,12 +151,12 @@
             {
                 NSLog(@"不允许网络下播放视频");
                 [_userDefaults setValue:@"0" forKey:@"whetherToAllowMobileNetworkBroadcast"];
-                mySwitch.on=NO;
+                mySwitch.on = NO;
             }else
             {
                 NSLog(@"允许网络下播放视频");
                 [_userDefaults setValue:@"1" forKey:@"whetherToAllowMobileNetworkBroadcast"];
-                mySwitch.on=YES;
+                mySwitch.on = YES;
                 
             }
 
@@ -170,12 +170,12 @@
             {
                 NSLog(@"不显示弹幕");
                 [_userDefaults setValue:@"0" forKey:@"whetherToAllowDisplayBarrage"];
-                mySwitch.on=NO;
+                mySwitch.on = NO;
             }else
             {
                 NSLog(@"显示弹幕");
                 [_userDefaults setValue:@"1" forKey:@"whetherToAllowDisplayBarrage"];
-                mySwitch.on=YES;
+                mySwitch.on = YES;
                 
             }
             
@@ -192,12 +192,38 @@
 #pragma mark-----------退出登录-----------
 -(void)signOut:(UIButton*)but
 {
-    _homeViewController=[[HomeController alloc]init];
-    [self presentViewController:_homeViewController animated:NO completion:^{
-        NSUserDefaults * userDefaults=[NSUserDefaults standardUserDefaults];
+    _homeViewController                         =[[HomeController alloc]init];
+    _homeViewController.modalTransitionStyle    =UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:_homeViewController animated:YES completion:^{
+        NSUserDefaults * userDefaults           = [NSUserDefaults standardUserDefaults];
         [userDefaults removeObjectForKey:@"用户信息"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"个人中心" object:self];
     }];
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section==1)
+    {
+        
+        NSString *path = NSHomeDirectory();//主目录
+        NSLog(@"NSHomeDirectory:%@",path);
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *cachesDir = [paths objectAtIndex:0];
+        NSLog(@"%@",cachesDir);
+      
+        
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"缓存清除" message:@"确定清除缓存?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+        
+        [alertView show];
+        //01......
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        //02.....
+        NSString *cacheFilePath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches"];
+        //03......
+        [fileManager removeItemAtPath:cacheFilePath error:nil];
+        
+        
+       
+    }
+}
 @end

@@ -9,5 +9,7 @@
 #import "TXViewController.h"
 #import "TXSearchNavigationView.h"
 @interface TXSearchViewController : TXViewController
-@property(nonatomic,strong)TXSearchNavigationView * searchNavigationView;
+@property(nonatomic,strong)TXSearchNavigationView   * searchNavigationView;
+@property(nonatomic,strong)UITableView              * searchtableView;
+
 @end

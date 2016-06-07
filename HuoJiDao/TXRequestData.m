@@ -15,7 +15,6 @@
 }
 @end
 @implementation TXRequestData
-
 -(instancetype)init
 {
     if (self=[super init])
@@ -37,9 +36,7 @@
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSURL                     * URL           = [NSURL URLWithString:ShouYe_URL];
-        
         NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
-        
         NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
             if (error)
             {
@@ -47,24 +44,21 @@
             } else
             {
                 NSLog(@"%@",response);
-                
                 //轮播图数据模型
                 for (NSDictionary * dic in responseObject[@"data"][@"rollpics"])
                 {
                     TXScrollFigureModel * scrollFigureModel=[[TXScrollFigureModel alloc]initWithDic:dic];
                     [arrScrollFigureModel addObject:scrollFigureModel];
-                    
                 }
                 //首页数据
-                for (NSDictionary * dic in responseObject[@"data"][@"list"]) {
-                    
+                for (NSDictionary * dic in responseObject[@"data"][@"list"])
+                {
                     TXHomeModelo      * homeModel  = [[TXHomeModelo alloc]initWithDic:dic];
                     [arrHomeModel addObject:homeModel];
                 }
                 _scrollFigureModel=arrScrollFigureModel;//轮播图数据模型
                 _homeModel=arrHomeModel;
                 [_requestNotifiction postNotificationName:@"RequestHomeModelData" object:self];
-                
             }
             
         }];
@@ -79,33 +73,23 @@
         NSMutableArray            * muarray      = [NSMutableArray array];
         
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        
-        
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        
         NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"%@/1_20/%@-%@",TuiJian_URL,APP_ID,APP_KEY]];
-        
         NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
-        
         NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
             if (error)
             {
                 NSLog(@"Error: %@", error);
             } else
             {
-                
                 NSLog(@"%@",response);  
                 for (NSDictionary * dic in responseObject[@"data"][@"content"])
                 {
-                    
                     TXListModel      * listModel  = [[TXListModel alloc]initWithDic:dic];
                     TXListFrameModel * frameModel = [TXListFrameModel recommendWithModel:listModel];
-                    
                     [muarray addObject:frameModel];
                 }
                _recommendFrameModel               = muarray;
-                
-                
             }
             
         }];
@@ -116,13 +100,11 @@
 #pragma mark------------------添加推荐页面数据------------------
 -(void)addrecommendDataWithPag:(int)pag Number:(int)number
 {
-    if ([self respondsToSelector:@selector(addAllDataPag:Number:)])
+    if ([self respondsToSelector:@selector(addrecommendDataWithPag:Number:)])
     {
-        //第一个页数
-        //第二个条数
-        NSString                  * strURl        =[NSString stringWithFormat:@"%@/%i_%i/%@-%@",TuiJian_URL,pag,number,APP_ID,APP_KEY];
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        NSString                  * strURl        =[NSString stringWithFormat:@"%@/%i_%i/%@-%@",TuiJian_URL,pag,number,APP_ID,APP_KEY];
         NSURL                     * URL           = [NSURL URLWithString:strURl];
         NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
         NSURLSessionDataTask      *dataTask       = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
@@ -151,22 +133,13 @@
     if ([self respondsToSelector:@selector(requestAllData)])
     {
         NSMutableArray            * muarray       =[NSMutableArray array];
-        
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        //第一个参数：
-        //第二个参数：全部
-        //第三个参数：页数
-        //第四个参数：条数
         NSString                  *strURL         = [NSString stringWithFormat:@"%@_1_20/%@-%@",QuanBu_URL,APP_ID,APP_KEY];
-        
         NSURL                     * URL           = [NSURL URLWithString:strURL];
-        
         NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
-        
         NSURLSessionDataTask      *dataTask       = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
-                                                     {
+        {
             if (error)
             {
                 NSLog(@"Error: %@", error);
@@ -181,7 +154,6 @@
                 }
                  _allFrameModel                    = muarray;
                 [_requestNotifiction postNotificationName:@"RequestAllDataComplete" object:self];
-         
             }
             
         }];
@@ -190,36 +162,30 @@
 
 }
 #pragma mark------------------添加全部页面数据------------------
--(void)addAllDataPag:(int)pag Number:(int)number
+-(void)addAllDataWithPag:(int)pag Number:(int)number
 {
-    if ([self respondsToSelector:@selector(addAllDataPag:Number:)])
+    if ([self respondsToSelector:@selector(addAllDataWithPag:Number:)])
     {
-        
-        
-         NSString                  *strURL         = [NSString stringWithFormat:@"%@_%i_%i/%@-%@",QuanBu_URL,pag,number,APP_ID,APP_KEY];
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        NSString                  *strURL         = [NSString stringWithFormat:@"%@_%i_%i/%@-%@",QuanBu_URL,pag,number,APP_ID,APP_KEY];
         NSURL                     * URL           = [NSURL URLWithString:strURL];
         NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
         NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
-                                          {
+        {
             if (error)
             {
                 NSLog(@"Error: %@", error);
             } else
             {
-                
                 NSLog(@"%@",response);
                 for (NSDictionary * dic in responseObject[@"data"][@"content"])
                 {
-                    
                     TXListModel      * listModel   = [[TXListModel alloc]initWithDic:dic];
                     TXListFrameModel * frameModel  = [TXListFrameModel recommendWithModel:listModel];
-                    
                     [_allFrameModel addObject:frameModel];
                 }
             }
-            
         }];
         [dataTask resume];
     }
@@ -231,23 +197,19 @@
 {
     if ([self respondsToSelector:@selector(requestVideoData)])
     {
-        
         NSMutableArray            * muarray        = [NSMutableArray array];
         NSURLSessionConfiguration * configuration  = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager        = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSString                  *strURL         = [NSString stringWithFormat:@"%@_1_20/%@-%@",ShiPin_URL,APP_ID,APP_KEY];
         NSURL                     * URL            = [NSURL URLWithString:strURL];
-        
         NSURLRequest              * request        = [NSURLRequest requestWithURL:URL];
-        
         NSURLSessionDataTask      * dataTask       = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
-                                                      {
+        {
             if (error)
             {
                 NSLog(@"Error: %@", error);
             } else
             {
-                
                 NSLog(@"%@",response);
                 for (NSDictionary * dic in responseObject[@"data"][@"content"])
                 {
@@ -264,76 +226,102 @@
     }
 }
 #pragma mark---------------------添加视频页面数据-----------------
--(void)addVideoDataPag:(int)pag Number:(int)number
+-(void)addVideoDataWithPag:(int)pag Number:(int)number
 {
-    if ([self respondsToSelector:@selector(addVideoDataPag:Number:)])
+    if ([self respondsToSelector:@selector(addVideoDataWithPag:Number:)])
     {
-       
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSString                  *strURL         = [NSString stringWithFormat:@"%@_%i_%i/%@-%@",ShiPin_URL,pag,number,APP_ID,APP_KEY];
         NSURL                     * URL           = [NSURL URLWithString:strURL];
         NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
         NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
-                                                     {
-                                                         if (error)
-                                                         {
-                                                             NSLog(@"Error: %@", error);
-                                                         } else
-                                                         {
-                                                             NSLog(@"%@",response);
-                                                             for (NSDictionary * dic in responseObject[@"data"][@"content"])
-                                                             {
-                                                                 TXListModel      * listModel   = [[TXListModel alloc]initWithDic:dic];
-                                                                 TXListFrameModel * frameModel  = [TXListFrameModel recommendWithModel:listModel];
-                                                                 [_videoFrameModel addObject:frameModel];
-                                                             }
-                                                         }
-                                                     }];
+        {
+            if (error)
+            {
+                NSLog(@"Error: %@", error);
+            }
+            else
+             {
+                NSLog(@"%@",response);
+                for (NSDictionary * dic in responseObject[@"data"][@"content"])
+                 {
+                     TXListModel      * listModel   = [[TXListModel alloc]initWithDic:dic];
+                     TXListFrameModel * frameModel  = [TXListFrameModel recommendWithModel:listModel];
+                     [_videoFrameModel addObject:frameModel];
+                 }
+             }
+        }];
         [dataTask resume];
     }
 }
 #pragma mark------------------请求图片数据------------------
--(void)requestPicTitleData
+-(void)requestPicData
 {
-    if ([self respondsToSelector:@selector(requestPicTitleData)])
+    if ([self respondsToSelector:@selector(requestPicData)])
     {
         NSMutableArray            * muarray       =[NSMutableArray array];
-        
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        
-        
-        NSURL                     * URL           = [NSURL URLWithString:@"http://www.quumii.com/app/api.php?method=tuji&blogid=6212"];
+        NSString                  * strURL        =[NSString stringWithFormat:@"%@_1_20/%@-%@",TuPian_URL,APP_ID,APP_KEY];
+        NSURL                     * URL           = [NSURL URLWithString:strURL];
         NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
         NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
-                                                     {
-                                                         if (error)
-                                                         {
-                                                             NSLog(@"Error: %@", error);
-                                                         } else
-                                                         {
-                                                             NSLog(@"%@",response);
+            {
+                if (error)
+                {
+                    NSLog(@"Error: %@", error);
+                }
+                else
+                {
+                    NSLog(@"%@",response);
+    
+                    for (NSDictionary * dic in responseObject[@"data"][@"content"])
+                    {
+                    TXListModel      * listModel   = [[TXListModel alloc]initWithDic:dic];
+                    TXPic_titleFrameModel * frameModel  = [TXPic_titleFrameModel pic_titleWithModel:listModel];
+                    [muarray addObject:frameModel];
+                    }
                                                              
-                                                             for (NSDictionary * dic in responseObject)
-                                                             {
-                                                                 TXPic_title           * pic_title  = [[TXPic_title alloc]initWithDic:dic];
-                                                                 
-                                                                 TXPic_titleFrameModel * frameModel = [TXPic_titleFrameModel pic_titleWithModel:pic_title];
-                                                                 
-                                                                 [muarray addObject:frameModel];
-                                                             }
-                                                             _picFrameModel                         = muarray;
-                                                             
-                                                             [_requestNotifiction postNotificationName:@"RequestPicTitleData" object:self];
-                                                         }
-                                                         
-                                                     }];
+                }
+             _picFrameModel     = muarray;
+             [_requestNotifiction postNotificationName:@"RequestPicTitleData" object:self];
+          }];
         [dataTask resume];
     }
     
 }
+#pragma mark-------------添加图片数据-------------
+-(void)addPicDataWithPag:(int)pag Number:(int)number
+{
+    if ([self respondsToSelector:@selector(addPicDataWithPag:Number:)])
+    {
+        NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        NSString                  *strURL         = [NSString stringWithFormat:@"%@_%i_%i/%@-%@",TuPian_URL,pag,number,APP_ID,APP_KEY];
+        NSURL                     * URL           = [NSURL URLWithString:strURL];
+        NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
+        NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
+         {
+            if (error)
+            {
+                NSLog(@"Error: %@", error);
+            }
+            else
+            {
+                 NSLog(@"%@",response);
+                 for (NSDictionary * dic in responseObject[@"data"][@"content"])
+                 {
+                   TXListModel      * listModel   = [[TXListModel alloc]initWithDic:dic];
+                   TXPic_titleFrameModel * frameModel  = [TXPic_titleFrameModel pic_titleWithModel:listModel];
+                    [_picFrameModel addObject:frameModel];
+                 }
+            }
+        }];
+        [dataTask resume];
+    }
 
+}
 #pragma mark----------请求链接页面数据------------------
 -(void)requestLinkData
 {
@@ -348,13 +336,12 @@
         NSURL                     * URL           = [NSURL URLWithString:strURL];
         NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
         NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
-                                                     {
+        {
             if (error)
             {
                 NSLog(@"Error: %@", error);
             } else
             {
-                
                 NSLog(@"%@",response);
                 for (NSDictionary * dic in responseObject[@"data"][@"content"])
                 {
@@ -370,9 +357,9 @@
     }
 }
 #pragma mark---------------------添加链接页面数据-----------------
--(void)addLinkDataPag:(int)pag Number:(int)number
+-(void)addLinkDataWithPag:(int)pag Number:(int)number
 {
-    if ([self respondsToSelector:@selector(addLinkDataPag:Number:)])
+    if ([self respondsToSelector:@selector(addLinkDataWithPag:Number:)])
     {
         //可以把总跳数传递过来
         NSURLSessionConfiguration * configuration  = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -381,7 +368,7 @@
         NSURL                     * URL            = [NSURL URLWithString:strURL];
         NSURLRequest              * request        = [NSURLRequest requestWithURL:URL];
         NSURLSessionDataTask      * dataTask       = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
-                                                      {
+         {
             if (error)
             {
                 NSLog(@"Error: %@", error);
@@ -402,35 +389,39 @@
 #pragma mark-----------------请求搜索界面的数据-----------------
 -(void)requestSeachDataWithString:(NSString *)string
 {
-    NSMutableArray            * muarray       = [NSMutableArray array];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *URLString = [@"http://www.quumii.com/app/api.php?method=" stringByAppendingString:@"getlist"];
-    NSDictionary *parameters = @{
-                                 @"search":string,
-                                 @"ftime":@1,
-                                 @"type":@0,
-                                 @"start":@0,
-                                 @"end":@10
-                                 };
-    [manager GET:URLString parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        NSDictionary *dicData = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers | NSJSONReadingMutableContainers error:nil];
-        
-        for (NSDictionary * dic in dicData[@"content"])
-        {
-            TXListModel      * listModel  = [[TXListModel alloc]initWithDic:dic];
-            TXListFrameModel * frameModel = [TXListFrameModel recommendWithModel:listModel];
-            [muarray addObject:frameModel];
-        }
-        _seachFrameModel=muarray;
-        [_requestNotifiction postNotificationName:@"RequestSeachDataComplete" object:self];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        nil;
-    }];
-    
+   
+    if ([self respondsToSelector:@selector(requestSeachDataWithString:)])
+    {
+        NSMutableArray            * muarray       = [NSMutableArray array];
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        NSString *URLString = [@"http://www.quumii.com/app/api.php?method=" stringByAppendingString:@"getlist"];
+        NSDictionary *parameters = @{
+                                     @"search":string,
+                                     @"ftime":@1,
+                                     @"type":@0,
+                                     @"start":@0,
+                                     @"end":@10
+                                     };
+        [manager GET:URLString parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            NSDictionary *dicData = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers | NSJSONReadingMutableContainers error:nil];
+            
+            for (NSDictionary * dic in dicData[@"content"])
+            {
+                TXListModel      * listModel  = [[TXListModel alloc]initWithDic:dic];
+                TXListFrameModel * frameModel = [TXListFrameModel recommendWithModel:listModel];
+                [muarray addObject:frameModel];
+            }
+            _seachFrameModel=muarray;
+            [_requestNotifiction postNotificationName:@"RequestSeachDataComplete" object:self];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            nil;
+        }];
+
+    }
     
 }
 #pragma mark-----------------------登录获取用户数据数据-------------------

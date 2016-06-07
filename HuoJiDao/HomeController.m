@@ -235,6 +235,10 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
         _newestTableView.showsVerticalScrollIndicator   = NO;
         _newestTableView.delegate                       = self;
         _newestTableView.dataSource                     = self;
+        self.newestTableView.tableHeaderView=[[UIView alloc]init];
+        UIView * refreshView=[[[NSBundle mainBundle] loadNibNamed:@"ShuaXin" owner:nil options:nil]lastObject];
+        refreshView.frame=CGRectMake(0, -40, self.view.frame.size.width,  40);
+        [self.newestTableView.tableHeaderView addSubview:refreshView];
         self.newestTableView.tableFooterView=[[[NSBundle mainBundle] loadNibNamed:@"videoJiaZai" owner:nil options:nil]lastObject];
         [self.newestView addSubview:_newestTableView];
         
@@ -500,14 +504,14 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     {
         [UIView animateWithDuration:0.4 animations:^{
          self.homeTableView.contentInset = UIEdgeInsetsMake(40.0f, 0.0f, 0.0f, 0.0f);
+         self.newestTableView.contentInset = UIEdgeInsetsMake(40.0f, 0.0f, 0.0f, 0.0f);
         } completion:^(BOOL finished){
             
             /**
              *  发起网络请求,请求刷新数据
              */
-            
             [_data requestHomeModelData];
-           
+            [_data requestRecommendData];
         }];
         
     }
@@ -531,7 +535,7 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
         
         [UIView animateWithDuration:1.0 animations:^{
             //  frame发生的偏移量,距离底部往上提高60(可自行设定)
-            self.newestTableView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0);
+            self.newestTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         } completion:^(BOOL finished) {
             //添加数据
             [_data addrecommendDataWithPag:_pag Number:_number];
@@ -560,10 +564,12 @@ TXNaVigtionViewDelegate,TXCategoryViewDelegate,UITableViewDelegate,UITableViewDa
     _homeTableView.delegate   = self;
     _homeTableView.dataSource = self;
     [_homeTableView reloadData];
+    [_newestTableView reloadData];
     //添加数据
     _scrollFigureView.scrollFigureModel  = _data.scrollFigureModel;//轮播图网址
     [UIView animateWithDuration:0.4 animations:^{
          self.homeTableView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+        self.newestTableView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
         
     }];
 }

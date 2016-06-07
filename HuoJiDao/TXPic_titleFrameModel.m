@@ -10,7 +10,7 @@
 
 @implementation TXPic_titleFrameModel
 
--(void)setPic_titleModel:(TXPic_title *)pic_titleModel
+-(void)setPic_titleModel:(TXListModel *)pic_titleModel
 {
     _pic_titleModel             = pic_titleModel;
     
@@ -19,7 +19,7 @@
     UIFont * font               = [UIFont systemFontOfSize:14];
     
     //标题
-    CGSize  textSize            = [_pic_titleModel.explain calculateTextSize:CGSizeMake(357, MAXFLOAT) andFoun:font];
+    CGSize  textSize            = [_pic_titleModel.subject calculateTextSize:CGSizeMake(357, MAXFLOAT) andFoun:font];
     
     CGFloat  titleLabelX        = margin;
     CGFloat  titleLabelY        = margin;
@@ -34,9 +34,15 @@
     CGFloat picH                = 260;
     _pictureImageFrame          = CM(picX, picY, picW, picH);
     
+    //类型View
+    CGFloat typeViewX=0;
+    CGFloat typeViewY=CGRectGetMaxY(_pictureImageFrame);
+    CGFloat typeViewW=375;
+    CGFloat typeViewH=35;
+    _typeViewFrame=CM(typeViewX, typeViewY, typeViewW, typeViewH);
     //功能条
     CGFloat functionBarViewX    = 0;
-    CGFloat functionBarViewY    = CGRectGetMaxY(_pictureImageFrame)+margin;
+    CGFloat functionBarViewY    =CGRectGetMaxY(_typeViewFrame);
     CGFloat functionBarViewW    = 375;
     CGFloat functionBarViewH    = 40;
     
@@ -47,14 +53,14 @@
     CGFloat rowH                = CGRectGetMaxY(_functionBarViewFrame)+margin;
     _rowH=rowH;
 }
--(instancetype)initWithModel:(TXPic_title *)pic_titleModel{
+-(instancetype)initWithModel:(TXListModel *)pic_titleModel{
     if (self=[super init])
     {
         self.pic_titleModel=pic_titleModel;
     }
     return self;
 }
-+(instancetype)pic_titleWithModel:(TXPic_title *)pic_titleModel{
++(instancetype)pic_titleWithModel:(TXListModel *)pic_titleModel{
     return [[self alloc]initWithModel:pic_titleModel];
 }
 @end

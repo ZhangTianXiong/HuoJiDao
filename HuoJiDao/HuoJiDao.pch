@@ -21,6 +21,10 @@
 #define APP_ID @"7f5133db96a3f3e19a"
 //APP_KEY
 #define APP_KEY @"88f9cec25baadaa9a8209c49db4"
+
+
+
+
 //网络数据接口文件
 //首页
 #define ShouYe_URL @"http://api.huojidao.com/HomePage/token/7f5133db96a3f3e19a-88f9cec25baadaa9a8209c49db4"
@@ -31,7 +35,7 @@
 //视频
 #define ShiPin_URL @"http://api.huojidao.com/ChannelPage/1_3"
 //图片
-#define TuPian_URL @"http://api.huojidao.com/ChannelPage/1_2_1_15/7f5133db96a3f3e19a-88f9cec25baadaa9a8209c49db4"
+#define TuPian_URL @"http://api.huojidao.com/ChannelPage/1_2"
 //文章
 #define WenZhang_URL @"http://api.huojidao.com/ChannelPage/1_4"
 //视频播放 VID

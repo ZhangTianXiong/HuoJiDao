@@ -38,6 +38,9 @@
 {
     UIImageView        * picImageView       = [[UIImageView alloc]init];
     _picImageView                           = picImageView;
+    
+    
+    
     [self addSubview:picImageView];
 }
 

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIImageView+WebCache.h"
 #import "TXPic_titleFrameModel.h"
+#import "TXTypeView.h"
 #import "TXFunctionBarView.h"
 @interface TXPictureTableViewCell : UITableViewCell
 
@@ -16,6 +17,7 @@
 
 @property(nonatomic,strong)UILabel               * titleLabel;
 @property(nonatomic,strong)UIImageView           * pictureImageView;
+@property(nonatomic,strong)TXTypeView            * typeView;//类型View
 //功能条
 @property(nonatomic,weak)TXFunctionBarView       *  functionBarView;
 

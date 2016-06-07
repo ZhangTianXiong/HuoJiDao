@@ -254,6 +254,38 @@ typedef NS_ENUM(NSInteger, Direction)
 {
     return _sectionHeader;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //创建数据模型
+    TXCommentFrameModel     * frameModel = _pinglunModel[indexPath.row];
+    
+    UIAlertController * alertController=[UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"请选择对 %@ 楼层的操作",frameModel.model.author] message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"私信" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+       
+        
+        
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"引用该楼层" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"复制文本内容" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"举报" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 //播放
 -(void)myPlay
 {
@@ -315,7 +347,6 @@ typedef NS_ENUM(NSInteger, Direction)
         [self.view addSubview:_sendABarrageView];
     }
 }
-
 #pragma mark---------------大播放按钮点击事件-------------------------
 -(void)bigStartAction:(UIButton *)button
 {

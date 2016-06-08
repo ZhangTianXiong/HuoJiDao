@@ -13,6 +13,7 @@
 #import "TXMenuTableViewCell.h"
 #import "TXPersonalCenterModel.h"
 #import "TXPersonalCenterViewController.h"
+#import "TXUserCollectViewController.h"
 #import "TXSetUpViewController.h"//设置Controller
 @interface TXMenuView ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -268,6 +269,13 @@
         TXSetUpViewController * setUpViewController     =[[TXSetUpViewController alloc]init];
         setUpViewController.modalTransitionStyle        =  UIModalTransitionStyleCoverVertical;
         [self.getController presentViewController:setUpViewController animated:YES completion:nil];
+    }
+    //用户收藏
+    if (indexPath.section==0 && indexPath.row==0)
+    {
+        TXUserCollectViewController * userCollectViewController=[[TXUserCollectViewController alloc]init];
+        userCollectViewController.modalTransitionStyle        =  UIModalTransitionStyleCoverVertical;
+        [self.getController presentViewController:userCollectViewController animated:YES completion:nil];
     }
     
 }

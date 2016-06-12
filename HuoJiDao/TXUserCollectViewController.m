@@ -21,41 +21,41 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.titleLabel.text=@"收藏";
-    self.view.backgroundColor=[UIColor whiteColor];
+    self.titleLabel.text        = @"收藏";
+    self.view.backgroundColor   = [UIColor whiteColor];
     [self viewLayout];
     
 }
 -(void)viewLayout
 {
     /* 创建WJSegmentMenuVc */
-    CGFloat viewW=self.view.frame.size.width;
-    CGFloat viewH=self.view.frame.size.height;
+    CGFloat viewW                   = self.view.frame.size.width;
+    CGFloat viewH                   = self.view.frame.size.height;
     
-    CGFloat segmentMenuVcX=0;
-    CGFloat segmentMenuVcY=64;
-    CGFloat segmentMenuVcW=viewW;
-    CGFloat segmentMenuVcH=40;
-    WJSegmentMenuVc *segmentMenuVc = [[WJSegmentMenuVc alloc]initWithFrame:CGRectMake(segmentMenuVcX,segmentMenuVcY, segmentMenuVcW, segmentMenuVcH)];
+    CGFloat segmentMenuVcX          = 0;
+    CGFloat segmentMenuVcY          = 64;
+    CGFloat segmentMenuVcW          = viewW;
+    CGFloat segmentMenuVcH          = 40;
+    WJSegmentMenuVc *segmentMenuVc  = [[WJSegmentMenuVc alloc]initWithFrame:CGRectMake(segmentMenuVcX,segmentMenuVcY, segmentMenuVcW, segmentMenuVcH)];
     [self.view addSubview:segmentMenuVc];
     
     /* 自定义设置(可不设置为默认值) */
-    segmentMenuVc.backgroundColor = [UIColor colorWithRed:240/250.0 green:240/250.0 blue:240/250.0 alpha:1];
-    segmentMenuVc.titleFont = [UIFont systemFontOfSize:13];
-    segmentMenuVc.unlSelectedColor = [UIColor darkGrayColor];
-    segmentMenuVc.selectedColor = [UIColor darkGrayColor];
-    segmentMenuVc.MenuVcSlideType = 0;
-    segmentMenuVc.SlideColor = [UIColor greenColor];
+    segmentMenuVc.backgroundColor   = [UIColor colorWithRed:240/250.0 green:240/250.0 blue:240/250.0 alpha:1];
+    segmentMenuVc.titleFont         = [UIFont systemFontOfSize:13];
+    segmentMenuVc.unlSelectedColor  = [UIColor darkGrayColor];
+    segmentMenuVc.selectedColor     = [UIColor darkGrayColor];
+    segmentMenuVc.MenuVcSlideType   = 0;
+    segmentMenuVc.SlideColor        = [UIColor greenColor];
     segmentMenuVc.advanceLoadNextVc = YES;
     
-    NSArray * titleArr=@[@"全部",@"视频",@"图片",@"文章"];
+    NSArray * titleArr              = @[@"全部",@"视频",@"图片",@"文章"];
     
-    TXUserAllViewController * allViewController=[[TXUserAllViewController alloc]init];
-    TXUserVideoViewController * vidoViewController=[[TXUserVideoViewController alloc]init];
-    TXUserPictureViewController * pictureViewController=[[TXUserPictureViewController alloc]init];
-    TXUserLinkViewController * linkViewController=[[TXUserLinkViewController alloc]init];
+    TXUserAllViewController     * allViewController     = [[TXUserAllViewController alloc]init];
+    TXUserVideoViewController   * vidoViewController    = [[TXUserVideoViewController alloc]init];
+    TXUserPictureViewController * pictureViewController = [[TXUserPictureViewController alloc]init];
+    TXUserLinkViewController    * linkViewController    = [[TXUserLinkViewController alloc]init];
     
-    NSArray * controllerArr=@[allViewController,vidoViewController,pictureViewController,linkViewController];
+    NSArray * controllerArr = @[allViewController,vidoViewController,pictureViewController,linkViewController];
     
     [segmentMenuVc addSubVc:controllerArr subTitles:titleArr];
     

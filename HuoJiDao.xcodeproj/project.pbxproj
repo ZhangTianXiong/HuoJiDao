@@ -14,6 +14,7 @@
 		D5288A771CCB718700D99B64 /* TXAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5288A701CCB718700D99B64 /* TXAllViewController.m */; };
 		D5288A781CCB718700D99B64 /* TXVidoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5288A721CCB718700D99B64 /* TXVidoViewController.m */; };
 		D5288A7A1CCB718700D99B64 /* TXLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5288A761CCB718700D99B64 /* TXLinkViewController.m */; };
+		D529EA721D0CEDDC00B9D973 /* TXFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D529EA711D0CEDDC00B9D973 /* TXFeedbackViewController.m */; };
 		D53D7DBE1D081197005EF1C1 /* TXUserPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D53D7DBD1D081197005EF1C1 /* TXUserPictureViewController.m */; };
 		D53D7DC21D081392005EF1C1 /* TXUserLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D53D7DC11D081392005EF1C1 /* TXUserLinkViewController.m */; };
 		D55B86121D014410007BED47 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D55B85CD1D014410007BED47 /* UMSocialLocalizable.strings */; };
@@ -193,6 +194,8 @@
 		D5288A751CCB718700D99B64 /* TXLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXLinkViewController.h; sourceTree = "<group>"; };
 		D5288A761CCB718700D99B64 /* TXLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXLinkViewController.m; sourceTree = "<group>"; };
 		D5288A7B1CCB719A00D99B64 /* Home.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Home.h; sourceTree = "<group>"; };
+		D529EA701D0CEDDC00B9D973 /* TXFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXFeedbackViewController.h; sourceTree = "<group>"; };
+		D529EA711D0CEDDC00B9D973 /* TXFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXFeedbackViewController.m; sourceTree = "<group>"; };
 		D53D7DBC1D081197005EF1C1 /* TXUserPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXUserPictureViewController.h; sourceTree = "<group>"; };
 		D53D7DBD1D081197005EF1C1 /* TXUserPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXUserPictureViewController.m; sourceTree = "<group>"; };
 		D53D7DC01D081392005EF1C1 /* TXUserLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXUserLinkViewController.h; sourceTree = "<group>"; };
@@ -546,6 +549,15 @@
 			name = Other;
 			sourceTree = "<group>";
 		};
+		D529EA6F1D0CED5500B9D973 /* 意见反馈 */ = {
+			isa = PBXGroup;
+			children = (
+				D529EA701D0CEDDC00B9D973 /* TXFeedbackViewController.h */,
+				D529EA711D0CEDDC00B9D973 /* TXFeedbackViewController.m */,
+			);
+			name = "意见反馈";
+			sourceTree = "<group>";
+		};
 		D53D7DBF1D081355005EF1C1 /* 用户文章收藏 */ = {
 			isa = PBXGroup;
 			children = (
@@ -838,6 +850,7 @@
 				D59D85C71CEAFBDC0034DF31 /* 登录注册 */,
 				D5CA14F81CEFF121005D86DD /* 个人中心 */,
 				D5C9A58E1D06660600AD8CA4 /* 用户收藏 */,
+				D529EA6F1D0CED5500B9D973 /* 意见反馈 */,
 				D5A2EB121CF5689C0054F7EE /* 设置 */,
 			);
 			name = "用户";
@@ -1918,6 +1931,7 @@
 				D5F91E301CE5B01E007A1F52 /* TXCommentHeadView.m in Sources */,
 				D5733CCC1CE1C46A00172BBF /* TXScrollFigureModel.m in Sources */,
 				D503AA821CED8E6F00990E74 /* TXMenuTableViewCell.m in Sources */,
+				D529EA721D0CEDDC00B9D973 /* TXFeedbackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

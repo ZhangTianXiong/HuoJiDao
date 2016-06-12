@@ -13,6 +13,7 @@
 #import "TXMenuTableViewCell.h"
 #import "TXPersonalCenterModel.h"
 #import "TXPersonalCenterViewController.h"
+#import "TXFeedbackViewController.h"//用户反馈
 #import "TXUserCollectViewController.h"
 #import "TXSetUpViewController.h"//设置Controller
 @interface TXMenuView ()<UITableViewDelegate,UITableViewDataSource>
@@ -262,14 +263,8 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     NSLog(@"菜单 Cell被点击啦");
-    //设置页面
-    if (indexPath.section==1 && indexPath.row==1)
-    {
-        TXSetUpViewController * setUpViewController     =[[TXSetUpViewController alloc]init];
-        setUpViewController.modalTransitionStyle        =  UIModalTransitionStyleCoverVertical;
-        [self.getController presentViewController:setUpViewController animated:YES completion:nil];
-    }
     //用户收藏
     if (indexPath.section==0 && indexPath.row==0)
     {
@@ -277,7 +272,21 @@
         userCollectViewController.modalTransitionStyle        =  UIModalTransitionStyleCoverVertical;
         [self.getController presentViewController:userCollectViewController animated:YES completion:nil];
     }
-    
+    //用户反馈
+    if (indexPath.section==1 && indexPath.row==0 )
+    {
+        TXFeedbackViewController * feedbackViewController=[[TXFeedbackViewController alloc]init];
+        feedbackViewController.modalTransitionStyle        =  UIModalTransitionStyleCoverVertical;
+        [self.getController presentViewController:feedbackViewController animated:YES completion:nil];
+    }
+    //设置页面
+    if (indexPath.section==1 && indexPath.row==1)
+    {
+        TXSetUpViewController * setUpViewController     =[[TXSetUpViewController alloc]init];
+        setUpViewController.modalTransitionStyle        =  UIModalTransitionStyleCoverVertical;
+        [self.getController presentViewController:setUpViewController animated:YES completion:nil];
+    }
+
 }
 #pragma mark -------头像点击事件---------
 -(void)handLetap:(UITapGestureRecognizer*)sender

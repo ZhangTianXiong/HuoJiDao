@@ -74,7 +74,7 @@
     _titleLabel.textColor           = TitleLab_Color;
     _titleLabel.textAlignment       = NSTextAlignmentCenter;
     //返回按钮
-    _backBut.tag=0;
+    _backBut.tag                    = 0;
     UIImage *backImageI             = [UIImage imageNamed:@"Back"];
     [_backBut setImage:backImageI forState:UIControlStateNormal];
     [_backBut addTarget:self action:@selector(navigationButton:) forControlEvents:UIControlEventTouchUpInside];

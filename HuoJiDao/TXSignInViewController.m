@@ -11,6 +11,16 @@
 #import "HomeController.h"
 #import "TXRequestData.h"
 #import "TXPersonalCenterModel.h"
+
+
+
+
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
+#import "UMSocialSinaSSOHandler.h"
+
+#import "UMSocialWechatHandler.h"
 @interface TXSignInViewController ()
 {
     TXRegisteredViewController * _registeredViewController;
@@ -117,16 +127,58 @@
     
     
     NSLog(@"第三方登录——微博按钮");
+//    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
+//    
+//    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+//        
+//        //          获取微博用户名、uid、token等
+//        
+//        if (response.responseCode == UMSResponseCodeSuccess) {
+//            
+//            NSDictionary *dict = [UMSocialAccountManager socialAccountDictionary];
+//            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:snsPlatform.platformName];
+//            NSLog(@"\nusername = %@,\n usid = %@,\n token = %@ iconUrl = %@,\n unionId = %@,\n thirdPlatformUserProfile = %@,\n thirdPlatformResponse = %@ \n, message = %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL, snsAccount.unionId, response.thirdPlatformUserProfile, response.thirdPlatformResponse, response.message);
+//            
+//        }});
 }
 #pragma mark----------------第三方登录———QQ按钮-------------------
 -(void)thirdPartyIoginViewQQbut:(UIButton*)but
 {
     NSLog(@"第三方登录——QQ按钮");
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+    
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        
+        //          获取微博用户名、uid、token等
+        
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            NSDictionary *dict = [UMSocialAccountManager socialAccountDictionary];
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:snsPlatform.platformName];
+            NSLog(@"\nusername = %@,\n usid = %@,\n token = %@ iconUrl = %@,\n unionId = %@,\n thirdPlatformUserProfile = %@,\n thirdPlatformResponse = %@ \n, message = %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL, snsAccount.unionId, response.thirdPlatformUserProfile, response.thirdPlatformResponse, response.message);
+            
+        }});
+   
 }
 #pragma mark----------------第三方登录———微信按钮-------------------
 -(void)thirdPartyIoginViewWeiXinBut:(UIButton *)but
 {
     NSLog(@"第三方登录——微信按钮");
+    
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
+    
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            
+            NSDictionary *dict = [UMSocialAccountManager socialAccountDictionary];
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:snsPlatform.platformName];
+            NSLog(@"\nusername = %@,\n usid = %@,\n token = %@ iconUrl = %@,\n unionId = %@,\n thirdPlatformUserProfile = %@,\n thirdPlatformResponse = %@ \n, message = %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL, snsAccount.unionId, response.thirdPlatformUserProfile, response.thirdPlatformResponse, response.message);
+            
+        }
+        
+    });
+
+    
 }
 -(void)dealloc
 {

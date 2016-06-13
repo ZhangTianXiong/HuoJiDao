@@ -130,17 +130,18 @@ typedef NS_ENUM(NSInteger, Direction)
     _exhibitionTableView.tag                            = 0;
     [self.view addSubview:_exhibitionTableView];
     //设置exhibitionTableViewWithHeaderView
-    [self setExhibitionTableViewWithHeaderView];
+    _myTableHeaderView                       = [[UIView alloc]init];
+    [self setExhibitionTableViewWithHeaderViewH:0];
+   
 }
 #pragma mark=============设置TableView的tableHeaderView=======
--(void)setExhibitionTableViewWithHeaderView
+-(void)setExhibitionTableViewWithHeaderViewH:(CGFloat)h
 {
     //设置位置
     CGFloat myTableHeaderViewX               = 0;
     CGFloat myTableHeaderViewY               = 0;
     CGFloat myTableHeaderViewW               = self.view.frame.size.width;
-    CGFloat myTableHeaderViewH               = _playerH+_frameModel.H;
-    _myTableHeaderView                       = [[UIView alloc]init];
+    int myTableHeaderViewH                   = _frameModel.H+_playerH+h;//CGfloat会影响高度
     _myTableHeaderView.frame                 = CGRectMake(myTableHeaderViewX, myTableHeaderViewY, myTableHeaderViewW, myTableHeaderViewH);
     _myTableHeaderView.backgroundColor       = Color(239, 239, 244, 1);
     _exhibitionTableView.tableHeaderView     = _myTableHeaderView;
@@ -159,7 +160,7 @@ typedef NS_ENUM(NSInteger, Direction)
     _player.videoURL                        = [NSURL URLWithString: strURL];//添加URL
     [_player.maskView.bigstartBut addTarget:self action:@selector(bigStartAction:) forControlEvents:UIControlEventTouchUpInside];//添加大播放按钮
     [self.exhibitionTableView.tableHeaderView addSubview:_player];//将player添加在tableHeaderView上
-    [self addExhibitionDetailsView];//调用添加详情View
+    [self addExhibitionDetailsViewWithH:0];//调用添加详情View
     [self setupDanmakuData];//弹幕数据源
     [self createSendABarrageView];//创建发送弹幕View
 }
@@ -202,17 +203,17 @@ typedef NS_ENUM(NSInteger, Direction)
                            _picView.picImageView.image=[UIImage sd_animatedGIFWithData:imageData];
                        }
                        [self.exhibitionTableView.tableHeaderView addSubview:_picView];
-                       [self addExhibitionDetailsView];
+                       [self addExhibitionDetailsViewWithH:0];
                    });
     
     
 }
 #pragma mark=============添加exhibitionDetailsView=========
--(void)addExhibitionDetailsView
+-(void)addExhibitionDetailsViewWithH:(CGFloat)h
 {
     //设置Frame
     CGFloat exhibitionDetailsViewX             = 0;
-    CGFloat exhibitionDetailsViewY             = _playerH;
+    CGFloat exhibitionDetailsViewY             = _playerH+h;
     CGFloat exhibitionDetailsViewW             = self.view.frame.size.width;
     CGFloat exhibitionDetailsViewH             = _frameModel.H;
     _exhibitionDetailsView.frame               = CGRectMake(exhibitionDetailsViewX,exhibitionDetailsViewY ,exhibitionDetailsViewW,exhibitionDetailsViewH);
@@ -240,6 +241,8 @@ typedef NS_ENUM(NSInteger, Direction)
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
      TXCommentFrameModel    * frameModel = _pinglunModel[indexPath.row];
+    
+    
     return frameModel.rowH;
 }
 #pragma mark==================监听HeaderInSectionView===============
@@ -346,6 +349,8 @@ typedef NS_ENUM(NSInteger, Direction)
         //发送弹幕View
         [self.view addSubview:_sendABarrageView];
     }
+    [self setExhibitionTableViewWithHeaderViewH:40];
+    [self addExhibitionDetailsViewWithH:40];
 }
 #pragma mark---------------大播放按钮点击事件-------------------------
 -(void)bigStartAction:(UIButton *)button
@@ -382,6 +387,9 @@ typedef NS_ENUM(NSInteger, Direction)
         
         
     }
+    [self setExhibitionTableViewWithHeaderViewH:40];
+    [self addExhibitionDetailsViewWithH:40];
+    
 }
 #pragma mark---------------小播放按钮点击事件----------------
 -(void)smallStartAction:(NSNotification*)notification
@@ -415,6 +423,9 @@ typedef NS_ENUM(NSInteger, Direction)
         }
 
     }
+    
+    [self setExhibitionTableViewWithHeaderViewH:40];
+    [self addExhibitionDetailsViewWithH:40];
 }
 #pragma mark---------------scrollView滑动事件 -------------------
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

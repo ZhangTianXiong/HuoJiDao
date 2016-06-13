@@ -1735,7 +1735,7 @@
 				TargetAttributes = {
 					D5E9FC871CBE1EA6000452D9 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 6B72GXH32H;
+						DevelopmentTeam = 39R685P985;
 					};
 					D5E9FCA01CBE1EA6000452D9 = {
 						CreatedOnToolsVersion = 7.3;
@@ -2101,7 +2101,7 @@
 					"$(PROJECT_DIR)/HuoJiDao/umeng_ios_social_sdk_5.2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/HuoJiDao/umeng_ios_social_sdk_5.2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ZX.HoJiDao.com;
+				PRODUCT_BUNDLE_IDENTIFIER = YCJ.HoJiDao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -2129,7 +2129,7 @@
 					"$(PROJECT_DIR)/HuoJiDao/umeng_ios_social_sdk_5.2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/HuoJiDao/umeng_ios_social_sdk_5.2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ZX.HoJiDao.com;
+				PRODUCT_BUNDLE_IDENTIFIER = YCJ.HoJiDao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

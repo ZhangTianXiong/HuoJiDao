@@ -50,7 +50,7 @@
     _datelineFrame                  = CGRectMake(datelineFrameX, datelineFrameY, datelineFrameW, datelineFrameH);
     
    
-    CGFloat likeViewFrameX          = 300;//点赞View
+    CGFloat likeViewFrameX          = VIEW_WIDTH-60;//点赞View
     CGFloat likeViewFrameY          = CGRectGetMaxY(_userNameFrame)+2;
     CGFloat likeViewFrameW          = 80;
     CGFloat likeViewFrameH          = 20;
@@ -64,7 +64,7 @@
     _unlikeViewFrame                = CGRectMake(unlikeViewFrameX, unlikeViewFrameY, unlikeViewFrameW, unlikeViewFrameH);
     
     UIFont * messageFont            = [UIFont systemFontOfSize:12];
-    CGSize  messageSize             = [_model.message calculateTextSize:CGSizeMake(375-65-15, MAXFLOAT) andFoun:messageFont];
+    CGSize  messageSize             = [_model.message calculateTextSize:CGSizeMake(VIEW_WIDTH-65-15, MAXFLOAT) andFoun:messageFont];
     
     CGFloat messageFrameX           = userNameFrameX;
     CGFloat messageFrameY           = CGRectGetMaxY(_datelineFrame)+margin;

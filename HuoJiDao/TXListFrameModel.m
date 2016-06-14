@@ -32,7 +32,7 @@
     
     //标题
     UIFont * font               = [UIFont systemFontOfSize:13];
-    CGSize   titleSize          = [self.model.subject calculateTextSize:CGSizeMake(240, MAXFLOAT) andFoun:font];
+    CGSize   titleSize          = [self.model.subject calculateTextSize:CGSizeMake(VIEW_WIDTH-margin*2-pictureW, MAXFLOAT) andFoun:font];
     CGFloat  titleX             = CGRectGetMaxX(_pictureFrame)+margin;
     CGFloat  titleY             = margin;
     CGFloat  titleW             = titleSize.width;
@@ -57,7 +57,8 @@
     //显示条
     CGFloat displaybarViewX     = titleX;
     CGFloat displaybarViewY     = CGRectGetMaxY(_datelineLabelFrame)+margin;
-    CGFloat displaybarViewW     = 200;
+    CGFloat displaybarViewW     = VIEW_WIDTH;
+    NSLog(@"1111111   %f",displaybarViewW);
     CGFloat displaybarViewH     = 21;
     _displaybarViewFrame        = CM(displaybarViewX, displaybarViewY, displaybarViewW, displaybarViewH);
     

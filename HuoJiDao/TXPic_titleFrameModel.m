@@ -19,7 +19,7 @@
     UIFont * font               = [UIFont systemFontOfSize:14];
     
     //标题
-    CGSize  textSize            = [_pic_titleModel.subject calculateTextSize:CGSizeMake(357, MAXFLOAT) andFoun:font];
+    CGSize  textSize            = [_pic_titleModel.subject calculateTextSize:CGSizeMake(VIEW_WIDTH-margin*2, MAXFLOAT) andFoun:font];
     
     CGFloat  titleLabelX        = margin;
     CGFloat  titleLabelY        = margin;
@@ -30,20 +30,20 @@
     //图片
     CGFloat picX                = 0;
     CGFloat picY                = CGRectGetMaxY(_titleLabelFrame)+margin;
-    CGFloat picW                = 375;
+    CGFloat picW                = VIEW_WIDTH;
     CGFloat picH                = 260;
     _pictureImageFrame          = CM(picX, picY, picW, picH);
     
     //类型View
     CGFloat typeViewX=0;
     CGFloat typeViewY=CGRectGetMaxY(_pictureImageFrame);
-    CGFloat typeViewW=375;
+    CGFloat typeViewW=VIEW_WIDTH;
     CGFloat typeViewH=35;
     _typeViewFrame=CM(typeViewX, typeViewY, typeViewW, typeViewH);
     //功能条
     CGFloat functionBarViewX    = 0;
     CGFloat functionBarViewY    =CGRectGetMaxY(_typeViewFrame);
-    CGFloat functionBarViewW    = 375;
+    CGFloat functionBarViewW    = VIEW_WIDTH;
     CGFloat functionBarViewH    = 40;
     
     _functionBarViewFrame       = CM(functionBarViewX, functionBarViewY, functionBarViewW, functionBarViewH);

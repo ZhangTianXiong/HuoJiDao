@@ -72,7 +72,7 @@
     _backgroundImage.frame      = CM(0, 0, viewW, viewH);
     CGFloat margin=15;
     CGFloat userAccountX        = 0;
-    CGFloat userAccountY        = 120;
+    CGFloat userAccountY        = self.frame.size.width/6;
     CGFloat userAccountW        = viewW;
     CGFloat userAccountH        = 45;
     _userAccount.frame          = CM(userAccountX, userAccountY, userAccountW, userAccountH);
@@ -83,17 +83,11 @@
     CGFloat userPasswordH       = userAccountH;
     _userPassword.frame         = CM(userPasswordX, userPasswordY, userPasswordW, userPasswordH);
     
-    
-    
-   
-  
-    
     CGFloat registeredButX      = margin;
     CGFloat registeredButY      = CGRectGetMaxY(_userPassword.frame)+margin;
     CGFloat registeredButW      = viewW/2-25;
     CGFloat registeredButH      = 40;
     _registeredBut.frame        = CM(registeredButX, registeredButY, registeredButW, registeredButH);
-    
     
     CGFloat signInButX          = CGRectGetMaxX(_registeredBut.frame)+margin+5;
     CGFloat signInButY          = registeredButY;
@@ -103,7 +97,7 @@
     
     
     CGFloat thirdPartyIoginViewX= 0;
-    CGFloat thirdPartyIoginViewH= viewH/3;
+    CGFloat thirdPartyIoginViewH= viewH/2.5;
     CGFloat thirdPartyIoginViewY= viewH-thirdPartyIoginViewH;
     CGFloat thirdPartyIoginViewW= viewW;
     

@@ -79,13 +79,14 @@
     _obtainBut.frame            = CM(obtainButX, obtainButY, obtainButW, obtainButH);
     
     
-    CGFloat promptLabelX        = 35;
+    CGFloat promptLabelX        = 10;
     CGFloat promptLabelY        = CGRectGetMaxY(_obtainBut.frame)+margin;
-    CGFloat promptLabelW        = 240;
+    CGFloat promptLabelW        = self.frame.size.width/1.5;
+    ;
     CGFloat promptLabelH        = 20;
     _promptLabel.frame          = CM(promptLabelX, promptLabelY, promptLabelW, promptLabelH);
    
-    CGFloat protocolButX        = CGRectGetMaxX(_promptLabel.frame);
+    CGFloat protocolButX        = CGRectGetMaxX(_promptLabel.frame)-15;
     CGFloat protocolButY        = promptLabelY;
     CGFloat protocolButW        = 60;
     CGFloat protocolButH        = 20;
@@ -103,11 +104,11 @@
     _obtainBut.backgroundColor          = Navigation_Color;
     _obtainBut.layer.cornerRadius       = 4;
     
-    _promptLabel.font                   = [UIFont systemFontOfSize:15];
+    _promptLabel.font                   = [UIFont systemFontOfSize:12];
     _promptLabel.textColor              = [UIColor grayColor];
     _promptLabel.textAlignment          = NSTextAlignmentCenter;
     _promptLabel.text                   = @"点击“获取验证码”按钮，即表示同意";
-    _protocolBut.titleLabel.font        = [UIFont systemFontOfSize:15];
+    _protocolBut.titleLabel.font        = [UIFont systemFontOfSize:12];
     [_protocolBut setTitleColor:Navigation_Color forState:UIControlStateNormal];
     [_protocolBut setTitle:@"注册协议" forState:UIControlStateNormal];
   

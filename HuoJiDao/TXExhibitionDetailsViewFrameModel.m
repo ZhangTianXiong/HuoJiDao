@@ -29,7 +29,7 @@
     _model                                  = model;
     UIFont * titleFont                      = [UIFont systemFontOfSize:14];
     CGFloat margin                          = 10;
-    CGSize titleSize                        = [model.subject calculateTextSize:CGSizeMake(375-margin, MAXFLOAT) andFoun:titleFont];
+    CGSize titleSize                        = [model.subject calculateTextSize:CGSizeMake(VIEW_WIDTH-margin*2, MAXFLOAT) andFoun:titleFont];
     
     
     CGFloat titleLabelFrameX                = margin;//标题
@@ -53,7 +53,7 @@
     _numFrame                               = CM(numFrameX, numFrameY, numFrameW, numFrameH);
     
     UIFont * briefIntroductionFout          = [UIFont systemFontOfSize:13];
-    CGSize briefIntroductionFoutSize        = [_model.description_api calculateTextSize:CGSizeMake(365, MAXFLOAT) andFoun:briefIntroductionFout];
+    CGSize briefIntroductionFoutSize        = [_model.description_api calculateTextSize:CGSizeMake(VIEW_WIDTH-margin, MAXFLOAT) andFoun:briefIntroductionFout];
     CGFloat briefIntroductionLabelFrameX    = margin;//介绍
     CGFloat briefIntroductionLabelFrameY    = CGRectGetMaxY(_numFrame)+margin;
     CGFloat briefIntroductionLabelFrameW    = briefIntroductionFoutSize.width;
@@ -67,7 +67,7 @@
 
     CGFloat functionBarViewFrameX           = margin;
     CGFloat functionBarViewFrameY           = CGRectGetMaxY(_butFrame)+margin;
-    CGFloat functionBarViewFrameW           = 355;
+    CGFloat functionBarViewFrameW           = VIEW_WIDTH-margin*2;
     CGFloat functionBarViewFrameH           = 40;
     _functionBarViewFrame                   = CGRectMake(functionBarViewFrameX, functionBarViewFrameY, functionBarViewFrameW, functionBarViewFrameH);
     _H=CGRectGetMaxY(_functionBarViewFrame)+margin;

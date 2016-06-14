@@ -117,28 +117,28 @@
    
     //头像
     CGFloat userImageX                              = margin;
-    CGFloat userImageY                              = backgroundImageViewH/4;
+    CGFloat userImageY                              = backgroundImageViewH/4.5;
     CGFloat userImageW                              = backgroundImageViewH/3;
     //圆角的半径
     _userImageView.layer.cornerRadius               = userImageW/2;
     CGFloat userImageH                              = userImageW;
     _userImageView.frame                            = CM(userImageX, userImageY, userImageW, userImageH);
     //用户名称
-    CGFloat userNameButX                            = margin-5;
+    CGFloat userNameButX                            = margin/2;
     CGFloat userNameButY                            = CGRectGetMaxY(_userImageView.frame)+10;
-    CGFloat userNameButW                            = 80;
+    CGFloat userNameButW                            = 100;
     CGFloat userNameButH                            = 20;
     _userNameBut.frame                              = CM(userNameButX, userNameButY, userNameButW, userNameButH);
     
     //个性签名
-    CGFloat personalizedSignatureButX               = 15;
+    CGFloat personalizedSignatureButX               = 10;
     CGFloat personalizedSignatureButY               = CGRectGetMaxY(_userNameBut.frame)+10;
-    CGFloat personalizedSignatureButW               = 160;
+    CGFloat personalizedSignatureButW               = VIEW_WIDTH/2.6;
     CGFloat personalizedSignatureButH               = 20;
     _personalizedSignatureBut.frame                 = CM(personalizedSignatureButX, personalizedSignatureButY, personalizedSignatureButW, personalizedSignatureButH);
     //注册
     CGFloat registerButX                            = CGRectGetMaxX(_personalizedSignatureBut.frame)+5;
-    CGFloat registerButH                            = 30;
+    CGFloat registerButH                            = VIEW_WIDTH/15;
     CGFloat registerButY                            = CGRectGetMaxY(_personalizedSignatureBut.frame)-registerButH;
     CGFloat registerButW                            = 80;
     _registerBut.frame                              = CM(registerButX, registerButY, registerButW, registerButH);

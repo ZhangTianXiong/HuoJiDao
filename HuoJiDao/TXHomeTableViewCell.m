@@ -71,7 +71,7 @@
 { 
     //icon
     CGFloat iconW_H              = 40;
-    CGFloat margins              = 15;
+    CGFloat margins              = 10;
     CGFloat iconY                = 12;
     CGFloat iconX                = margins;
     _icon.layer.masksToBounds    = YES; //是否显示圆角以外的部分
@@ -81,20 +81,20 @@
     //主标题
     CGFloat titleLabelX          = CGRectGetMaxX(_icon.frame)+margins;
     CGFloat titleLabelY          = iconY;
-    CGFloat titleLabelW          = 240;
+    CGFloat titleLabelW          = VIEW_WIDTH-150;
     CGFloat titleLabelH          = 20;
     _titleLabel.frame            = CM(titleLabelX, titleLabelY, titleLabelW, titleLabelH);
     
     //副标题
     CGFloat subtitleLabelX       = CGRectGetMinX(_titleLabel.frame);
     CGFloat subtitleLabelY       = CGRectGetMaxY(_titleLabel.frame)+2;
-    CGFloat subtitleLabelW       = 240;
+    CGFloat subtitleLabelW       = VIEW_WIDTH-130;
     CGFloat subtitleLabelH       = 20;
     _subtitleLabel.frame         = CM(subtitleLabelX, subtitleLabelY, subtitleLabelW, subtitleLabelH);
     
     //发布时间
     CGFloat datelineLabelW       = 80;
-    CGFloat datelineLabelX       = CGRectGetMaxX(_subtitleLabel.frame)-margins-10;
+    CGFloat datelineLabelX       = CGRectGetMaxX(_subtitleLabel.frame)-margins*2;
     
     CGFloat datelineLabelH       = 20;
     CGFloat datelineLabelY       = CGRectGetMinY(_titleLabel.frame)+5;

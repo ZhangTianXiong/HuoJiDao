@@ -445,7 +445,13 @@ typedef NS_ENUM(NSInteger, Direction)
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@-%@",ShiPin_Vid_URL,strURL,APP_ID,APP_KEY]];
-    NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    //请求头
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+    [request setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+    [request setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];
+
     
     NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
                                                  {
@@ -468,7 +474,13 @@ typedef NS_ENUM(NSInteger, Direction)
     NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@/%@-%@",PingLun_blogID_URL,blogid,APP_ID,APP_KEY]];
-    NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    //请求头
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+    [request setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+    [request setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];
+
     NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
                                                  {
                                                      if (error)

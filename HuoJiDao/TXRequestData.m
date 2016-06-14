@@ -36,7 +36,13 @@
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSURL                     * URL           = [NSURL URLWithString:ShouYe_URL];
-        NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+        //请求头
+        [request setHTTPMethod:@"GET"];
+        [request setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+        [request setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+        [request setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];
+
         NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
             if (error)
             {
@@ -75,7 +81,13 @@
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSURL                     * URL           = [NSURL URLWithString:[NSString stringWithFormat:@"%@/1_20/%@-%@",TuiJian_URL,APP_ID,APP_KEY]];
-        NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+        //请求头
+        [request setHTTPMethod:@"GET"];
+        [request setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+        [request setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+        [request setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];
+
         NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
             if (error)
             {
@@ -105,8 +117,13 @@
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSString                  * strURl        =[NSString stringWithFormat:@"%@/%i_%i/%@-%@",TuiJian_URL,pag,number,APP_ID,APP_KEY];
-        NSURL                     * URL           = [NSURL URLWithString:strURl];
-        NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
+        NSURL                     * URL            = [NSURL URLWithString:strURl];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+        //请求头
+        [request setHTTPMethod:@"GET"];
+        [request setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+        [request setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+        [request setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];
         NSURLSessionDataTask      *dataTask       = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
             if (error)
             {
@@ -136,9 +153,13 @@
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSString                  *strURL         = [NSString stringWithFormat:@"%@_1_20/%@-%@",QuanBu_URL,APP_ID,APP_KEY];
-        NSURL                     * URL           = [NSURL URLWithString:strURL];
-        NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
-        NSURLSessionDataTask      *dataTask       = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
+        NSURL                     * URL            = [NSURL URLWithString:strURL];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+        //请求头
+        [request setHTTPMethod:@"GET"];
+        [request setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+        [request setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+        [request setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];        NSURLSessionDataTask      *dataTask       = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
         {
             if (error)
             {
@@ -169,9 +190,13 @@
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSString                  *strURL         = [NSString stringWithFormat:@"%@_%i_%i/%@-%@",QuanBu_URL,pag,number,APP_ID,APP_KEY];
-        NSURL                     * URL           = [NSURL URLWithString:strURL];
-        NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
-        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
+        NSURL                     * URL            = [NSURL URLWithString:strURL];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+        //请求头
+        [request setHTTPMethod:@"GET"];
+        [request setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+        [request setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+        [request setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
         {
             if (error)
             {
@@ -202,8 +227,12 @@
         AFURLSessionManager       * manager        = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSString                  *strURL         = [NSString stringWithFormat:@"%@_1_20/%@-%@",ShiPin_URL,APP_ID,APP_KEY];
         NSURL                     * URL            = [NSURL URLWithString:strURL];
-        NSURLRequest              * request        = [NSURLRequest requestWithURL:URL];
-        NSURLSessionDataTask      * dataTask       = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+        //请求头
+        [request setHTTPMethod:@"GET"];
+        [request setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+        [request setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+        [request setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];        NSURLSessionDataTask      * dataTask       = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
         {
             if (error)
             {
@@ -233,8 +262,13 @@
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSString                  *strURL         = [NSString stringWithFormat:@"%@_%i_%i/%@-%@",ShiPin_URL,pag,number,APP_ID,APP_KEY];
-        NSURL                     * URL           = [NSURL URLWithString:strURL];
-        NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
+        NSURL                     * URL            = [NSURL URLWithString:strURL];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+        //请求头
+        [request setHTTPMethod:@"GET"];
+        [request setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+        [request setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+        [request setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];
         NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
         {
             if (error)
@@ -264,8 +298,13 @@
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSString                  * strURL        =[NSString stringWithFormat:@"%@_1_20/%@-%@",TuPian_URL,APP_ID,APP_KEY];
-        NSURL                     * URL           = [NSURL URLWithString:strURL];
-        NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
+        NSURL                     * URL            = [NSURL URLWithString:strURL];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+        //请求头
+        [request setHTTPMethod:@"GET"];
+        [request setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+        [request setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+        [request setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];
         NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
             {
                 if (error)
@@ -299,8 +338,13 @@
         NSURLSessionConfiguration * configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSString                  *strURL         = [NSString stringWithFormat:@"%@_%i_%i/%@-%@",TuPian_URL,pag,number,APP_ID,APP_KEY];
-        NSURL                     * URL           = [NSURL URLWithString:strURL];
-        NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
+        NSURL                     * URL            = [NSURL URLWithString:strURL];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+        //请求头
+        [request setHTTPMethod:@"GET"];
+        [request setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+        [request setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+        [request setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];
         NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
          {
             if (error)
@@ -333,8 +377,14 @@
         
         AFURLSessionManager       * manager       = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSString                  * strURL         = [NSString stringWithFormat:@"%@_1_20/%@-%@",WenZhang_URL,APP_ID,APP_KEY];
-        NSURL                     * URL           = [NSURL URLWithString:strURL];
-        NSURLRequest              * request       = [NSURLRequest requestWithURL:URL];
+        
+        NSURL                     * URL            = [NSURL URLWithString:strURL];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+        //请求头
+        [request setHTTPMethod:@"GET"];
+        [request setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+        [request setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+        [request setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];
         NSURLSessionDataTask      * dataTask      = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
         {
             if (error)
@@ -366,7 +416,13 @@
         AFURLSessionManager       * manager        = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         NSString                  *strURL         = [NSString stringWithFormat:@"%@_%i_%i/%@-%@",WenZhang_URL,pag,number,APP_ID,APP_KEY];
         NSURL                     * URL            = [NSURL URLWithString:strURL];
-        NSURLRequest              * request        = [NSURLRequest requestWithURL:URL];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+        //请求头
+        [request setHTTPMethod:@"GET"];
+        [request setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+        [request setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+        [request setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];
+        
         NSURLSessionDataTask      * dataTask       = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error)
          {
             if (error)
@@ -375,6 +431,7 @@
             } else
             {
                 NSLog(@"%@",response);
+                NSLog(@"%@",responseObject);
                 for (NSDictionary * dic in responseObject[@"data"][@"content"])
                 {
                     TXListModel      * listModel  = [[TXListModel alloc]initWithDic:dic];
@@ -395,6 +452,11 @@
         NSMutableArray            * muarray       = [NSMutableArray array];
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        //设置头部请求
+        [manager.requestSerializer setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+        [manager.requestSerializer setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+        [manager.requestSerializer setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];
+        
         NSString *URLString = [@"http://www.quumii.com/app/api.php?method=" stringByAppendingString:@"getlist"];
         NSDictionary *parameters = @{
                                      @"search":string,
@@ -429,17 +491,16 @@
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    //设置头部请求
+    [manager.requestSerializer setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+    [manager.requestSerializer setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+    [manager.requestSerializer setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];
+    
     NSString *URLString = [@"http://www.quumii.com/app/api.php?method=registerlogin&type=0" stringByAppendingString:@"usercenter"];
-    
-    
-    
     NSDictionary *parameters = @{@"type":@0,
                                  @"username":userAccount,
                                  @"password":userPassword
                                  };
-    
-    
-    
     [manager POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -460,6 +521,14 @@
 #pragma mark----------------短信验证--------------
 -(void)SMSVerificationWithPhone:(NSString*)phone
 {
+   
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    //设置头部请求
+    [manager.requestSerializer setValue:@"zhangxiong" forHTTPHeaderField:@"App"];
+    [manager.requestSerializer setValue:@"zadddssd" forHTTPHeaderField:@"Token"];
+    [manager.requestSerializer setValue:@"sdfsdfsdfdsf599525" forHTTPHeaderField:@"Imei"];
+    [manager.requestSerializer setValue:@"yuyu" forHTTPHeaderField:@"App"];
+    
     NSString *URLString = @"http://api.huojidao.com/VerificationCode";
     NSNumber*  phoneNum=(NSNumber *)phone;
     NSLog(@"%@",phoneNum);
@@ -468,16 +537,10 @@
                                  @"phone":phoneNum,
                                  @"timeout":@5,
                                  };
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    [manager.requestSerializer setValue:@"yuyu" forHTTPHeaderField:@"App"];
     [manager POST:URLString parameters:parameters  progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"aaaaaaaa  %@",responseObject);
-        
-//        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers | NSJSONReadingMutableContainers error:nil];
-//        NSLog(@"短信dic:%@",dic);
-//        NSUserDefaults * user=[NSUserDefaults standardUserDefaults];
-//        [user setValue:dic[@"data"][@"vcode"] forKey:@"verificationCode"];
+        NSLog(@"短信dic:%@",responseObject);
+        NSUserDefaults * user=[NSUserDefaults standardUserDefaults];
+        [user setValue:responseObject[@"data"][@"vcode"] forKey:@"verificationCode"];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"error: %@", error);
     }];

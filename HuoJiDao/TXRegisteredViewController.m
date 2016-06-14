@@ -50,13 +50,10 @@
     
     
     //获取验证码按钮
-    
     [_registeredbackgroundView.obtainBut addTarget:self action:@selector(registeredbackgroundViewObtainBut:) forControlEvents:UIControlEventTouchUpInside];
     [_registeredbackgroundView.obtainBut setTitle:@"获取验证码" forState:UIControlStateNormal];
     //协议按钮
     [_registeredbackgroundView.protocolBut addTarget:self action:@selector(registeredbackgroundViewProtocolButBut:) forControlEvents:UIControlEventTouchUpInside];
-
-    
     [self.view addSubview:_registeredbackgroundView];
     
     

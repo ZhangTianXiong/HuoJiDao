@@ -10,7 +10,7 @@
 #import "TXExhibitionController.h"
 #import "TXRequestData.h"
 #import "TXSearchTableViewCell.h"
-@interface TXSearchViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+@interface TXSearchViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     TXRequestData             * _data;
     NSNotificationCenter      * _notifiction;//通知中心
@@ -144,10 +144,6 @@
     _searchtableView.showsHorizontalScrollIndicator = NO;
     _searchtableView.delegate                       = self;
     _searchtableView.dataSource                     = self;
-}
-- (void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self.view endEditing:YES];
 }
 - (void)didReceiveMemoryWarning
 {

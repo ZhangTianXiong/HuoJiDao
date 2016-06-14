@@ -430,10 +430,16 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSString *URLString = [@"http://www.quumii.com/app/api.php?method=registerlogin&type=0" stringByAppendingString:@"usercenter"];
+    
+    
+    
     NSDictionary *parameters = @{@"type":@0,
                                  @"username":userAccount,
                                  @"password":userPassword
                                  };
+    
+    
+    
     [manager POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -454,9 +460,7 @@
 #pragma mark----------------短信验证--------------
 -(void)SMSVerificationWithPhone:(NSString*)phone
 {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSString *URLString = @"http://api.huojidao.com/VerificationCode/token/7f5133db96a3f3e19a-88f9cec25baadaa9a8209c49db4";
+    NSString *URLString = @"http://api.huojidao.com/VerificationCode";
     NSNumber*  phoneNum=(NSNumber *)phone;
     NSLog(@"%@",phoneNum);
     NSDictionary *parameters = @{
@@ -464,17 +468,20 @@
                                  @"phone":phoneNum,
                                  @"timeout":@5,
                                  };
-    [manager POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
-        NSLog(@"%@",downloadProgress);
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers | NSJSONReadingMutableContainers error:nil];
-        NSLog(@"短信dic:%@",dic);
-        NSUserDefaults * user=[NSUserDefaults standardUserDefaults];
-        [user setValue:dic[@"data"][@"vcode"] forKey:@"verificationCode"];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc]initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"yuyu" forHTTPHeaderField:@"App"];
+    [manager POST:URLString parameters:parameters  progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"aaaaaaaa  %@",responseObject);
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error){
-        nil;
+//        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers | NSJSONReadingMutableContainers error:nil];
+//        NSLog(@"短信dic:%@",dic);
+//        NSUserDefaults * user=[NSUserDefaults standardUserDefaults];
+//        [user setValue:dic[@"data"][@"vcode"] forKey:@"verificationCode"];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error: %@", error);
     }];
+
 
 }
 #pragma mark---------------注册---------------

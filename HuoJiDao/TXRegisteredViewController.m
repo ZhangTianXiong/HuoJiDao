@@ -46,6 +46,7 @@
     _registeredbackgroundView.frame          = CM(registeredbackgroundViewX, registeredbackgroundViewY, registeredbackgroundViewW, registeredbackgroundViewH);
     
     _registeredbackgroundView.phoneNumber.textField.text=@"15934862072";
+    _registeredbackgroundView.phoneNumber.textField.keyboardType = UIKeyboardTypeNumberPad;
     
     
     //获取验证码按钮

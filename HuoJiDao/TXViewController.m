@@ -28,7 +28,6 @@
 -(void)initData
 {
     
-    
 }
 #pragma mark++++++++++初始化变量++++++++++
 -(void)initVar
@@ -36,9 +35,12 @@
     
 }
 #pragma mark===============初始化视图===============
--(void)initView{
+-(void)initView
+{
     
     
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar=NO;
 }
 #pragma mark-------------Button点击事件-------------
 -(void)navigationButton:(UIButton *)sender

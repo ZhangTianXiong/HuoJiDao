@@ -42,6 +42,8 @@
     
     //验证码输入框
     _verificationbackgroundView.textField.text   = @"146875";
+   _verificationbackgroundView.textField.keyboardType = UIKeyboardTypeNumberPad;
+    
     [_verificationbackgroundView.nextBut setTitle:@"下一步" forState:UIControlStateNormal];
     [_verificationbackgroundView.nextBut addTarget:self action:@selector(verificationbackgroundViewNextBut:) forControlEvents:UIControlEventTouchUpInside];
     

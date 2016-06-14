@@ -21,7 +21,7 @@
 #import "UMSocialSinaSSOHandler.h"
 
 #import "UMSocialWechatHandler.h"
-@interface TXSignInViewController ()
+@interface TXSignInViewController ()<UITextFieldDelegate>
 {
     TXRegisteredViewController * _registeredViewController;
     HomeController             * _homeViewController;
@@ -60,9 +60,6 @@
     _signInbackgroundView.userAccount.textField.text  = @"yamiadei";
     //密码输入框
     _signInbackgroundView.userPassword.textField.text = @"323000";
-    
-    
-    
     //注册按钮
     [_signInbackgroundView.registeredBut addTarget:self action:@selector(signInbackgroundViewRegisteredBut:) forControlEvents:UIControlEventTouchUpInside];
     //登录按钮

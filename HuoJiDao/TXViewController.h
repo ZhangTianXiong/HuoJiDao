@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IQKeyboardManager.h"
+#import "IQKeyboardReturnKeyHandler.h" 
+
 typedef NS_ENUM(NSInteger,Button_tag)
 {
     backButton,//返回
